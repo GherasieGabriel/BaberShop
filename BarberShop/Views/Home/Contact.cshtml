@@ -1,0 +1,44 @@
+@{
+    Layout = "_BarberLayout";
+    ViewData["Title"] = "Contact";
+}
+
+<section class="hero">
+    <h1>Contact Us</h1>
+    <p>We are here to help with bookings and questions.</p>
+</section>
+
+<section class="mx-auto" style="max-width:700px;">
+    <h2>Details</h2>
+    <p><strong>Phone:</strong> +40 744 136 878</p>
+    <p><strong>Email:</strong> hello@barbershop.ro</p>
+    <p><strong>Address:</strong> 15 Calea Bucuresti, Craiova</p>
+    <p><strong>Hours:</strong> Mon - Fri 09:00 - 20:00, Saturday 10:00 - 18:00, Sunday Closed</p>
+</section>
+
+<section>
+    <h2 class="text-center">Send a Message</h2>
+    <form class="booking-form">
+        <label>
+            Full name:
+            <input type="text" name="fullName" required>
+        </label>
+
+        <label>
+            Email:
+            <input type="email" name="email" required>
+        </label>
+
+        <label>
+            Subject:
+            <input type="text" name="subject" required>
+        </label>
+
+        <label>
+            Message:
+            <textarea name="message" rows="4" required></textarea>
+        </label>
+
+        <button type="submit" class="btn-primary">Send message</button>
+    </form>
+</section>

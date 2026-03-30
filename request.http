@@ -1,0 +1,47 @@
+@host = http://localhost:5000
+
+### DB check
+GET {{host}}/api/products/db-check
+
+### Get all
+GET {{host}}/api/products
+
+### Create product
+POST {{host}}/api/products
+Content-Type: application/json
+
+{
+  "name": "Test",
+  "description": "Strong hold",
+  "category": "Hair",
+  "price": 29.99,
+  "stockQuantity": 10,
+  "isActive": true
+}
+
+### Get by id
+GET {{host}}/api/products/2
+
+### Update
+PUT {{host}}/api/products/2
+Content-Type: application/json
+
+{
+  "productId": 2,
+  "name": "Test Updated",
+  "description": "Updated",
+  "category": "Hair",
+  "price": 31.99,
+  "stockQuantity": 8,
+  "isActive": true
+}
+
+
+### Get all
+GET {{host}}/api/products
+
+### Delete
+DELETE {{host}}/api/products/2
+
+### Get all
+GET {{host}}/api/products
