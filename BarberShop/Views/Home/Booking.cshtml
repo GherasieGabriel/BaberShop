@@ -5,7 +5,18 @@
 
 <h1 class="text-center mb-3">Book an appointment</h1>
 
-<form class="booking-form">
+@if (TempData["BookingSuccess"] is not null)
+{
+    <div class="alert alert-success">@TempData["BookingSuccess"]</div>
+}
+
+@if (TempData["BookingError"] is not null)
+{
+    <div class="alert alert-danger">@TempData["BookingError"]</div>
+}
+
+<form class="booking-form" method="post" asp-action="Booking">
+    @Html.AntiForgeryToken()
     <label>
         Full name:
         <input type="text" name="fullName" required>

@@ -1,5 +1,5 @@
-@host = http://localhost:5051 
-### 5000 for default Visual studio , 5051 for dotnet
+@host = http://localhost:5000
+
 ### DB check
 GET {{host}}/api/products/db-check
 
@@ -20,10 +20,10 @@ Content-Type: application/json
 }
 
 ### Get by id
-GET {{host}}/api/products/2
+GET {{host}}/api/products/1
 
 ### Update
-PUT {{host}}/api/products/2
+PUT {{host}}/api/products/3
 Content-Type: application/json
 
 {
@@ -41,7 +41,7 @@ Content-Type: application/json
 GET {{host}}/api/products
 
 ### Delete
-DELETE {{host}}/api/products/2
+DELETE {{host}}/api/products/3
 
 ### Get all
 GET {{host}}/api/products
