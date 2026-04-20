@@ -1,35 +1,39 @@
-using BarberShop.Data;
 using BarberShop.Models;
+using BarberShop.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BarberShop.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProductsController(BarberShopDbContext context) : ControllerBase
+public class ProductsController(IProductService productService, IAdminAccessService adminAccessService) : ControllerBase
 {
     [HttpGet("db-check")]
     public async Task<IActionResult> CheckDatabaseConnection()
     {
-        var canConnect = await context.Database.CanConnectAsync();
-        return Ok(new { connected = canConnect });
+        try
+        {
+            await productService.GetAllAsync();
+            return Ok(new { connected = true });
+        }
+        catch
+        {
+            return Ok(new { connected = false });
+        }
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Product>>> GetAll()
     {
-        return Ok(await context.Products.ToListAsync());
+        return Ok(await productService.GetAllAsync());
     }
 
     [HttpGet("{id:int}")]
     public async Task<ActionResult<Product>> GetById(int id)
     {
-        var product = await context.Products.FindAsync(id);
+        var product = await productService.GetByIdAsync(id);
         if (product is null)
-        {
             return NotFound();
-        }
 
         return Ok(product);
     }
@@ -37,43 +41,37 @@ public class ProductsController(BarberShopDbContext context) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Product>> Create(Product product)
     {
-        context.Products.Add(product);
-        await context.SaveChangesAsync();
+        if (!adminAccessService.IsAdmin())
+            return Unauthorized(new { message = "Only admin can create products." });
 
-        return CreatedAtAction(nameof(GetById), new { id = product.ProductId }, product);
+        var created = await productService.CreateAsync(product);
+        return CreatedAtAction(nameof(GetById), new { id = created.ProductId }, created);
     }
 
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(int id, Product input)
     {
-        var product = await context.Products.FindAsync(id);
-        if (product is null)
-        {
+        if (!adminAccessService.IsAdmin())
+            return Unauthorized(new { message = "Only admin can update products." });
+
+        input.ProductId = id;
+        var updated = await productService.UpdateAsync(input);
+        if (!updated)
             return NotFound();
-        }
 
-        product.Name = input.Name;
-        product.Description = input.Description;
-        product.Category = input.Category;
-        product.Price = input.Price;
-        product.StockQuantity = input.StockQuantity;
-        product.IsActive = input.IsActive;
-
-        await context.SaveChangesAsync();
         return NoContent();
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var product = await context.Products.FindAsync(id);
-        if (product is null)
-        {
-            return NotFound();
-        }
+        if (!adminAccessService.IsAdmin())
+            return Unauthorized(new { message = "Only admin can delete products." });
 
-        context.Products.Remove(product);
-        await context.SaveChangesAsync();
+        var deleted = await productService.DeleteAsync(id);
+        if (!deleted)
+            return NotFound();
+
         return NoContent();
     }
 }
