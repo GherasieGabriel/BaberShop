@@ -1,0 +1,44 @@
+@model Service
+@{
+    Layout = "_BarberLayout";
+    ViewData["Title"] = "Edit Service";
+}
+
+<div class="container-centered">
+    <h1 class="mb-3">Edit Service</h1>
+
+    @if (TempData["BookingSuccess"] is not null)
+    {
+        <div class="alert alert-success">@TempData["BookingSuccess"]</div>
+    }
+
+    @if (TempData["BookingError"] is not null)
+    {
+        <div class="alert alert-danger">@TempData["BookingError"]</div>
+    }
+
+    <form method="post" asp-action="Update" class="booking-form">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="serviceId" value="@Model.ServiceId" />
+        <label>Name <input type="text" name="name" value="@Model.Name" required /></label>
+        <label>Description <textarea name="description" rows="2">@Model.Description</textarea></label>
+        <label>Duration (minutes) <input type="number" name="baseDuration" min="1" value="@Model.BaseDuration" required /></label>
+        <label>Base Price <input type="number" name="basePrice" step="0.01" min="0" value="@Model.BasePrice" required /></label>
+        <label>
+            @if (Model.IsActive)
+            {
+                <input type="checkbox" name="isActive" value="true" checked />
+            }
+            else
+            {
+                <input type="checkbox" name="isActive" value="true" />
+            }
+            Active
+        </label>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn-primary">Save</button>
+            <a asp-action="Manage" class="btn btn-secondary">Back</a>
+        </div>
+    </form>
+</div>

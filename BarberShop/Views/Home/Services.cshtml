@@ -1,9 +1,48 @@
+@model List<Service>
+@inject BarberShop.Services.Interfaces.IAdminAccessService adminAccessService
+
 @{
     Layout = "_BarberLayout";
     ViewData["Title"] = "Services";
 }
 
-<section class="hero">
+<section class="hero mb-4">
     <h1>Services available</h1>
     <p>Haircuts, beard styling and premium grooming services.</p>
 </section>
+
+@if (TempData["BookingSuccess"] is not null)
+{
+    <div class="alert alert-success">@TempData["BookingSuccess"]</div>
+}
+
+@if (TempData["BookingError"] is not null)
+{
+    <div class="alert alert-danger">@TempData["BookingError"]</div>
+}
+
+<div class="products-container mb-4">
+    <div class="row">
+        @foreach (var service in Model.Where(s => s.IsActive).OrderBy(s => s.Name))
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="product-card">
+                    <h3 class="product-name">@service.Name</h3>
+                    <p class="product-description">@(string.IsNullOrWhiteSpace(service.Description) ? "Classic grooming service." : service.Description)</p>
+                    <div class="product-price">@service.BasePrice.ToString("0.00") RON • @service.BaseDuration min</div>
+                    @if (adminAccessService.IsAdmin())
+                    {
+                        <a href="/Services/Edit/@service.ServiceId" class="btn btn-primary btn-sm mt-2">Edit</a>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@if (adminAccessService.IsAdmin())
+{
+    <div class="text-center mt-4">
+        <a href="/Services/Manage" class="btn-primary">Manage services</a>
+    </div>
+}

@@ -9,7 +9,8 @@ public class HomeController(
     ILogger<HomeController> logger,
     IAppointmentService appointmentService,
     IBarberService barberService,
-    IServiceCatalogService serviceCatalogService) : Controller
+    IServiceCatalogService serviceCatalogService,
+    IProductService productService) : Controller
 {
     public IActionResult Index()
     {
@@ -28,6 +29,20 @@ public class HomeController(
     {
         var barbers = await barberService.GetAllAsync();
         return View(barbers);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Products()
+    {
+        var products = await productService.GetAllAsync();
+        return View(products);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Profile(string email = "admin@yahoo.com", int? selectedAppointmentId = null)
+    {
+        var model = await appointmentService.GetProfileAsync(email, selectedAppointmentId);
+        return View(model);
     }
 
     [HttpGet]

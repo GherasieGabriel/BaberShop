@@ -1,0 +1,53 @@
+@model List<Barber>
+@{
+    Layout = "_BarberLayout";
+    ViewData["Title"] = "Manage Barbers";
+}
+
+<h1 class="mb-3">Manage Barbers</h1>
+
+@if (TempData["BookingSuccess"] is not null)
+{
+    <div class="alert alert-success">@TempData["BookingSuccess"]</div>
+}
+@if (TempData["BookingError"] is not null)
+{
+    <div class="alert alert-danger">@TempData["BookingError"]</div>
+}
+
+<section class="mb-4">
+    <h2>Add Barber</h2>
+    <form method="post" asp-action="Create" class="booking-form">
+        @Html.AntiForgeryToken()
+        <label>First Name <input type="text" name="firstName" required /></label>
+        <label>Last Name <input type="text" name="lastName" required /></label>
+        <label>Phone <input type="text" name="phone" /></label>
+        <label>Email <input type="email" name="email" /></label>
+        <label><input type="checkbox" name="isActive" value="true" checked /> Active</label>
+        <button type="submit" class="btn-primary">Create</button>
+    </form>
+</section>
+
+<section>
+    <h2>Barbers</h2>
+    <div class="row">
+        @foreach (var barber in Model.OrderBy(b => b.FirstName).ThenBy(b => b.LastName))
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="product-card">
+                    <h3>@barber.FirstName @barber.LastName</h3>
+                    <p>@barber.Phone</p>
+                    <p>@barber.Email</p>
+                    <div class="d-flex gap-2">
+                        <a asp-action="Edit" asp-route-id="@barber.BarberId" class="btn-primary">Edit</a>
+                        <form method="post" asp-action="Delete" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="barberId" value="@barber.BarberId" />
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

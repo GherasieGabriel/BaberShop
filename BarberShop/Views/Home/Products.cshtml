@@ -1,3 +1,6 @@
+@model List<Product>
+@inject BarberShop.Services.Interfaces.IAdminAccessService adminAccessService
+
 @{
     Layout = "_BarberLayout";
     ViewData["Title"] = "Products";
@@ -8,13 +11,38 @@
     <p>Premium barber products available for purchase</p>
 </section>
 
+@if (TempData["BookingSuccess"] is not null)
+{
+    <div class="alert alert-success">@TempData["BookingSuccess"]</div>
+}
+@if (TempData["BookingError"] is not null)
+{
+    <div class="alert alert-danger">@TempData["BookingError"]</div>
+}
+
 <div class="products-container">
     <div class="row">
-        <div class="col-md-6 col-lg-4"><div class="product-card"><h3 class="product-name">Premium Hair Gel</h3><p class="product-description">Strong hold gel with matte finish for modern styles.</p><div class="product-price">$12.99</div><button class="btn-add-cart" type="button">Add to Cart</button></div></div>
-        <div class="col-md-6 col-lg-4"><div class="product-card"><h3 class="product-name">Beard Oil</h3><p class="product-description">Nourishing beard oil with natural ingredients.</p><div class="product-price">$15.99</div><button class="btn-add-cart" type="button">Add to Cart</button></div></div>
-        <div class="col-md-6 col-lg-4"><div class="product-card"><h3 class="product-name">Professional Clippers</h3><p class="product-description">Cordless clippers with ceramic blades and lifetime warranty.</p><div class="product-price">$49.99</div><button class="btn-add-cart" type="button">Add to Cart</button></div></div>
-        <div class="col-md-6 col-lg-4"><div class="product-card"><h3 class="product-name">Hair Pomade</h3><p class="product-description">Classic pomade for slicked-back looks. Water-soluble.</p><div class="product-price">$14.99</div><button class="btn-add-cart" type="button">Add to Cart</button></div></div>
-        <div class="col-md-6 col-lg-4"><div class="product-card"><h3 class="product-name">Beard Balm</h3><p class="product-description">Conditioning balm that shapes and styles your beard.</p><div class="product-price">$13.99</div><button class="btn-add-cart" type="button">Add to Cart</button></div></div>
-        <div class="col-md-6 col-lg-4"><div class="product-card"><h3 class="product-name">Straight Razor</h3><p class="product-description">Premium steel razor for precise shaving. Includes strop.</p><div class="product-price">$39.99</div><button class="btn-add-cart" type="button">Add to Cart</button></div></div>
+        @foreach (var product in Model.Where(p => p.IsActive).OrderBy(p => p.Name))
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="product-card">
+                    <h3 class="product-name">@product.Name</h3>
+                    <p class="product-description">@(string.IsNullOrWhiteSpace(product.Description) ? "Premium barber product." : product.Description)</p>
+                    <div class="product-price">@product.Price.ToString("0.00") RON</div>
+                    <button class="btn-add-cart" type="button" onclick="alert('@product.Name added to cart!')">Add to Cart</button>
+                    @if (adminAccessService.IsAdmin())
+                    {
+                        <a href="/ProductsPage/Edit/@product.ProductId" class="btn btn-primary btn-sm mt-2">Edit</a>
+                    }
+                </div>
+            </div>
+        }
     </div>
 </div>
+
+@if (adminAccessService.IsAdmin())
+{
+    <div class="text-center mt-4">
+        <a href="/ProductsPage/Manage" class="btn-primary">Manage Products</a>
+    </div>
+}

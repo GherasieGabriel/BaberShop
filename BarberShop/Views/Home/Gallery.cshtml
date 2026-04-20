@@ -8,3 +8,51 @@
     <p>Modern cuts, classic style. Book your next appointment in seconds.</p>
     <a asp-controller="Home" asp-action="Booking" class="btn-primary">Book an appointment</a>
 </section>
+
+<section class="gallery-container mt-5 mb-5">
+    <h2 class="text-center mb-4">Recent Styles</h2>
+    
+    <div class="row">
+        <div class="col-md-6 col-lg-4 mb-4">
+            <img src="~/images/barbers/JohnyMcBarber.jpg" alt="Johny McBarber" class="gallery-image" />
+            <h4 class="mt-2">Modern Undercut</h4>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <img src="~/images/barbers/Andrei Barberescu.jpg" alt="Andrei Barberescu" class="gallery-image" />
+            <h4 class="mt-2">Classic Fade</h4>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <img src="~/images/barbers/Mihai Brici.jpg" alt="Mihai Brici" class="gallery-image" />
+            <h4 class="mt-2">Sharp Lineup</h4>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <img src="~/images/barbers/Dorel Centuristul.jpg" alt="Dorel Centuristul" class="gallery-image" />
+            <h4 class="mt-2">Premium Styling</h4>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <img src="~/images/barbers/Stephany Shearing.jpg" alt="Stephany Shearing" class="gallery-image" />
+            <h4 class="mt-2">Elegant Design</h4>
+        </div>
+    </div>
+</section>
+
+<style>
+.gallery-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery-image:hover {
+    transform: scale(1.05);
+}
+
+.gallery-container h4 {
+    text-align: center;
+    color: #333;
+    font-weight: 600;
+}
+</style>

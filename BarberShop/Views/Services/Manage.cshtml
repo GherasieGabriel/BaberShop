@@ -1,0 +1,53 @@
+@model List<Service>
+@{
+    Layout = "_BarberLayout";
+    ViewData["Title"] = "Manage Services";
+}
+
+<h1 class="mb-3">Manage Services</h1>
+
+@if (TempData["BookingSuccess"] is not null)
+{
+    <div class="alert alert-success">@TempData["BookingSuccess"]</div>
+}
+@if (TempData["BookingError"] is not null)
+{
+    <div class="alert alert-danger">@TempData["BookingError"]</div>
+}
+
+<section class="mb-4">
+    <h2>Add Service</h2>
+    <form method="post" asp-action="Create" class="booking-form">
+        @Html.AntiForgeryToken()
+        <label>Name <input type="text" name="name" required /></label>
+        <label>Description <textarea name="description" rows="2"></textarea></label>
+        <label>Duration (minutes) <input type="number" name="baseDuration" min="1" required /></label>
+        <label>Base Price <input type="number" name="basePrice" step="0.01" min="0" required /></label>
+        <label><input type="checkbox" name="isActive" value="true" checked /> Active</label>
+        <button type="submit" class="btn-primary">Create</button>
+    </form>
+</section>
+
+<section class="products-container">
+    <h2>Services List</h2>
+    <div class="row">
+        @foreach (var service in Model.OrderBy(s => s.Name))
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="product-card">
+                    <h3 class="product-name">@service.Name</h3>
+                    <p class="product-description">@(string.IsNullOrWhiteSpace(service.Description) ? "-" : service.Description)</p>
+                    <div class="product-price">@service.BasePrice.ToString("0.00") RON • @service.BaseDuration min</div>
+                    <div class="d-flex gap-2">
+                        <a asp-action="Edit" asp-route-id="@service.ServiceId" class="btn-primary">Edit</a>
+                        <form method="post" asp-action="Delete" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="serviceId" value="@service.ServiceId" />
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

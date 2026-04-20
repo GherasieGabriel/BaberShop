@@ -1,0 +1,44 @@
+@model Barber
+@{
+    Layout = "_BarberLayout";
+    ViewData["Title"] = "Edit Barber";
+}
+
+<div class="container-centered">
+    <h1 class="mb-3">Edit Barber</h1>
+
+    @if (TempData["BookingSuccess"] is not null)
+    {
+        <div class="alert alert-success">@TempData["BookingSuccess"]</div>
+    }
+
+    @if (TempData["BookingError"] is not null)
+    {
+        <div class="alert alert-danger">@TempData["BookingError"]</div>
+    }
+
+    <form method="post" asp-action="Update" class="booking-form">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="barberId" value="@Model.BarberId" />
+        <label>First Name <input type="text" name="firstName" value="@Model.FirstName" required /></label>
+        <label>Last Name <input type="text" name="lastName" value="@Model.LastName" required /></label>
+        <label>Phone <input type="text" name="phone" value="@Model.Phone" /></label>
+        <label>Email <input type="email" name="email" value="@Model.Email" /></label>
+        <label>
+            @if (Model.IsActive)
+            {
+                <input type="checkbox" name="isActive" value="true" checked />
+            }
+            else
+            {
+                <input type="checkbox" name="isActive" value="true" />
+            }
+            Active
+        </label>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn-primary">Save</button>
+            <a asp-action="Manage" class="btn btn-secondary">Back</a>
+        </div>
+    </form>
+</div>
