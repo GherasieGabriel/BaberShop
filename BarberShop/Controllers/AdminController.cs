@@ -1,4 +1,3 @@
-using BarberShop.Models;
 using BarberShop.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

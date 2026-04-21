@@ -1,0 +1,31 @@
+@{
+    Layout = "_BarberLayout";
+    ViewData["Title"] = "Admin Login";
+}
+
+<div class="container-centered">
+    <h1 class="mb-3">Admin Login</h1>
+
+    @if (TempData["BookingSuccess"] is not null)
+    {
+        <div class="alert alert-success">@TempData["BookingSuccess"]</div>
+    }
+
+    @if (TempData["BookingError"] is not null)
+    {
+        <div class="alert alert-danger">@TempData["BookingError"]</div>
+    }
+
+    <form method="post" asp-controller="Admin" asp-action="Login" class="booking-form">
+        @Html.AntiForgeryToken()
+        <label>
+            Username
+            <input type="text" name="username" required />
+        </label>
+        <label>
+            Password
+            <input type="password" name="password" required />
+        </label>
+        <button type="submit" class="btn-primary">Login</button>
+    </form>
+</div>

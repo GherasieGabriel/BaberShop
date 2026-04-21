@@ -32,7 +32,7 @@
                     <button class="btn-add-cart" type="button" onclick="alert('@product.Name added to cart!')">Add to Cart</button>
                     @if (adminAccessService.IsAdmin())
                     {
-                        <a href="/ProductsPage/Edit/@product.ProductId" class="btn btn-primary btn-sm mt-2">Edit</a>
+                        <a href="/Products/Edit/@product.ProductId" class="btn btn-primary btn-sm mt-2">Edit</a>
                     }
                 </div>
             </div>
@@ -43,6 +43,6 @@
 @if (adminAccessService.IsAdmin())
 {
     <div class="text-center mt-4">
-        <a href="/ProductsPage/Manage" class="btn-primary">Manage Products</a>
+        <a href="/Products/Manage" class="btn-primary">Manage Products</a>
     </div>
 }

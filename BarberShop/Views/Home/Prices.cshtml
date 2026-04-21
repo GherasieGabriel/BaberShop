@@ -1,3 +1,5 @@
+@model List<Service>
+@inject BarberShop.Services.Interfaces.IAdminAccessService adminAccessService
 @{
     Layout = "_BarberLayout";
     ViewData["Title"] = "Prices";
@@ -6,17 +8,51 @@
 <section class="hero">
     <h1>Our Prices</h1>
     <p>Simple and clear prices for all our services.</p>
-    <a asp-controller="Home" asp-action="Booking" class="btn-primary">Book an appointment</a>
+    <a asp-controller="Appointments" asp-action="Booking" class="btn-primary">Book an appointment</a>
 </section>
+
+@if (TempData["BookingSuccess"] is not null)
+{
+    <div class="alert alert-success">@TempData["BookingSuccess"]</div>
+}
+@if (TempData["BookingError"] is not null)
+{
+    <div class="alert alert-danger">@TempData["BookingError"]</div>
+}
 
 <section class="mx-auto" style="max-width:700px;">
     <h2>Price List</h2>
     <ul>
-        <li>Buzz Cut - 40 RON (25 min)</li>
-        <li>Classic Haircut - 45 RON (40 min)</li>
-        <li>Beard Trim - 35 RON (20 min)</li>
-        <li>Skin Fade - 60 RON (50 min)</li>
-        <li>Haircut + Beard - 70 RON (60 min)</li>
-        <li>Kids Haircut (under 12) - 25 RON (30 min)</li>
+        @foreach (var service in Model.Where(s => s.IsActive).OrderBy(s => s.Name))
+        {
+            <li>
+                <strong>@service.Name</strong> - @service.BasePrice.ToString("0.00") RON (@service.BaseDuration min)
+                @if (adminAccessService.IsAdmin())
+                {
+                    <a asp-controller="Services" asp-action="Edit" asp-route-id="@service.ServiceId" class="ms-2">Edit</a>
+                    <form method="post" asp-controller="Services" asp-action="Delete" class="d-inline ms-1">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="serviceId" value="@service.ServiceId" />
+                        <button type="submit" class="btn btn-link p-0 align-baseline">Delete</button>
+                    </form>
+                }
+            </li>
+        }
     </ul>
 </section>
+
+@if (adminAccessService.IsAdmin())
+{
+    <section class="container-centered mt-4">
+        <h3>Add new price item</h3>
+        <form method="post" asp-controller="Services" asp-action="Create" class="booking-form">
+            @Html.AntiForgeryToken()
+            <label>Name <input type="text" name="name" required /></label>
+            <label>Description <textarea name="description" rows="2"></textarea></label>
+            <label>Duration (minutes) <input type="number" name="baseDuration" min="1" required /></label>
+            <label>Price (RON) <input type="number" name="basePrice" step="0.01" min="0" required /></label>
+            <input type="hidden" name="isActive" value="true" />
+            <button type="submit" class="btn-primary">Create</button>
+        </form>
+    </section>
+}

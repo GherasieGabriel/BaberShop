@@ -1,3 +1,4 @@
+@inject BarberShop.Services.Interfaces.IAdminAccessService adminAccessService
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,19 +22,30 @@
         <div class="collapse navbar-collapse" id="mainNavbar">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
-                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Services">Services</a></li>
-                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Barbers">Barbers</a></li>
-                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Booking">Book Now</a></li>
-                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Products">Products</a></li>
+                <li class="nav-item"><a class="nav-link" asp-controller="Services" asp-action="Index">Services</a></li>
+                <li class="nav-item"><a class="nav-link" asp-controller="Barbers" asp-action="Index">Barbers</a></li>
+                <li class="nav-item"><a class="nav-link" asp-controller="Appointments" asp-action="Booking">Book Now</a></li>
+                <li class="nav-item"><a class="nav-link" asp-controller="Products" asp-action="Index">Products</a></li>
                 <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Prices">Prices</a></li>
                 <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Gallery">Gallery</a></li>
             </ul>
 
-            <div class="d-flex align-items-center text-light">
-                <a asp-controller="Home" asp-action="Profile" class="btn btn-outline-warning btn-sm me-2">Profile</a>
-                <span class="me-1 fw-bold">Admin</span>
-                <span class="text-muted">&lt;admin@yahoo.com&gt;</span>
+            <div class="d-flex align-items-center gap-2">
+                <a asp-controller="Appointments" asp-action="Profile" class="btn btn-outline-warning btn-sm">Profile</a>
+
+                @if (adminAccessService.IsAdmin())
+                {
+                    <span class="text-warning small fw-bold">Admin mode</span>
+                    <form method="post" asp-controller="Admin" asp-action="Logout" class="m-0">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-warning btn-sm">Logout</button>
+                    </form>
+                }
+                else
+                {
+                    <a asp-controller="Admin" asp-action="Login" class="btn btn-outline-light btn-sm">Admin Login</a>
+                }
             </div>
         </div>
     </nav>

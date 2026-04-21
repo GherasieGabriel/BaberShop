@@ -6,53 +6,36 @@
 <section class="hero">
     <h1>Gallery</h1>
     <p>Modern cuts, classic style. Book your next appointment in seconds.</p>
-    <a asp-controller="Home" asp-action="Booking" class="btn-primary">Book an appointment</a>
+    <a asp-controller="Appointments" asp-action="Booking" class="btn-primary">Book an appointment</a>
 </section>
 
 <section class="gallery-container mt-5 mb-5">
     <h2 class="text-center mb-4">Recent Styles</h2>
-    
+
     <div class="row">
         <div class="col-md-6 col-lg-4 mb-4">
-            <img src="~/images/barbers/JohnyMcBarber.jpg" alt="Johny McBarber" class="gallery-image" />
+            <img src="https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=900&q=80" alt="Modern Undercut" class="gallery-image" />
             <h4 class="mt-2">Modern Undercut</h4>
         </div>
         <div class="col-md-6 col-lg-4 mb-4">
-            <img src="~/images/barbers/Andrei Barberescu.jpg" alt="Andrei Barberescu" class="gallery-image" />
+            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80" alt="Classic Fade" class="gallery-image" />
             <h4 class="mt-2">Classic Fade</h4>
         </div>
         <div class="col-md-6 col-lg-4 mb-4">
-            <img src="~/images/barbers/Mihai Brici.jpg" alt="Mihai Brici" class="gallery-image" />
+            <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=900&q=80" alt="Sharp Lineup" class="gallery-image" />
             <h4 class="mt-2">Sharp Lineup</h4>
         </div>
         <div class="col-md-6 col-lg-4 mb-4">
-            <img src="~/images/barbers/Dorel Centuristul.jpg" alt="Dorel Centuristul" class="gallery-image" />
-            <h4 class="mt-2">Premium Styling</h4>
+            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=900&q=80" alt="Beard Styling" class="gallery-image" />
+            <h4 class="mt-2">Beard Styling</h4>
         </div>
         <div class="col-md-6 col-lg-4 mb-4">
-            <img src="~/images/barbers/Stephany Shearing.jpg" alt="Stephany Shearing" class="gallery-image" />
-            <h4 class="mt-2">Elegant Design</h4>
+            <img src="https://images.unsplash.com/photo-1532710093739-9470acff878f?auto=format&fit=crop&w=900&q=80" alt="Premium Grooming" class="gallery-image" />
+            <h4 class="mt-2">Premium Grooming</h4>
+        </div>
+        <div class="col-md-6 col-lg-4 mb-4">
+            <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=900&q=80" alt="Skin Fade" class="gallery-image" />
+            <h4 class="mt-2">Skin Fade</h4>
         </div>
     </div>
 </section>
-
-<style>
-.gallery-image {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.gallery-image:hover {
-    transform: scale(1.05);
-}
-
-.gallery-container h4 {
-    text-align: center;
-    color: #333;
-    font-weight: 600;
-}
-</style>
