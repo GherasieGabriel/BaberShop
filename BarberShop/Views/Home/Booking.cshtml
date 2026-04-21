@@ -1,0 +1,65 @@
+@{
+    Layout = "_BarberLayout";
+    ViewData["Title"] = "Booking";
+}
+
+<h1 class="text-center mb-3">Book an appointment</h1>
+
+@if (TempData["BookingSuccess"] is not null)
+{
+    <div class="alert alert-success">@TempData["BookingSuccess"]</div>
+}
+
+@if (TempData["BookingError"] is not null)
+{
+    <div class="alert alert-danger">@TempData["BookingError"]</div>
+}
+
+<form class="booking-form" method="post" asp-action="Booking">
+    @Html.AntiForgeryToken()
+    <label>
+        Full name:
+        <input type="text" name="fullName" required>
+    </label>
+
+    <label>
+        Email:
+        <input type="email" name="email" required>
+    </label>
+
+    <label>
+        Service:
+        <select name="service">
+            <option>Haircut</option>
+            <option>Beard Trim</option>
+            <option>Haircut + Beard</option>
+        </select>
+    </label>
+
+    <label>
+        Barber:
+        <select name="barber">
+            <option>Any available</option>
+            <option>Alex</option>
+            <option>Mark</option>
+            <option>Chris</option>
+        </select>
+    </label>
+
+    <label>
+        Date:
+        <input type="date" name="date" required>
+    </label>
+
+    <label>
+        Time:
+        <input type="time" name="time" required>
+    </label>
+
+    <label>
+        Notes:
+        <textarea name="notes" rows="3" placeholder="Optional"></textarea>
+    </label>
+
+    <button type="submit" class="btn-primary">Submit reservation</button>
+</form>

@@ -1,0 +1,151 @@
+@model ProfileViewModel
+@{
+    Layout = "_BarberLayout";
+    ViewData["Title"] = "Profile";
+
+    var selectedAppointment = Model.SelectedAppointment;
+}
+
+<section class="profile-header">
+    <h1 class="profile-name">@Model.FullName</h1>
+    <p class="profile-email">@Model.Email</p>
+</section>
+
+@if (TempData["BookingSuccess"] is not null)
+{
+    <div class="alert alert-success">@TempData["BookingSuccess"]</div>
+}
+
+@if (TempData["BookingError"] is not null)
+{
+    <div class="alert alert-danger">@TempData["BookingError"]</div>
+}
+
+<div class="profile-container">
+    <div class="profile-section">
+        <h2 class="section-title">Personal Information</h2>
+        <div class="info-row"><span class="info-label">Full Name:</span><span class="info-value">@Model.FullName</span></div>
+        <div class="info-row"><span class="info-label">Email:</span><span class="info-value">@Model.Email</span></div>
+        <div class="info-row"><span class="info-label">Phone:</span><span class="info-value">@Model.Phone</span></div>
+        <div class="info-row">
+            <span class="info-label">Member Since:</span>
+            <span class="info-value">@(Model.MemberSince?.ToString("MMMM d, yyyy") ?? "-")</span>
+        </div>
+    </div>
+
+    <div class="profile-section">
+        <h2 class="section-title">Upcoming Appointments</h2>
+
+        @if (!Model.UpcomingAppointments.Any())
+        {
+            <div class="info-row"><span class="info-value">No upcoming appointments.</span></div>
+        }
+        else
+        {
+            @foreach (var appointment in Model.UpcomingAppointments)
+            {
+                var barberName = $"{appointment.Barber.FirstName} {appointment.Barber.LastName}".Trim();
+                <div class="booking-item">
+                    <div class="booking-date">@appointment.StartDateTime.ToString("MMMM d, yyyy - h:mm tt")</div>
+                    <div class="booking-details">
+                        <strong>Service:</strong> @appointment.Service.Name<br>
+                        <strong>Barber:</strong> @barberName<br>
+                        <strong>Duration:</strong> @(appointment.EndDateTime.Subtract(appointment.StartDateTime).TotalMinutes) minutes<br>
+                        <a asp-action="Profile" asp-route-email="@Model.Email" asp-route-selectedAppointmentId="@appointment.AppointmentId">View details</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <div class="profile-section">
+        <h2 class="section-title">Selected Appointment</h2>
+
+        @if (selectedAppointment is null)
+        {
+            <div class="info-row"><span class="info-value">Select an upcoming appointment to view, edit, or delete it.</span></div>
+        }
+        else
+        {
+            <div class="booking-item">
+                <div class="booking-date">@selectedAppointment.StartDateTime.ToString("MMMM d, yyyy - h:mm tt")</div>
+                <div class="booking-details">
+                    <strong>Status:</strong> @selectedAppointment.Status<br>
+                    <strong>Service:</strong> @selectedAppointment.Service.Name<br>
+                    <strong>Barber:</strong> @($"{selectedAppointment.Barber.FirstName} {selectedAppointment.Barber.LastName}".Trim())<br>
+                    <strong>Notes:</strong> @(string.IsNullOrWhiteSpace(selectedAppointment.Notes) ? "-" : selectedAppointment.Notes)
+                </div>
+            </div>
+
+            <form method="post" asp-action="UpdateAppointment" class="booking-form">
+                <input type="hidden" name="appointmentId" value="@selectedAppointment.AppointmentId" />
+                <input type="hidden" name="email" value="@Model.Email" />
+
+                <label>
+                    Service:
+                    <select name="service">
+                        <option selected="@(selectedAppointment.Service.Name == "Haircut")">Haircut</option>
+                        <option selected="@(selectedAppointment.Service.Name == "Beard Trim")">Beard Trim</option>
+                        <option selected="@(selectedAppointment.Service.Name == "Haircut + Beard")">Haircut + Beard</option>
+                    </select>
+                </label>
+
+                <label>
+                    Barber:
+                    <select name="barber">
+                        <option selected="@(selectedAppointment.Barber.FirstName == "Any")">Any available</option>
+                        <option selected="@(selectedAppointment.Barber.FirstName == "Alex")">Alex</option>
+                        <option selected="@(selectedAppointment.Barber.FirstName == "Mark")">Mark</option>
+                        <option selected="@(selectedAppointment.Barber.FirstName == "Chris")">Chris</option>
+                    </select>
+                </label>
+
+                <label>
+                    Date:
+                    <input type="date" name="date" value="@selectedAppointment.StartDateTime.ToString("yyyy-MM-dd")" required>
+                </label>
+
+                <label>
+                    Time:
+                    <input type="time" name="time" value="@selectedAppointment.StartDateTime.ToString("HH:mm")" required>
+                </label>
+
+                <label>
+                    Notes:
+                    <textarea name="notes" rows="3">@selectedAppointment.Notes</textarea>
+                </label>
+
+                <button type="submit" class="btn-primary">Update appointment</button>
+            </form>
+
+            <form method="post" asp-action="DeleteAppointment" style="margin-top:10px;">
+                <input type="hidden" name="appointmentId" value="@selectedAppointment.AppointmentId" />
+                <input type="hidden" name="email" value="@Model.Email" />
+                <button type="submit" class="btn-primary">Delete appointment</button>
+            </form>
+        }
+    </div>
+
+    <div class="profile-section">
+        <h2 class="section-title">Past Bookings</h2>
+
+        @if (!Model.PastAppointments.Any())
+        {
+            <div class="info-row"><span class="info-value">No past bookings.</span></div>
+        }
+        else
+        {
+            @foreach (var appointment in Model.PastAppointments)
+            {
+                <div class="booking-item">
+                    <div class="booking-date">@appointment.StartDateTime.ToString("MMMM d, yyyy - h:mm tt")</div>
+                    <div class="booking-details">
+                        <strong>Service:</strong> @appointment.Service.Name<br>
+                        <strong>Barber:</strong> @($"{appointment.Barber.FirstName} {appointment.Barber.LastName}".Trim())<br>
+                        <strong>Duration:</strong> @(appointment.EndDateTime.Subtract(appointment.StartDateTime).TotalMinutes) minutes
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
