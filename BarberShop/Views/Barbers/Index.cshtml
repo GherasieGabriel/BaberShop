@@ -12,7 +12,7 @@
             "Johny" => Url.Content("~/images/barbers/JohnyMcBarber.jpg"),
             "Andrei" => Url.Content("~/images/barbers/Andrei Barberescu.jpg"),
             "Mihai" => Url.Content("~/images/barbers/Mihai Brici.jpg"),
-            "Dorel" => Url.Content("~/images/barbers/Dorel Centuristul.jpg"),
+            "Dorel" => Url.Content("~/images/barbers/Dorel Conturistul.jpg"),
             "Stephany" => Url.Content("~/images/barbers/Stephany Shearing.jpg"),
             _ => Url.Content("~/images/barbers/JohnyMcBarber.jpg")
         };
@@ -41,7 +41,7 @@
                 <p>@(!string.IsNullOrWhiteSpace(barber.Phone) ? barber.Phone : "-")</p>
                 @if (adminAccessService.IsAdmin())
                 {
-                    <a href="/Barbers/Edit/@barber.BarberId" class="btn btn-primary btn-sm">Edit</a>
+                    <a asp-controller="Barbers" asp-action="Edit" asp-route-email="@barber.Email" class="btn btn-primary btn-sm">Edit</a>
                 }
             </div>
         </div>
@@ -51,6 +51,6 @@
 @if (adminAccessService.IsAdmin())
 {
     <div class="text-center mt-5">
-        <a href="/Barbers/Manage" class="btn-primary">Manage Barbers</a>
+        <a asp-controller="Barbers" asp-action="Manage" class="btn-primary">Manage Barbers</a>
     </div>
 }

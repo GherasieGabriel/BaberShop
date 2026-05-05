@@ -10,4 +10,7 @@ public class ProfileViewModel
     public List<Appointment> UpcomingAppointments { get; set; } = new();
     public List<Appointment> PastAppointments { get; set; } = new();
     public Appointment? SelectedAppointment { get; set; }
+
+    public List<string> AvailableServices { get; set; } = new();
+    public List<string> AvailableBarbers { get; set; } = new();
 }

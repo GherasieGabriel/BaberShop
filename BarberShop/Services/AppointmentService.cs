@@ -11,16 +11,28 @@ public class AppointmentService(
     IBarberService barberService,
     IServiceCatalogService serviceCatalogService) : IAppointmentService
 {
-    public async Task<bool> CreateAsync(string fullName, string email, string serviceName, string barberName, DateTime date, DateTime time, string? notes)
+    public async Task<BookingViewModel> GetBookingAsync()
     {
-        if (string.IsNullOrWhiteSpace(fullName) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(serviceName))
+        var services = await serviceCatalogService.GetAllAsync();
+        var barbers = await barberService.GetAllAsync();
+
+        return new BookingViewModel
+        {
+            AvailableServices = services.Where(s => s.IsActive).OrderBy(s => s.Name).Select(s => s.Name).ToList(),
+            AvailableBarbers = barbers.Where(b => b.IsActive).OrderBy(b => b.FirstName).ThenBy(b => b.LastName).Select(b => $"{b.FirstName} {b.LastName}".Trim()).ToList()
+        };
+    }
+
+    public async Task<bool> CreateAsync(BookingViewModel model)
+    {
+        if (string.IsNullOrWhiteSpace(model.FullName) || string.IsNullOrWhiteSpace(model.Email) || string.IsNullOrWhiteSpace(model.Service) || model.Date is null || model.Time is null)
             return false;
 
-        var client = await clientService.GetOrCreateClientAsync(fullName, email);
-        var selectedService = await serviceCatalogService.ResolveServiceAsync(serviceName);
-        var selectedBarber = await barberService.ResolveBarberAsync(barberName);
+        var client = await clientService.GetOrCreateClientAsync(model.FullName, model.Email);
+        var selectedService = await serviceCatalogService.ResolveServiceAsync(model.Service);
+        var selectedBarber = await barberService.ResolveBarberAsync(model.Barber);
 
-        var startDateTime = date.Date + time.TimeOfDay;
+        var startDateTime = model.Date.Value.Date + model.Time.Value;
         var appointment = new Appointment
         {
             ClientId = client.ClientId,
@@ -29,7 +41,7 @@ public class AppointmentService(
             StartDateTime = startDateTime,
             EndDateTime = startDateTime.AddMinutes(selectedService.BaseDuration),
             Status = "Booked",
-            Notes = notes,
+            Notes = model.Notes,
             CreatedAt = DateTime.UtcNow
         };
 
@@ -60,6 +72,9 @@ public class AppointmentService(
             ? allAppointments.FirstOrDefault(a => a.AppointmentId == selectedAppointmentId.Value)
             : upcomingAppointments.FirstOrDefault();
 
+        var services = await serviceCatalogService.GetAllAsync();
+        var barbers = await barberService.GetAllAsync();
+
         return new ProfileViewModel
         {
             FullName = client?.FullName ?? "Admin",
@@ -68,13 +83,15 @@ public class AppointmentService(
             MemberSince = client?.MemberSince,
             UpcomingAppointments = upcomingAppointments,
             PastAppointments = pastAppointments,
-            SelectedAppointment = selectedAppointment
+            SelectedAppointment = selectedAppointment,
+            AvailableServices = services.Where(s => s.IsActive).OrderBy(s => s.Name).Select(s => s.Name).ToList(),
+            AvailableBarbers = barbers.Where(b => b.IsActive).OrderBy(b => b.FirstName).ThenBy(b => b.LastName).Select(b => $"{b.FirstName} {b.LastName}".Trim()).ToList()
         };
     }
 
-    public async Task<bool> UpdateAsync(int appointmentId, string email, string serviceName, string barberName, DateTime date, DateTime time, string? notes)
+    public async Task<bool> UpdateAsync(string email, DateTime appointmentStartDateTime, string serviceName, string barberName, DateTime date, DateTime time, string? notes)
     {
-        var appointment = await appointmentRepository.GetByIdForClientEmailAsync(appointmentId, email);
+        var appointment = await appointmentRepository.GetByClientEmailAndStartAsync(email, appointmentStartDateTime);
         if (appointment is null)
             return false;
 
@@ -93,9 +110,9 @@ public class AppointmentService(
         return true;
     }
 
-    public async Task<bool> DeleteAsync(int appointmentId, string email)
+    public async Task<bool> DeleteAsync(string email, DateTime appointmentStartDateTime)
     {
-        var appointment = await appointmentRepository.GetByIdForClientEmailAsync(appointmentId, email);
+        var appointment = await appointmentRepository.GetByClientEmailAndStartAsync(email, appointmentStartDateTime);
         if (appointment is null)
             return false;
 

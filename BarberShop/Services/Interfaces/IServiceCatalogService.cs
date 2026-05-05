@@ -7,8 +7,9 @@ public interface IServiceCatalogService
 {
     Task<List<ServiceEntity>> GetAllAsync();
     Task<ServiceEntity?> GetByIdAsync(int serviceId);
+    Task<ServiceEntity?> GetByNameAsync(string name);
     Task<ServiceEntity> CreateAsync(ServiceEntity service);
-    Task<bool> UpdateAsync(ServiceEntity service);
-    Task<bool> DeleteAsync(int serviceId);
+    Task<bool> UpdateAsync(string originalName, ServiceEntity service);
+    Task<bool> DeleteAsync(string name);
     Task<ServiceEntity> ResolveServiceAsync(string serviceName);
 }

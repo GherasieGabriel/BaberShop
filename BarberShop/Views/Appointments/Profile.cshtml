@@ -78,25 +78,27 @@
             </div>
 
             <form method="post" asp-action="UpdateAppointment" class="booking-form">
-                <input type="hidden" name="appointmentId" value="@selectedAppointment.AppointmentId" />
+                @Html.AntiForgeryToken()
                 <input type="hidden" name="email" value="@Model.Email" />
+                <input type="hidden" name="appointmentStartDateTime" value="@selectedAppointment.StartDateTime.ToString("O")" />
 
                 <label>
                     Service:
                     <select name="service">
-                        <option selected="@(selectedAppointment.Service.Name == "Haircut")">Haircut</option>
-                        <option selected="@(selectedAppointment.Service.Name == "Beard Trim")">Beard Trim</option>
-                        <option selected="@(selectedAppointment.Service.Name == "Haircut + Beard")">Haircut + Beard</option>
+                        @foreach (var service in Model.AvailableServices)
+                        {
+                            <option selected="@(selectedAppointment.Service.Name == service)">@service</option>
+                        }
                     </select>
                 </label>
 
                 <label>
                     Barber:
                     <select name="barber">
-                        <option selected="@(selectedAppointment.Barber.FirstName == "Any")">Any available</option>
-                        <option selected="@(selectedAppointment.Barber.FirstName == "Alex")">Alex</option>
-                        <option selected="@(selectedAppointment.Barber.FirstName == "Mark")">Mark</option>
-                        <option selected="@(selectedAppointment.Barber.FirstName == "Chris")">Chris</option>
+                        @foreach (var barber in Model.AvailableBarbers)
+                        {
+                            <option selected="@($"{selectedAppointment.Barber.FirstName} {selectedAppointment.Barber.LastName}".Trim() == barber)">@barber</option>
+                        }
                     </select>
                 </label>
 
@@ -119,7 +121,8 @@
             </form>
 
             <form method="post" asp-action="DeleteAppointment" style="margin-top:10px;">
-                <input type="hidden" name="appointmentId" value="@selectedAppointment.AppointmentId" />
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="appointmentStartDateTime" value="@selectedAppointment.StartDateTime.ToString("O")" />
                 <input type="hidden" name="email" value="@Model.Email" />
                 <button type="submit" class="btn-primary">Delete appointment</button>
             </form>

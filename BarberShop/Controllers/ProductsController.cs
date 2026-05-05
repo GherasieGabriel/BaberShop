@@ -24,20 +24,24 @@ public class ProductsController(
             return RedirectToAction("Index");
         }
 
-        var products = await productService.GetAllAsync();
-        return View(products);
+        var viewModel = new ManageProductsViewModel
+        {
+            Products = await productService.GetAllAsync()
+        };
+
+        return View(viewModel);
     }
 
     [HttpGet]
-    public async Task<IActionResult> Edit(int id)
+    public async Task<IActionResult> Edit(string name)
     {
         if (!adminAccessService.IsAdmin())
         {
             TempData["BookingError"] = "Only admin can edit products.";
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
-        var product = await productService.GetByIdAsync(id);
+        var product = await productService.GetByNameAsync(name);
         if (product is null)
         {
             TempData["BookingError"] = "Product not found.";
@@ -49,7 +53,7 @@ public class ProductsController(
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(string name, string? description, string category, decimal price, int stockQuantity, bool isActive)
+    public async Task<IActionResult> Create(Product model)
     {
         if (!adminAccessService.IsAdmin())
         {
@@ -57,21 +61,15 @@ public class ProductsController(
             return RedirectToAction(nameof(Manage));
         }
 
-        if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(category) || price < 0 || stockQuantity < 0)
+        if (!ModelState.IsValid)
         {
             TempData["BookingError"] = "Invalid product input.";
             return RedirectToAction(nameof(Manage));
         }
 
-        await productService.CreateAsync(new Product
-        {
-            Name = name.Trim(),
-            Description = description,
-            Category = category.Trim(),
-            Price = price,
-            StockQuantity = stockQuantity,
-            IsActive = isActive
-        });
+        model.Name = model.Name.Trim();
+        model.Category = model.Category.Trim();
+        await productService.CreateAsync(model);
 
         TempData["BookingSuccess"] = "Product created.";
         return RedirectToAction(nameof(Manage));
@@ -79,7 +77,7 @@ public class ProductsController(
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Update(int productId, string name, string? description, string category, decimal price, int stockQuantity, bool isActive)
+    public async Task<IActionResult> Update(string originalName, string name, string? description, string category, decimal price, int stockQuantity, bool isActive)
     {
         if (!adminAccessService.IsAdmin())
         {
@@ -87,9 +85,8 @@ public class ProductsController(
             return RedirectToAction(nameof(Manage));
         }
 
-        var updated = await productService.UpdateAsync(new Product
+        var updated = await productService.UpdateAsync(originalName, new Product
         {
-            ProductId = productId,
             Name = name.Trim(),
             Description = description,
             Category = category.Trim(),
@@ -104,7 +101,7 @@ public class ProductsController(
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Delete(int productId)
+    public async Task<IActionResult> Delete(string name)
     {
         if (!adminAccessService.IsAdmin())
         {
@@ -112,7 +109,7 @@ public class ProductsController(
             return RedirectToAction(nameof(Manage));
         }
 
-        var deleted = await productService.DeleteAsync(productId);
+        var deleted = await productService.DeleteAsync(name);
         TempData[deleted ? "BookingSuccess" : "BookingError"] = deleted ? "Product deleted." : "Product not found.";
         return RedirectToAction(nameof(Manage));
     }

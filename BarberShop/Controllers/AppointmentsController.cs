@@ -10,16 +10,29 @@ public class AppointmentsController(
     IBarberService barberService) : Controller
 {
     [HttpGet]
-    public IActionResult Booking()
+    public async Task<IActionResult> Booking()
     {
-        return View();
+        return View(await appointmentService.GetBookingAsync());
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Booking(string fullName, string email, string service, string barber, DateTime date, DateTime time, string? notes)
+    public async Task<IActionResult> Booking(BookingViewModel model)
     {
-        var created = await appointmentService.CreateAsync(fullName, email, service, barber, date, time, notes);
+        if (!ModelState.IsValid)
+        {
+            var vm = await appointmentService.GetBookingAsync();
+            vm.FullName = model.FullName;
+            vm.Email = model.Email;
+            vm.Service = model.Service;
+            vm.Barber = model.Barber;
+            vm.Date = model.Date;
+            vm.Time = model.Time;
+            vm.Notes = model.Notes;
+            return View(vm);
+        }
+
+        var created = await appointmentService.CreateAsync(model);
         TempData[created ? "BookingSuccess" : "BookingError"] = created
             ? "Your appointment was saved."
             : "Please complete all required fields.";
@@ -36,18 +49,18 @@ public class AppointmentsController(
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> UpdateAppointment(int appointmentId, string email, string service, string barber, DateTime date, DateTime time, string? notes)
+    public async Task<IActionResult> UpdateAppointment(string email, DateTime appointmentStartDateTime, string service, string barber, DateTime date, DateTime time, string? notes)
     {
-        var updated = await appointmentService.UpdateAsync(appointmentId, email, service, barber, date, time, notes);
+        var updated = await appointmentService.UpdateAsync(email, appointmentStartDateTime, service, barber, date, time, notes);
         TempData[updated ? "BookingSuccess" : "BookingError"] = updated ? "Appointment updated." : "Appointment not found.";
-        return RedirectToAction(nameof(Profile), new { email, selectedAppointmentId = appointmentId });
+        return RedirectToAction(nameof(Profile), new { email });
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteAppointment(int appointmentId, string email)
+    public async Task<IActionResult> DeleteAppointment(string email, DateTime appointmentStartDateTime)
     {
-        var deleted = await appointmentService.DeleteAsync(appointmentId, email);
+        var deleted = await appointmentService.DeleteAsync(email, appointmentStartDateTime);
         TempData[deleted ? "BookingSuccess" : "BookingError"] = deleted ? "Appointment deleted." : "Appointment not found.";
         return RedirectToAction(nameof(Profile), new { email });
     }

@@ -22,6 +22,13 @@ public class AppointmentRepository(BarberShopDbContext context) : IAppointmentRe
             .Include(a => a.Barber)
             .FirstOrDefaultAsync(a => a.AppointmentId == appointmentId && a.Client.Email == email);
 
+    public Task<Appointment?> GetByClientEmailAndStartAsync(string email, DateTime startDateTime)
+        => context.Appointments
+            .Include(a => a.Client)
+            .Include(a => a.Service)
+            .Include(a => a.Barber)
+            .FirstOrDefaultAsync(a => a.Client.Email == email && a.StartDateTime == startDateTime);
+
     public async Task<Appointment> AddAsync(Appointment appointment)
     {
         context.Appointments.Add(appointment);

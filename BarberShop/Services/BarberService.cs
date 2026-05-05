@@ -12,12 +12,18 @@ public class BarberService(IRepository<Barber> barberRepository) : IBarberServic
     public Task<Barber?> GetByIdAsync(int barberId)
         => barberRepository.GetByIdAsync(barberId);
 
+    public Task<Barber?> GetByEmailAsync(string email)
+        => barberRepository.FirstOrDefaultAsync(b => b.Email == email);
+
+    public Task<Barber?> GetByFullNameAsync(string firstName, string lastName)
+        => barberRepository.FirstOrDefaultAsync(b => b.FirstName == firstName && b.LastName == lastName);
+
     public Task<Barber> CreateAsync(Barber barber)
         => barberRepository.AddAsync(barber);
 
-    public async Task<bool> UpdateAsync(Barber barber)
+    public async Task<bool> UpdateAsync(string originalEmail, Barber barber)
     {
-        var existing = await barberRepository.GetByIdAsync(barber.BarberId);
+        var existing = await barberRepository.FirstOrDefaultAsync(b => b.Email == originalEmail);
         if (existing is null)
             return false;
 
@@ -32,9 +38,9 @@ public class BarberService(IRepository<Barber> barberRepository) : IBarberServic
         return true;
     }
 
-    public async Task<bool> DeleteAsync(int barberId)
+    public async Task<bool> DeleteAsync(string email)
     {
-        var barber = await barberRepository.GetByIdAsync(barberId);
+        var barber = await barberRepository.FirstOrDefaultAsync(b => b.Email == email);
         if (barber is null)
             return false;
 
@@ -51,16 +57,17 @@ public class BarberService(IRepository<Barber> barberRepository) : IBarberServic
         }
         else
         {
-            barber = await barberRepository.FirstOrDefaultAsync(b => b.FirstName == barberName && b.IsActive);
+            barber = await barberRepository.FirstOrDefaultAsync(b => ($"{b.FirstName} {b.LastName}").Trim() == barberName && b.IsActive);
         }
 
         if (barber is not null)
             return barber;
 
+        var split = barberName.Split(' ', 2, StringSplitOptions.RemoveEmptyEntries);
         barber = new Barber
         {
-            FirstName = string.Equals(barberName, "Any available", StringComparison.OrdinalIgnoreCase) ? "Any" : barberName,
-            LastName = "Available",
+            FirstName = string.Equals(barberName, "Any available", StringComparison.OrdinalIgnoreCase) ? "Any" : split.FirstOrDefault() ?? barberName,
+            LastName = string.Equals(barberName, "Any available", StringComparison.OrdinalIgnoreCase) ? "Available" : (split.Length > 1 ? split[1] : string.Empty),
             Phone = string.Empty,
             Email = string.Empty,
             HireDate = DateTime.UtcNow.Date,

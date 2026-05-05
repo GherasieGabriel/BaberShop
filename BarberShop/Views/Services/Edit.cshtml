@@ -19,20 +19,18 @@
 
     <form method="post" asp-action="Update" class="booking-form">
         @Html.AntiForgeryToken()
-        <input type="hidden" name="serviceId" value="@Model.ServiceId" />
-        <label>Name <input type="text" name="name" value="@Model.Name" required /></label>
-        <label>Description <textarea name="description" rows="2">@Model.Description</textarea></label>
-        <label>Duration (minutes) <input type="number" name="baseDuration" min="1" value="@Model.BaseDuration" required /></label>
-        <label>Base Price <input type="number" name="basePrice" step="0.01" min="0" value="@Model.BasePrice" required /></label>
+        <input type="hidden" name="originalName" value="@Model.Name" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <label>Name <input asp-for="Name" type="text" /></label>
+        <span asp-validation-for="Name" class="text-danger"></span>
+        <label>Description <textarea asp-for="Description" rows="2"></textarea></label>
+        <span asp-validation-for="Description" class="text-danger"></span>
+        <label>Duration (minutes) <input asp-for="BaseDuration" type="number" min="1" /></label>
+        <span asp-validation-for="BaseDuration" class="text-danger"></span>
+        <label>Base Price <input asp-for="BasePrice" type="number" step="0.01" min="0" /></label>
+        <span asp-validation-for="BasePrice" class="text-danger"></span>
         <label>
-            @if (Model.IsActive)
-            {
-                <input type="checkbox" name="isActive" value="true" checked />
-            }
-            else
-            {
-                <input type="checkbox" name="isActive" value="true" />
-            }
+            <input asp-for="IsActive" type="checkbox" />
             Active
         </label>
 
@@ -42,3 +40,7 @@
         </div>
     </form>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

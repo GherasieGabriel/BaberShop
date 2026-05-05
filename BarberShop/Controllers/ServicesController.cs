@@ -24,12 +24,16 @@ public class ServicesController(
             return RedirectToAction(nameof(Index));
         }
 
-        var services = await serviceCatalogService.GetAllAsync();
-        return View(services);
+        var viewModel = new ManageServicesViewModel
+        {
+            Services = await serviceCatalogService.GetAllAsync()
+        };
+
+        return View(viewModel);
     }
 
     [HttpGet]
-    public async Task<IActionResult> Edit(int id)
+    public async Task<IActionResult> Edit(string name)
     {
         if (!adminAccessService.IsAdmin())
         {
@@ -37,7 +41,7 @@ public class ServicesController(
             return RedirectToAction(nameof(Index));
         }
 
-        var service = await serviceCatalogService.GetByIdAsync(id);
+        var service = await serviceCatalogService.GetByNameAsync(name);
         if (service is null)
         {
             TempData["BookingError"] = "Service not found.";
@@ -49,7 +53,7 @@ public class ServicesController(
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(string name, string? description, int baseDuration, decimal basePrice, bool isActive)
+    public async Task<IActionResult> Create(Service model)
     {
         if (!adminAccessService.IsAdmin())
         {
@@ -57,20 +61,14 @@ public class ServicesController(
             return RedirectToAction(nameof(Index));
         }
 
-        if (string.IsNullOrWhiteSpace(name) || baseDuration <= 0 || basePrice < 0)
+        if (!ModelState.IsValid)
         {
             TempData["BookingError"] = "Invalid service input.";
             return RedirectToAction(nameof(Manage));
         }
 
-        await serviceCatalogService.CreateAsync(new Service
-        {
-            Name = name.Trim(),
-            Description = description,
-            BaseDuration = baseDuration,
-            BasePrice = basePrice,
-            IsActive = isActive
-        });
+        model.Name = model.Name.Trim();
+        await serviceCatalogService.CreateAsync(model);
 
         TempData["BookingSuccess"] = "Service created.";
         return RedirectToAction(nameof(Manage));
@@ -78,7 +76,7 @@ public class ServicesController(
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Update(int serviceId, string name, string? description, int baseDuration, decimal basePrice, bool isActive)
+    public async Task<IActionResult> Update(string originalName, string name, string? description, int baseDuration, decimal basePrice, bool isActive)
     {
         if (!adminAccessService.IsAdmin())
         {
@@ -86,9 +84,8 @@ public class ServicesController(
             return RedirectToAction(nameof(Index));
         }
 
-        var updated = await serviceCatalogService.UpdateAsync(new Service
+        var updated = await serviceCatalogService.UpdateAsync(originalName, new Service
         {
-            ServiceId = serviceId,
             Name = name.Trim(),
             Description = description,
             BaseDuration = baseDuration,
@@ -102,7 +99,7 @@ public class ServicesController(
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Delete(int serviceId)
+    public async Task<IActionResult> Delete(string name)
     {
         if (!adminAccessService.IsAdmin())
         {
@@ -110,7 +107,7 @@ public class ServicesController(
             return RedirectToAction(nameof(Index));
         }
 
-        var deleted = await serviceCatalogService.DeleteAsync(serviceId);
+        var deleted = await serviceCatalogService.DeleteAsync(name);
         TempData[deleted ? "BookingSuccess" : "BookingError"] = deleted ? "Service deleted." : "Service not found.";
         return RedirectToAction(nameof(Manage));
     }

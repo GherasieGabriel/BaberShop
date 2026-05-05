@@ -32,7 +32,7 @@
                     <div class="product-price">@service.BasePrice.ToString("0.00") RON • @service.BaseDuration min</div>
                     @if (adminAccessService.IsAdmin())
                     {
-                        <a href="/Services/Edit/@service.ServiceId" class="btn btn-primary btn-sm mt-2">Edit</a>
+                        <a asp-controller="Services" asp-action="Edit" asp-route-name="@service.Name" class="btn btn-primary btn-sm mt-2">Edit</a>
                     }
                 </div>
             </div>
@@ -43,6 +43,6 @@
 @if (adminAccessService.IsAdmin())
 {
     <div class="text-center mt-4">
-        <a href="/Services/Manage" class="btn-primary">Manage services</a>
+        <a asp-controller="Services" asp-action="Manage" class="btn-primary">Manage services</a>
     </div>
 }

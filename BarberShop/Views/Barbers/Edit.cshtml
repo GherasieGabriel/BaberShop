@@ -19,20 +19,18 @@
 
     <form method="post" asp-action="Update" class="booking-form">
         @Html.AntiForgeryToken()
-        <input type="hidden" name="barberId" value="@Model.BarberId" />
-        <label>First Name <input type="text" name="firstName" value="@Model.FirstName" required /></label>
-        <label>Last Name <input type="text" name="lastName" value="@Model.LastName" required /></label>
-        <label>Phone <input type="text" name="phone" value="@Model.Phone" /></label>
-        <label>Email <input type="email" name="email" value="@Model.Email" /></label>
+        <input type="hidden" name="originalEmail" value="@Model.Email" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <label>First Name <input asp-for="FirstName" type="text" /></label>
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+        <label>Last Name <input asp-for="LastName" type="text" /></label>
+        <span asp-validation-for="LastName" class="text-danger"></span>
+        <label>Phone <input asp-for="Phone" type="text" /></label>
+        <span asp-validation-for="Phone" class="text-danger"></span>
+        <label>Email <input asp-for="Email" type="email" /></label>
+        <span asp-validation-for="Email" class="text-danger"></span>
         <label>
-            @if (Model.IsActive)
-            {
-                <input type="checkbox" name="isActive" value="true" checked />
-            }
-            else
-            {
-                <input type="checkbox" name="isActive" value="true" />
-            }
+            <input asp-for="IsActive" type="checkbox" />
             Active
         </label>
 
@@ -42,3 +40,7 @@
         </div>
     </form>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

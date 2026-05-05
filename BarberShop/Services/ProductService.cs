@@ -12,12 +12,15 @@ public class ProductService(IRepository<Product> productRepository) : IProductSe
     public Task<Product?> GetByIdAsync(int productId)
         => productRepository.GetByIdAsync(productId);
 
+    public Task<Product?> GetByNameAsync(string name)
+        => productRepository.FirstOrDefaultAsync(p => p.Name == name);
+
     public Task<Product> CreateAsync(Product product)
         => productRepository.AddAsync(product);
 
-    public async Task<bool> UpdateAsync(Product product)
+    public async Task<bool> UpdateAsync(string originalName, Product product)
     {
-        var existing = await productRepository.GetByIdAsync(product.ProductId);
+        var existing = await productRepository.FirstOrDefaultAsync(p => p.Name == originalName);
         if (existing is null)
             return false;
 
@@ -32,9 +35,9 @@ public class ProductService(IRepository<Product> productRepository) : IProductSe
         return true;
     }
 
-    public async Task<bool> DeleteAsync(int productId)
+    public async Task<bool> DeleteAsync(string name)
     {
-        var product = await productRepository.GetByIdAsync(productId);
+        var product = await productRepository.FirstOrDefaultAsync(p => p.Name == name);
         if (product is null)
             return false;
 

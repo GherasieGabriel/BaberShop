@@ -24,12 +24,16 @@ public class BarbersController(
             return RedirectToAction(nameof(Index));
         }
 
-        var barbers = await barberService.GetAllAsync();
-        return View(barbers);
+        var viewModel = new ManageBarbersViewModel
+        {
+            Barbers = await barberService.GetAllAsync()
+        };
+
+        return View(viewModel);
     }
 
     [HttpGet]
-    public async Task<IActionResult> Edit(int id)
+    public async Task<IActionResult> Edit(string email)
     {
         if (!adminAccessService.IsAdmin())
         {
@@ -37,7 +41,7 @@ public class BarbersController(
             return RedirectToAction(nameof(Index));
         }
 
-        var barber = await barberService.GetByIdAsync(id);
+        var barber = await barberService.GetByEmailAsync(email);
         if (barber is null)
         {
             TempData["BookingError"] = "Barber not found.";
@@ -49,7 +53,7 @@ public class BarbersController(
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(string firstName, string lastName, string? phone, string? email, bool isActive)
+    public async Task<IActionResult> Create(Barber model)
     {
         if (!adminAccessService.IsAdmin())
         {
@@ -57,21 +61,18 @@ public class BarbersController(
             return RedirectToAction(nameof(Index));
         }
 
-        if (string.IsNullOrWhiteSpace(firstName) || string.IsNullOrWhiteSpace(lastName))
+        if (!ModelState.IsValid)
         {
-            TempData["BookingError"] = "First and last names are required.";
+            TempData["BookingError"] = "Invalid barber input.";
             return RedirectToAction(nameof(Manage));
         }
 
-        await barberService.CreateAsync(new Barber
-        {
-            FirstName = firstName.Trim(),
-            LastName = lastName.Trim(),
-            Phone = phone?.Trim() ?? string.Empty,
-            Email = email?.Trim() ?? string.Empty,
-            HireDate = DateTime.UtcNow.Date,
-            IsActive = isActive
-        });
+        model.FirstName = model.FirstName.Trim();
+        model.LastName = model.LastName.Trim();
+        model.Phone = model.Phone?.Trim() ?? string.Empty;
+        model.Email = model.Email?.Trim() ?? string.Empty;
+        model.HireDate = DateTime.UtcNow.Date;
+        await barberService.CreateAsync(model);
 
         TempData["BookingSuccess"] = "Barber created successfully.";
         return RedirectToAction(nameof(Manage));
@@ -79,7 +80,7 @@ public class BarbersController(
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Update(int barberId, string firstName, string lastName, string? phone, string? email, bool isActive)
+    public async Task<IActionResult> Update(string originalEmail, string firstName, string lastName, string? phone, string? email, bool isActive)
     {
         if (!adminAccessService.IsAdmin())
         {
@@ -87,9 +88,8 @@ public class BarbersController(
             return RedirectToAction(nameof(Index));
         }
 
-        var updated = await barberService.UpdateAsync(new Barber
+        var updated = await barberService.UpdateAsync(originalEmail, new Barber
         {
-            BarberId = barberId,
             FirstName = firstName.Trim(),
             LastName = lastName.Trim(),
             Phone = phone?.Trim() ?? string.Empty,
@@ -104,7 +104,7 @@ public class BarbersController(
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Delete(int barberId)
+    public async Task<IActionResult> Delete(string email)
     {
         if (!adminAccessService.IsAdmin())
         {
@@ -112,7 +112,7 @@ public class BarbersController(
             return RedirectToAction(nameof(Index));
         }
 
-        var deleted = await barberService.DeleteAsync(barberId);
+        var deleted = await barberService.DeleteAsync(email);
         TempData[deleted ? "BookingSuccess" : "BookingError"] = deleted ? "Barber deleted." : "Barber not found.";
         return RedirectToAction(nameof(Manage));
     }

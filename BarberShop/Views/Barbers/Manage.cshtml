@@ -1,4 +1,4 @@
-@model List<Barber>
+@model ManageBarbersViewModel
 @{
     Layout = "_BarberLayout";
     ViewData["Title"] = "Manage Barbers";
@@ -19,11 +19,11 @@
     <h2>Add Barber</h2>
     <form method="post" asp-action="Create" class="booking-form">
         @Html.AntiForgeryToken()
-        <label>First Name <input type="text" name="firstName" required /></label>
-        <label>Last Name <input type="text" name="lastName" required /></label>
-        <label>Phone <input type="text" name="phone" /></label>
-        <label>Email <input type="email" name="email" /></label>
-        <label><input type="checkbox" name="isActive" value="true" checked /> Active</label>
+        <label>First Name <input name="FirstName" type="text" value="@Model.NewBarber.FirstName" /></label>
+        <label>Last Name <input name="LastName" type="text" value="@Model.NewBarber.LastName" /></label>
+        <label>Phone <input name="Phone" type="text" value="@Model.NewBarber.Phone" /></label>
+        <label>Email <input name="Email" type="email" value="@Model.NewBarber.Email" /></label>
+        <label><input name="IsActive" type="checkbox" value="true" /> Active</label>
         <button type="submit" class="btn-primary">Create</button>
     </form>
 </section>
@@ -31,7 +31,7 @@
 <section>
     <h2>Barbers</h2>
     <div class="row">
-        @foreach (var barber in Model.OrderBy(b => b.FirstName).ThenBy(b => b.LastName))
+        @foreach (var barber in Model.Barbers.OrderBy(b => b.FirstName).ThenBy(b => b.LastName))
         {
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="product-card">
@@ -39,10 +39,10 @@
                     <p>@barber.Phone</p>
                     <p>@barber.Email</p>
                     <div class="d-flex gap-2">
-                        <a asp-action="Edit" asp-route-id="@barber.BarberId" class="btn-primary">Edit</a>
+                        <a asp-action="Edit" asp-route-email="@barber.Email" class="btn-primary">Edit</a>
                         <form method="post" asp-action="Delete" class="d-inline">
                             @Html.AntiForgeryToken()
-                            <input type="hidden" name="barberId" value="@barber.BarberId" />
+                            <input type="hidden" name="email" value="@barber.Email" />
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
                     </div>

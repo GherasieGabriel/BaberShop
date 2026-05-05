@@ -12,12 +12,15 @@ public class ServiceCatalogService(IRepository<ServiceEntity> serviceRepository)
     public Task<ServiceEntity?> GetByIdAsync(int serviceId)
         => serviceRepository.GetByIdAsync(serviceId);
 
+    public Task<ServiceEntity?> GetByNameAsync(string name)
+        => serviceRepository.FirstOrDefaultAsync(s => s.Name == name);
+
     public Task<ServiceEntity> CreateAsync(ServiceEntity service)
         => serviceRepository.AddAsync(service);
 
-    public async Task<bool> UpdateAsync(ServiceEntity service)
+    public async Task<bool> UpdateAsync(string originalName, ServiceEntity service)
     {
-        var existing = await serviceRepository.GetByIdAsync(service.ServiceId);
+        var existing = await serviceRepository.FirstOrDefaultAsync(s => s.Name == originalName);
         if (existing is null)
             return false;
 
@@ -31,9 +34,9 @@ public class ServiceCatalogService(IRepository<ServiceEntity> serviceRepository)
         return true;
     }
 
-    public async Task<bool> DeleteAsync(int serviceId)
+    public async Task<bool> DeleteAsync(string name)
     {
-        var service = await serviceRepository.GetByIdAsync(serviceId);
+        var service = await serviceRepository.FirstOrDefaultAsync(s => s.Name == name);
         if (service is null)
             return false;
 

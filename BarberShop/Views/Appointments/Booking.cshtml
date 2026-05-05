@@ -1,3 +1,4 @@
+@model BookingViewModel
 @{
     Layout = "_BarberLayout";
     ViewData["Title"] = "Booking";
@@ -17,49 +18,52 @@
 
 <form class="booking-form" method="post" asp-action="Booking">
     @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <label>
         Full name:
-        <input type="text" name="fullName" required>
+        <input asp-for="FullName" type="text" required />
+        <span asp-validation-for="FullName" class="text-danger"></span>
     </label>
 
     <label>
         Email:
-        <input type="email" name="email" required>
+        <input asp-for="Email" type="email" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
     </label>
 
     <label>
         Service:
-        <select name="service">
-            <option>Haircut</option>
-            <option>Beard Trim</option>
-            <option>Haircut + Beard</option>
-        </select>
+        <select asp-for="Service" asp-items="new SelectList(Model.AvailableServices)" required></select>
+        <span asp-validation-for="Service" class="text-danger"></span>
     </label>
 
     <label>
         Barber:
-        <select name="barber">
-            <option>Any available</option>
-            <option>Alex</option>
-            <option>Mark</option>
-            <option>Chris</option>
-        </select>
+        <select asp-for="Barber" asp-items="new SelectList(Model.AvailableBarbers)" required></select>
+        <span asp-validation-for="Barber" class="text-danger"></span>
     </label>
 
     <label>
         Date:
-        <input type="date" name="date" required>
+        <input asp-for="Date" type="date" required />
+        <span asp-validation-for="Date" class="text-danger"></span>
     </label>
 
     <label>
         Time:
-        <input type="time" name="time" required>
+        <input asp-for="Time" type="time" required />
+        <span asp-validation-for="Time" class="text-danger"></span>
     </label>
 
     <label>
         Notes:
-        <textarea name="notes" rows="3" placeholder="Optional"></textarea>
+        <textarea asp-for="Notes" rows="3" placeholder="Optional"></textarea>
+        <span asp-validation-for="Notes" class="text-danger"></span>
     </label>
 
     <button type="submit" class="btn-primary">Submit reservation</button>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
