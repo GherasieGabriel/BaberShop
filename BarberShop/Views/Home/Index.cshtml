@@ -3,8 +3,158 @@
     ViewData["Title"] = "Home";
 }
 
-<section class="hero">
-    <h1>Welcome to BarberShop</h1>
-    <p>Modern cuts, classic style. Book your next appointment in seconds.</p>
-    <a asp-controller="Appointments" asp-action="Booking" class="btn-primary">Book an appointment</a>
+<!-- Hero Section -->
+<section class="hero-section" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80') center/cover; height: 500px; display: flex; align-items: center; justify-content: center; color: white; text-align: center;">
+    <div class="hero-content">
+        <h1 class="display-3 mb-4">Classic Style Never Goes Out of Style!</h1>
+        <p class="lead mb-4">An unforgettable atmosphere with every visit</p>
+        <p class="mb-5">Premium barbering and grooming services for men who appreciate the details</p>
+        <a asp-controller="Appointments" asp-action="Booking" class="btn btn-primary btn-lg">
+            <i class="bi bi-calendar-check"></i> Book Now
+        </a>
+    </div>
 </section>
+
+<!-- About/Story Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <img src="https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&fit=crop&w=900&q=80" alt="Our Story" class="img-fluid rounded" style="height: 400px; object-fit: cover;">
+            </div>
+            <div class="col-lg-6">
+                <h2 class="mb-4">Our Story</h2>
+                <p class="mb-3">
+                    Founded with a passion for traditional barbering craftsmanship, BarberShop is where classic meets modern. 
+                    For over 10 years, we've served our community with dedication and attention to detail.
+                </p>
+                <p class="mb-3">
+                    Our team of master barbers is trained to provide the highest quality services in a comfortable and elegant barbershop environment.
+                </p>
+                <p>
+                    Every client is special to us. We listen to your needs and create a look that surprises you and makes you feel confident.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Popular Services</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1599623282947-7a426fbf0bfd?auto=format&fit=crop&w=400&q=80" alt="Classic Cut" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Classic Cut</h5>
+                        <p class="card-text text-muted">Traditional haircut with attention to detail and personalized style.</p>
+                        <p class="fw-bold">$25</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=400&q=80" alt="Beard Trim" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Beard Trim</h5>
+                        <p class="card-text text-muted">Professional beard grooming with premium products and relaxation.</p>
+                        <p class="fw-bold">$30</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=400&q=80" alt="Haircut + Beard" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Haircut + Beard</h5>
+                        <p class="card-text text-muted">Complete package for the perfect look.</p>
+                        <p class="fw-bold">$50</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=400&q=80" alt="Facial Treatment" class="card-img-top" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">Facial Treatment</h5>
+                        <p class="card-text text-muted">Specialized skincare and facial treatment services.</p>
+                        <p class="fw-bold">$40</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-5">
+            <a asp-controller="Home" asp-action="Prices" class="btn btn-outline-primary">
+                View All Services
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">What Our Clients Say</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                            <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                            <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                            <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                            <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                        </div>
+                        <p class="card-text">"Best barber in town! Perfect atmosphere, professional masters. I highly recommend!"</p>
+                        <p class="mb-0 fw-bold">- John M.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                            <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                            <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                            <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                            <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                        </div>
+                        <p class="card-text">"Quality services, reasonable prices, and very attentive and hospitable staff."</p>
+                        <p class="mb-0 fw-bold">- David T.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                            <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                            <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                            <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                            <i class="bi bi-star-fill" style="color: #ffc107;"></i>
+                        </div>
+                        <p class="card-text">"Always left satisfied from here. My preferred style is exactly how I want it. Thanks guys!"</p>
+                        <p class="mb-0 fw-bold">- Michael D.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-dark text-white">
+    <div class="container text-center">
+        <h2 class="mb-4">Ready for Your Best Look?</h2>
+        <p class="lead mb-5">Book an appointment today and discover the difference a true master barber makes.</p>
+        <a asp-controller="Appointments" asp-action="Booking" class="btn btn-primary btn-lg">
+            Book Now
+        </a>
+    </div>
+</section>
+

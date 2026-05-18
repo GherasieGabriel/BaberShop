@@ -29,7 +29,14 @@
                     <h3 class="product-name">@product.Name</h3>
                     <p class="product-description">@(string.IsNullOrWhiteSpace(product.Description) ? "Premium barber product." : product.Description)</p>
                     <div class="product-price">@product.Price.ToString("0.00") RON</div>
-                    <button class="btn-add-cart" type="button" onclick="alert('@product.Name added to cart!')">Add to Cart</button>
+                    <form method="post" asp-controller="Cart" asp-action="Add" class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@product.ProductId" />
+                        <input type="hidden" name="name" value="@product.Name" />
+                        <input type="hidden" name="price" value="@product.Price" />
+                        <input type="hidden" name="quantity" value="1" />
+                        <button type="submit" class="btn-add-cart">Add to Cart</button>
+                    </form>
                     @if (adminAccessService.IsAdmin())
                     {
                         <a asp-controller="Products" asp-action="Edit" asp-route-name="@product.Name" class="btn btn-primary btn-sm mt-2">Edit</a>

@@ -1,4 +1,5 @@
-@inject BarberShop.Services.Interfaces.IAdminAccessService adminAccessService
+@inject BarberShop.Services.ICartService cartService
+@inject Microsoft.AspNetCore.Identity.UserManager<BarberShop.Models.ApplicationUser> userManager
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,19 +33,46 @@
             </ul>
 
             <div class="d-flex align-items-center gap-2">
-                <a asp-controller="Appointments" asp-action="Profile" class="btn btn-outline-warning btn-sm">Profile</a>
+                <a asp-controller="Cart" asp-action="Index" class="btn btn-outline-info btn-sm position-relative">
+                    <i class="bi bi-cart3"></i> Cart
+                    @{
+                        var cart = cartService.GetCart(Context);
+                        var itemCount = cart.GetItemCount();
+                        if (itemCount > 0)
+                        {
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                @itemCount
+                            </span>
+                        }
+                    }
+                </a>
 
-                @if (adminAccessService.IsAdmin())
+                @if (User.Identity?.IsAuthenticated == true)
                 {
-                    <span class="text-warning small fw-bold">Admin mode</span>
-                    <form method="post" asp-controller="Admin" asp-action="Logout" class="m-0">
+                    var currentUser = await userManager.GetUserAsync(User);
+                    <div class="d-flex align-items-center gap-2">
+                        @if (currentUser?.ProfileImage != null)
+                        {
+                            <img src="data:image/jpeg;base64,@System.Convert.ToBase64String(currentUser.ProfileImage)" 
+                                 alt="Profile" class="rounded-circle" style="width: 32px; height: 32px; object-fit: cover;" />
+                        }
+                        <span class="text-light small">@currentUser?.FirstName @currentUser?.LastName</span>
+                    </div>
+                    <a asp-controller="Appointments" asp-action="Profile" class="btn btn-outline-warning btn-sm">Profile</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <span class="text-warning small fw-bold">Admin</span>
+                        <a asp-controller="Admin" asp-action="Dashboard" class="btn btn-warning btn-sm">Dashboard</a>
+                    }
+                    <form method="post" asp-controller="Account" asp-action="Logout" class="m-0">
                         @Html.AntiForgeryToken()
-                        <button type="submit" class="btn btn-warning btn-sm">Logout</button>
+                        <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
                     </form>
                 }
                 else
                 {
-                    <a asp-controller="Admin" asp-action="Login" class="btn btn-outline-light btn-sm">Admin Login</a>
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light btn-sm">Login</a>
+                    <a asp-controller="Account" asp-action="Register" class="btn btn-outline-warning btn-sm">Register</a>
                 }
             </div>
         </div>

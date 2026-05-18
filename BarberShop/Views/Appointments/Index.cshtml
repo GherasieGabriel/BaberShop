@@ -1,0 +1,18 @@
+@{
+    ViewData["Title"] = "My Appointments";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5 mb-5">
+    <h1 class="mb-4">My Appointments</h1>
+
+    <div class="alert alert-info">
+        <p class="mb-0">Your appointments will be displayed here. <a asp-controller="Appointments" asp-action="Booking">Book a new appointment</a></p>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <p class="text-muted">Appointments will appear once you book them.</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+@model List<ContactMessage>
+
+@{
+    ViewData["Title"] = "My Messages";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5 mb-5">
+    <h1 class="mb-4">Contact Messages</h1>
+
+    <div class="row">
+        <div class="col-md-8">
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info">
+                    You haven't sent any messages yet.
+                </div>
+            }
+            else
+            {
+                <div class="list-group">
+                    @foreach (var message in Model)
+                    {
+                        <div class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">@message.Subject</h6>
+                                <small class="text-muted">@message.CreatedAt.ToString("MMM d, yyyy HH:mm")</small>
+                            </div>
+                            <p class="mb-1 text-muted">@message.Message.Substring(0, Math.Min(100, message.Message.Length))...</p>
+                            <small class="text-muted">
+                                Status: <span class="badge @(message.IsRead ? "bg-success" : "bg-warning")">
+                                    @(message.IsRead ? "Read" : "Unread")
+                                </span>
+                            </small>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Send Message</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-action="SendMessage">
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-3">
+                            <label asp-for="@new ContactMessageViewModel().Subject" class="form-label">Subject</label>
+                            <input type="text" name="subject" class="form-control" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="@new ContactMessageViewModel().Message" class="form-label">Message</label>
+                            <textarea name="message" class="form-control" rows="5" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

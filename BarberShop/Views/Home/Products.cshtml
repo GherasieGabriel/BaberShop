@@ -10,11 +10,95 @@
 
 <div class="products-container">
     <div class="row">
-        <div class="col-md-6 col-lg-4"><div class="product-card"><h3 class="product-name">Premium Hair Gel</h3><p class="product-description">Strong hold gel with matte finish for modern styles.</p><div class="product-price">$12.99</div><button class="btn-add-cart" type="button">Add to Cart</button></div></div>
-        <div class="col-md-6 col-lg-4"><div class="product-card"><h3 class="product-name">Beard Oil</h3><p class="product-description">Nourishing beard oil with natural ingredients.</p><div class="product-price">$15.99</div><button class="btn-add-cart" type="button">Add to Cart</button></div></div>
-        <div class="col-md-6 col-lg-4"><div class="product-card"><h3 class="product-name">Professional Clippers</h3><p class="product-description">Cordless clippers with ceramic blades and lifetime warranty.</p><div class="product-price">$49.99</div><button class="btn-add-cart" type="button">Add to Cart</button></div></div>
-        <div class="col-md-6 col-lg-4"><div class="product-card"><h3 class="product-name">Hair Pomade</h3><p class="product-description">Classic pomade for slicked-back looks. Water-soluble.</p><div class="product-price">$14.99</div><button class="btn-add-cart" type="button">Add to Cart</button></div></div>
-        <div class="col-md-6 col-lg-4"><div class="product-card"><h3 class="product-name">Beard Balm</h3><p class="product-description">Conditioning balm that shapes and styles your beard.</p><div class="product-price">$13.99</div><button class="btn-add-cart" type="button">Add to Cart</button></div></div>
-        <div class="col-md-6 col-lg-4"><div class="product-card"><h3 class="product-name">Straight Razor</h3><p class="product-description">Premium steel razor for precise shaving. Includes strop.</p><div class="product-price">$39.99</div><button class="btn-add-cart" type="button">Add to Cart</button></div></div>
+        <div class="col-md-6 col-lg-4">
+            <div class="product-card">
+                <h3 class="product-name">Premium Hair Gel</h3>
+                <p class="product-description">Strong hold gel with matte finish for modern styles.</p>
+                <div class="product-price">$12.99</div>
+                <form method="post" asp-controller="Cart" asp-action="Add" class="d-inline">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="gel-001" />
+                    <input type="hidden" name="name" value="Premium Hair Gel" />
+                    <input type="hidden" name="price" value="12.99" />
+                    <input type="hidden" name="quantity" value="1" />
+                    <button type="submit" class="btn-add-cart">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="product-card">
+                <h3 class="product-name">Beard Oil</h3>
+                <p class="product-description">Nourishing beard oil with natural ingredients.</p>
+                <div class="product-price">$15.99</div>
+                <form method="post" asp-controller="Cart" asp-action="Add" class="d-inline">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="oil-001" />
+                    <input type="hidden" name="name" value="Beard Oil" />
+                    <input type="hidden" name="price" value="15.99" />
+                    <input type="hidden" name="quantity" value="1" />
+                    <button type="submit" class="btn-add-cart">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="product-card">
+                <h3 class="product-name">Professional Clippers</h3>
+                <p class="product-description">Cordless clippers with ceramic blades and lifetime warranty.</p>
+                <div class="product-price">$49.99</div>
+                <form method="post" asp-controller="Cart" asp-action="Add" class="d-inline">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="clip-001" />
+                    <input type="hidden" name="name" value="Professional Clippers" />
+                    <input type="hidden" name="price" value="49.99" />
+                    <input type="hidden" name="quantity" value="1" />
+                    <button type="submit" class="btn-add-cart">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="product-card">
+                <h3 class="product-name">Hair Pomade</h3>
+                <p class="product-description">Classic pomade for slicked-back looks. Water-soluble.</p>
+                <div class="product-price">$14.99</div>
+                <form method="post" asp-controller="Cart" asp-action="Add" class="d-inline">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="pom-001" />
+                    <input type="hidden" name="name" value="Hair Pomade" />
+                    <input type="hidden" name="price" value="14.99" />
+                    <input type="hidden" name="quantity" value="1" />
+                    <button type="submit" class="btn-add-cart">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="product-card">
+                <h3 class="product-name">Beard Balm</h3>
+                <p class="product-description">Conditioning balm that shapes and styles your beard.</p>
+                <div class="product-price">$13.99</div>
+                <form method="post" asp-controller="Cart" asp-action="Add" class="d-inline">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="balm-001" />
+                    <input type="hidden" name="name" value="Beard Balm" />
+                    <input type="hidden" name="price" value="13.99" />
+                    <input type="hidden" name="quantity" value="1" />
+                    <button type="submit" class="btn-add-cart">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="product-card">
+                <h3 class="product-name">Straight Razor</h3>
+                <p class="product-description">Premium steel razor for precise shaving. Includes strop.</p>
+                <div class="product-price">$39.99</div>
+                <form method="post" asp-controller="Cart" asp-action="Add" class="d-inline">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" value="razor-001" />
+                    <input type="hidden" name="name" value="Straight Razor" />
+                    <input type="hidden" name="price" value="39.99" />
+                    <input type="hidden" name="quantity" value="1" />
+                    <button type="submit" class="btn-add-cart">Add to Cart</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>

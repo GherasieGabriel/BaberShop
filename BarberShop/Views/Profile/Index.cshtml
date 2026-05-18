@@ -1,0 +1,97 @@
+@model ApplicationUser
+
+@{
+    ViewData["Title"] = "My Profile";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    @if (Model.ProfileImage != null)
+                    {
+                        <img src="data:image/jpeg;base64,@System.Convert.ToBase64String(Model.ProfileImage)" 
+                             alt="Profile" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <div class="rounded-circle bg-secondary d-inline-flex align-items-center justify-content-center mb-3" 
+                             style="width: 150px; height: 150px; color: white; font-size: 3rem;">
+                            <i class="bi bi-person"></i>
+                        </div>
+                    }
+                    <h5 class="card-title">@Model.FirstName @Model.LastName</h5>
+                    <p class="card-text text-muted">@Model.Email</p>
+
+                    <form method="post" asp-action="UploadImage" enctype="multipart/form-data" class="mb-2">
+                        @Html.AntiForgeryToken()
+                        <div class="mb-2">
+                            <input type="file" name="profileImage" class="form-control form-control-sm" accept="image/*" />
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-primary w-100 mb-2">Upload Image</button>
+                    </form>
+
+                    @if (Model.ProfileImage != null)
+                    {
+                        <form method="post" asp-action="DeleteImage" class="mb-2">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-sm btn-danger w-100">Delete Image</button>
+                        </form>
+                    }
+
+                    <a asp-action="Edit" class="btn btn-sm btn-secondary w-100">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Personal Information</h5>
+                    <table class="table table-sm mb-0">
+                        <tbody>
+                            <tr>
+                                <th>First Name:</th>
+                                <td>@Model.FirstName</td>
+                            </tr>
+                            <tr>
+                                <th>Last Name:</th>
+                                <td>@Model.LastName</td>
+                            </tr>
+                            <tr>
+                                <th>Email:</th>
+                                <td>@Model.Email</td>
+                            </tr>
+                            <tr>
+                                <th>Phone:</th>
+                                <td>@(Model.PhoneNumber ?? "Not provided")</td>
+                            </tr>
+                            <tr>
+                                <th>Member Since:</th>
+                                <td>@Model.CreatedAt.ToString("MMMM d, yyyy")</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mt-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <a asp-controller="Appointments" asp-action="Index" class="btn btn-outline-primary w-100">View Appointments</a>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <a asp-action="Messages" class="btn btn-outline-info w-100">My Messages</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

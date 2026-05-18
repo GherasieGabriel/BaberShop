@@ -1,39 +1,112 @@
+using BarberShop.Models;
 using BarberShop.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BarberShop.Controllers;
 
-public class AdminController(IAdminAccessService adminAccessService) : Controller
+[Authorize(Roles = "Admin")]
+[Route("Admin")]
+public class AdminController(
+    UserManager<ApplicationUser> userManager,
+    RoleManager<IdentityRole> roleManager,
+    IAdminAccessService adminAccessService) : Controller
 {
-    [HttpGet]
-    public IActionResult Login()
+    [HttpGet("")]
+    public IActionResult Dashboard()
     {
-        if (adminAccessService.IsAdmin())
-            return RedirectToAction("Index", "Home");
-
         return View();
     }
 
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public IActionResult Login(string username, string password)
+    [HttpGet("Users")]
+    public async Task<IActionResult> Users()
     {
-        if (!adminAccessService.TryLogin(username, password))
+        var users = await userManager.Users.ToListAsync();
+        return View(users);
+    }
+
+    [HttpGet("UserRoles/{userId}")]
+    public async Task<IActionResult> UserRoles(string userId)
+    {
+        var user = await userManager.FindByIdAsync(userId);
+        if (user == null)
         {
-            TempData["BookingError"] = "Invalid admin credentials.";
-            return RedirectToAction(nameof(Login));
+            return NotFound();
         }
 
-        TempData["BookingSuccess"] = "Admin mode enabled.";
-        return RedirectToAction("Index", "Home");
+        var userRoles = await userManager.GetRolesAsync(user);
+        var allRoles = roleManager.Roles.Select(r => r.Name).ToList();
+
+        var model = new UserRolesViewModel
+        {
+            UserId = user.Id,
+            UserName = user.UserName,
+            Email = user.Email,
+            CurrentRoles = userRoles.ToList(),
+            AvailableRoles = allRoles!
+        };
+
+        return View(model);
     }
 
-    [HttpPost]
+    [HttpPost("AssignRole")]
     [ValidateAntiForgeryToken]
-    public IActionResult Logout()
+    public async Task<IActionResult> AssignRole(string userId, string role)
     {
-        adminAccessService.Logout();
-        TempData["BookingSuccess"] = "Admin mode disabled.";
-        return RedirectToAction("Index", "Home");
+        var user = await userManager.FindByIdAsync(userId);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        var roleExists = await roleManager.RoleExistsAsync(role);
+        if (!roleExists)
+        {
+            TempData["ErrorMessage"] = "Role does not exist";
+            return RedirectToAction("UserRoles", new { userId });
+        }
+
+        var isInRole = await userManager.IsInRoleAsync(user, role);
+        if (!isInRole)
+        {
+            await userManager.AddToRoleAsync(user, role);
+            TempData["SuccessMessage"] = $"Role '{role}' assigned successfully";
+        }
+
+        return RedirectToAction("UserRoles", new { userId });
+    }
+
+    [HttpPost("RemoveRole")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RemoveRole(string userId, string role)
+    {
+        var user = await userManager.FindByIdAsync(userId);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        var isInRole = await userManager.IsInRoleAsync(user, role);
+        if (isInRole)
+        {
+            await userManager.RemoveFromRoleAsync(user, role);
+            TempData["SuccessMessage"] = $"Role '{role}' removed successfully";
+        }
+
+        return RedirectToAction("UserRoles", new { userId });
+    }
+
+    [HttpGet("Messages")]
+    public async Task<IActionResult> Messages()
+    {
+        var messages = await userManager.Users
+            .SelectMany(u => u.Id == u.Id ? new[] { u } : Array.Empty<ApplicationUser>())
+            .ToListAsync();
+
+        // This will need integration with message service
+        return View();
     }
 }
+

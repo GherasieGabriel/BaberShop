@@ -1,21 +1,27 @@
 using BarberShop.Models;
 using BarberShop.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BarberShop.Controllers;
 
+[Authorize]
 public class AppointmentsController(
     IAppointmentService appointmentService,
     IServiceCatalogService serviceCatalogService,
-    IBarberService barberService) : Controller
+    IBarberService barberService,
+    UserManager<ApplicationUser> userManager) : Controller
 {
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> Booking()
     {
         return View(await appointmentService.GetBookingAsync());
     }
 
     [HttpPost]
+    [AllowAnonymous]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Booking(BookingViewModel model)
     {
@@ -41,27 +47,101 @@ public class AppointmentsController(
     }
 
     [HttpGet]
-    public async Task<IActionResult> Profile(string email = "admin@yahoo.com", int? selectedAppointmentId = null)
+    public async Task<IActionResult> Profile(int? selectedAppointmentId = null)
     {
-        var model = await appointmentService.GetProfileAsync(email, selectedAppointmentId);
+        var user = await userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return RedirectToAction("Login", "Account");
+        }
+
+        var model = await appointmentService.GetProfileAsync(user.Email ?? string.Empty, selectedAppointmentId);
+        model.UserId = user.Id;
+        model.ProfileImage = user.ProfileImage;
         return View(model);
     }
 
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> UpdateAppointment(string email, DateTime appointmentStartDateTime, string service, string barber, DateTime date, DateTime time, string? notes)
+    [HttpGet]
+    public async Task<IActionResult> Index()
     {
-        var updated = await appointmentService.UpdateAsync(email, appointmentStartDateTime, service, barber, date, time, notes);
-        TempData[updated ? "BookingSuccess" : "BookingError"] = updated ? "Appointment updated." : "Appointment not found.";
-        return RedirectToAction(nameof(Profile), new { email });
+        // This shows the user's appointments
+        // We can refactor this later to use Identity user
+        return View();
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteAppointment(string email, DateTime appointmentStartDateTime)
+    public async Task<IActionResult> UpdateAppointment(int appointmentId, string service, string barber, DateTime date, DateTime time, string? notes)
     {
-        var deleted = await appointmentService.DeleteAsync(email, appointmentStartDateTime);
+        var user = await userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return RedirectToAction("Login", "Account");
+        }
+
+        var updated = await appointmentService.UpdateAsync(appointmentId, service, barber, date, time, notes);
+        TempData[updated ? "BookingSuccess" : "BookingError"] = updated ? "Appointment updated." : "Appointment not found.";
+        return RedirectToAction(nameof(Profile));
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteAppointment(int appointmentId)
+    {
+        var user = await userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return RedirectToAction("Login", "Account");
+        }
+
+        var deleted = await appointmentService.DeleteAsync(appointmentId);
         TempData[deleted ? "BookingSuccess" : "BookingError"] = deleted ? "Appointment deleted." : "Appointment not found.";
-        return RedirectToAction(nameof(Profile), new { email });
+        return RedirectToAction(nameof(Profile));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UploadProfileImage(IFormFile profileImage)
+    {
+        var user = await userManager.GetUserAsync(User);
+        if (user == null)
+        {
+            return RedirectToAction("Login", "Account");
+        }
+
+        if (profileImage != null && profileImage.Length > 0)
+        {
+            // Limit file size to 5MB
+            if (profileImage.Length > 5 * 1024 * 1024)
+            {
+                TempData["BookingError"] = "Image must be smaller than 5MB.";
+                return RedirectToAction(nameof(Profile));
+            }
+
+            // Validate file type
+            var allowedTypes = new[] { "image/jpeg", "image/png", "image/gif", "image/webp" };
+            if (!allowedTypes.Contains(profileImage.ContentType))
+            {
+                TempData["BookingError"] = "Only image files (JPEG, PNG, GIF, WebP) are allowed.";
+                return RedirectToAction(nameof(Profile));
+            }
+
+            using (var memoryStream = new MemoryStream())
+            {
+                await profileImage.CopyToAsync(memoryStream);
+                user.ProfileImage = memoryStream.ToArray();
+            }
+
+            var result = await userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                TempData["BookingSuccess"] = "Profile image updated successfully.";
+            }
+            else
+            {
+                TempData["BookingError"] = "Failed to update profile image.";
+            }
+        }
+
+        return RedirectToAction(nameof(Profile));
     }
 }
