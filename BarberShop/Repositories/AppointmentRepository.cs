@@ -15,6 +15,13 @@ public class AppointmentRepository(BarberShopDbContext context) : IAppointmentRe
             .OrderBy(a => a.StartDateTime)
             .ToListAsync();
 
+    public Task<Appointment?> GetByIdAsync(int appointmentId)
+        => context.Appointments
+            .Include(a => a.Client)
+            .Include(a => a.Service)
+            .Include(a => a.Barber)
+            .FirstOrDefaultAsync(a => a.AppointmentId == appointmentId);
+
     public Task<Appointment?> GetByIdForClientEmailAsync(int appointmentId, string email)
         => context.Appointments
             .Include(a => a.Client)

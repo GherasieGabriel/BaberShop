@@ -1,9 +1,10 @@
 using BarberShop.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BarberShop.Data;
 
-public class BarberShopDbContext(DbContextOptions<BarberShopDbContext> options) : DbContext(options)
+public class BarberShopDbContext(DbContextOptions<BarberShopDbContext> options) : IdentityDbContext<ApplicationUser>(options)
 {
     public DbSet<Client> Clients => Set<Client>();
     public DbSet<Barber> Barbers => Set<Barber>();
@@ -13,6 +14,7 @@ public class BarberShopDbContext(DbContextOptions<BarberShopDbContext> options) 
     public DbSet<ClientNotificationSettings> ClientNotificationSettings => Set<ClientNotificationSettings>();
     public DbSet<Review> Reviews => Set<Review>();
     public DbSet<Payment> Payments => Set<Payment>();
+    public DbSet<ContactMessage> ContactMessages => Set<ContactMessage>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -158,6 +160,18 @@ public class BarberShopDbContext(DbContextOptions<BarberShopDbContext> options) 
                 .WithMany(a => a.Payments)
                 .HasForeignKey(e => e.AppointmentId)
                 .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        modelBuilder.Entity<ContactMessage>(entity =>
+        {
+            entity.ToTable("CONTACT_MESSAGE");
+            entity.HasKey(e => e.MessageId);
+            entity.Property(e => e.MessageId).HasColumnName("message_id");
+            entity.Property(e => e.UserId).HasColumnName("user_id").HasMaxLength(450);
+            entity.Property(e => e.Subject).HasColumnName("subject").HasMaxLength(200);
+            entity.Property(e => e.Message).HasColumnName("message");
+            entity.Property(e => e.IsRead).HasColumnName("is_read");
+            entity.Property(e => e.CreatedAt).HasColumnName("created_at");
         });
     }
 }

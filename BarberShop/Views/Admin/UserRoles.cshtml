@@ -1,0 +1,134 @@
+@model UserRolesViewModel
+
+@{
+    ViewData["Title"] = "Manage User Roles";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="bi bi-person-circle"></i> @Model.UserName
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm mb-0">
+                        <tr>
+                            <th>Email:</th>
+                            <td>@Model.Email</td>
+                        </tr>
+                        <tr>
+                            <th>User ID:</th>
+                            <td><code>@Model.UserId</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Current Roles</h5>
+                </div>
+                <div class="card-body">
+                    @if (!Model.CurrentRoles.Any())
+                    {
+                        <div class="alert alert-info">
+                            User has no assigned roles.
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="list-group">
+                            @foreach (var role in Model.CurrentRoles)
+                            {
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>
+                                        <i class="bi bi-check-circle-fill text-success"></i>
+                                        <strong>@role</strong>
+                                    </span>
+                                    <form method="post" asp-action="RemoveRole" style="display: inline;">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="userId" value="@Model.UserId" />
+                                        <input type="hidden" name="role" value="@role" />
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="bi bi-trash"></i> Remove
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Assign Role</h5>
+                </div>
+                <div class="card-body">
+                    @if (!Model.AvailableRoles.Any())
+                    {
+                        <div class="alert alert-warning">
+                            No available roles.
+                        </div>
+                    }
+                    else
+                    {
+                        <form method="post" asp-action="AssignRole">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="userId" value="@Model.UserId" />
+
+                            <div class="mb-3">
+                                <label for="role" class="form-label">Select Role</label>
+                                <select name="role" id="role" class="form-select" required>
+                                    <option value="">-- Select Role --</option>
+                                    @foreach (var role in Model.AvailableRoles)
+                                    {
+                                        if (!Model.CurrentRoles.Contains(role))
+                                        {
+                                            <option value="@role">@role</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="bi bi-plus-circle"></i> Assign Role
+                            </button>
+                        </form>
+                    }
+                </div>
+            </div>
+
+            <div class="card shadow-sm mt-3">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Available Roles</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        @foreach (var role in Model.AvailableRoles)
+                        {
+                            <li class="mb-2">
+                                @if (Model.CurrentRoles.Contains(role))
+                                {
+                                    <span class="badge bg-success">@role</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">@role</span>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <a asp-action="Users" class="btn btn-outline-secondary w-100 mt-3">Back to Users</a>
+        </div>
+    </div>
+</div>

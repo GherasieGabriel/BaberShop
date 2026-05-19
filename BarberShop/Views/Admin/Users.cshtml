@@ -1,0 +1,54 @@
+@model List<ApplicationUser>
+
+@{
+    ViewData["Title"] = "Manage Users";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>User Management</h1>
+        <a asp-action="Dashboard" class="btn btn-outline-secondary">Back to Dashboard</a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info">
+                    No users found.
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Email</th>
+                                <th>Name</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                                <tr>
+                                    <td>@user.Email</td>
+                                    <td>@user.FirstName @user.LastName</td>
+                                    <td>@user.CreatedAt.ToString("MMM d, yyyy")</td>
+                                    <td>
+                                        <a asp-action="UserRoles" asp-route-userId="@user.Id" class="btn btn-sm btn-primary">
+                                            <i class="bi bi-shield-check"></i> Manage Roles
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>

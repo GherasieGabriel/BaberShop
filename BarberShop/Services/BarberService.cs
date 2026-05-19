@@ -57,7 +57,7 @@ public class BarberService(IRepository<Barber> barberRepository) : IBarberServic
         }
         else
         {
-            barber = await barberRepository.FirstOrDefaultAsync(b => ($"{b.FirstName} {b.LastName}").Trim() == barberName && b.IsActive);
+            barber = await barberRepository.FirstOrDefaultAsync(b => (b.FirstName + " " + b.LastName) == barberName && b.IsActive);
         }
 
         if (barber is not null)

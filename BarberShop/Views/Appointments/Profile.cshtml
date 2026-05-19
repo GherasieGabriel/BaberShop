@@ -7,8 +7,33 @@
 }
 
 <section class="profile-header">
-    <h1 class="profile-name">@Model.FullName</h1>
-    <p class="profile-email">@Model.Email</p>
+    <div class="row align-items-center mb-4">
+        <div class="col-md-3 text-center">
+            @if (Model.ProfileImage != null && Model.ProfileImage.Length > 0)
+            {
+                <img src="data:image/jpeg;base64,@System.Convert.ToBase64String(Model.ProfileImage)" 
+                     alt="Profile" class="rounded-circle img-fluid mb-3" style="max-width: 150px; object-fit: cover;" />
+            }
+            else
+            {
+                <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center mx-auto mb-3" 
+                     style="width: 150px; height: 150px;">
+                    <i class="bi bi-person-fill text-white" style="font-size: 3rem;"></i>
+                </div>
+            }
+            <form method="post" asp-controller="Appointments" asp-action="UploadProfileImage" enctype="multipart/form-data" class="mb-2">
+                @Html.AntiForgeryToken()
+                <div class="input-group mb-2">
+                    <input type="file" class="form-control form-control-sm" name="profileImage" accept="image/*" id="profileImageInput" />
+                </div>
+                <button type="submit" class="btn btn-sm btn-primary w-100">Upload Photo</button>
+            </form>
+        </div>
+        <div class="col-md-9">
+            <h1 class="profile-name">@Model.FullName</h1>
+            <p class="profile-email">@Model.Email</p>
+        </div>
+    </div>
 </section>
 
 @if (TempData["BookingSuccess"] is not null)
@@ -79,8 +104,7 @@
 
             <form method="post" asp-action="UpdateAppointment" class="booking-form">
                 @Html.AntiForgeryToken()
-                <input type="hidden" name="email" value="@Model.Email" />
-                <input type="hidden" name="appointmentStartDateTime" value="@selectedAppointment.StartDateTime.ToString("O")" />
+                <input type="hidden" name="appointmentId" value="@selectedAppointment.AppointmentId" />
 
                 <label>
                     Service:
@@ -122,8 +146,7 @@
 
             <form method="post" asp-action="DeleteAppointment" style="margin-top:10px;">
                 @Html.AntiForgeryToken()
-                <input type="hidden" name="appointmentStartDateTime" value="@selectedAppointment.StartDateTime.ToString("O")" />
-                <input type="hidden" name="email" value="@Model.Email" />
+                <input type="hidden" name="appointmentId" value="@selectedAppointment.AppointmentId" />
                 <button type="submit" class="btn-primary">Delete appointment</button>
             </form>
         }

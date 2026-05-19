@@ -89,9 +89,9 @@ public class AppointmentService(
         };
     }
 
-    public async Task<bool> UpdateAsync(string email, DateTime appointmentStartDateTime, string serviceName, string barberName, DateTime date, DateTime time, string? notes)
+    public async Task<bool> UpdateAsync(int appointmentId, string serviceName, string barberName, DateTime date, DateTime time, string? notes)
     {
-        var appointment = await appointmentRepository.GetByClientEmailAndStartAsync(email, appointmentStartDateTime);
+        var appointment = await appointmentRepository.GetByIdAsync(appointmentId);
         if (appointment is null)
             return false;
 
@@ -110,9 +110,9 @@ public class AppointmentService(
         return true;
     }
 
-    public async Task<bool> DeleteAsync(string email, DateTime appointmentStartDateTime)
+    public async Task<bool> DeleteAsync(int appointmentId)
     {
-        var appointment = await appointmentRepository.GetByClientEmailAndStartAsync(email, appointmentStartDateTime);
+        var appointment = await appointmentRepository.GetByIdAsync(appointmentId);
         if (appointment is null)
             return false;
 
