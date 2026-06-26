@@ -7,6 +7,7 @@ using BarberShop.Services.Interfaces;
 using BarberShop.Services.Auth;
 using BarberShop.Services.Profile;
 using BarberShop.Services.Image;
+using BarberShop.Services.Email;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -43,8 +44,13 @@ builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 
 // Authentication & Profile Services
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<IPasswordResetService, PasswordResetService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IImageService, ImageService>();
+
+// Email Service registration
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 // Service registration
 builder.Services.AddScoped<IProductService, ProductService>();
@@ -92,6 +98,14 @@ using (var scope = app.Services.CreateScope())
         };
         await userManager.CreateAsync(admin, "admin123");
         await userManager.AddToRoleAsync(admin, "Admin");
+    }
+    else
+    {
+        // FIX: Ensure admin user always has Admin role
+        if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
+        {
+            await userManager.AddToRoleAsync(adminUser, "Admin");
+        }
     }
 }
 

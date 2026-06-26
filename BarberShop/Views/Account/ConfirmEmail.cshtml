@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Email Confirmation";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            @if (ViewBag.Success == true)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Success!</h4>
+                    <p>@ViewBag.Message</p>
+                    <a href="@Url.Action("Login", "Account")" class="btn btn-success">Continue to Login</a>
+                </div>
+            }
+            else if (!string.IsNullOrEmpty(ViewBag.Error))
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Error!</h4>
+                    <p>@ViewBag.Error</p>
+                    <p>If you need a new confirmation link, please <a href="@Url.Action("Register", "Account")">register again</a>.</p>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    <p>Processing your email confirmation...</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

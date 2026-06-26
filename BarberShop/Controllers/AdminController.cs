@@ -98,6 +98,45 @@ public class AdminController(
         return RedirectToAction("UserRoles", new { userId });
     }
 
+    [HttpPost("DeleteUser")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteUser(string userId)
+    {
+        if (string.IsNullOrEmpty(userId))
+        {
+            TempData["ErrorMessage"] = "Invalid user id.";
+            return RedirectToAction("Users");
+        }
+
+        var user = await userManager.FindByIdAsync(userId);
+        if (user == null)
+        {
+            TempData["ErrorMessage"] = "User not found.";
+            return RedirectToAction("Users");
+        }
+
+        // Prevent admin from deleting themselves
+        var currentUserId = userManager.GetUserId(User);
+        if (string.Equals(currentUserId, userId, StringComparison.OrdinalIgnoreCase))
+        {
+            TempData["ErrorMessage"] = "You cannot delete your own account.";
+            return RedirectToAction("Users");
+        }
+
+        var result = await userManager.DeleteAsync(user);
+        if (result.Succeeded)
+        {
+            TempData["SuccessMessage"] = "User deleted successfully.";
+        }
+        else
+        {
+            var errors = string.Join("; ", result.Errors.Select(e => e.Description));
+            TempData["ErrorMessage"] = $"Failed to delete user: {errors}";
+        }
+
+        return RedirectToAction("Users");
+    }
+
     [HttpGet("Messages")]
     public async Task<IActionResult> Messages()
     {
