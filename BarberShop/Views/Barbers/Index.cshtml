@@ -21,6 +21,11 @@
 
 <h1>Our Team</h1>
 
+<div class="mb-3">
+    <input id="barberSearch" class="form-control" placeholder="Search barbers by name or email..." />
+    <div id="searchResults" class="mt-2"></div>
+</div>
+
 @if (TempData["BookingSuccess"] is not null)
 {
     <div class="alert alert-success">@TempData["BookingSuccess"]</div>
@@ -48,9 +53,51 @@
     }
 </div>
 
+n<div id="searchTemplate" style="display:none;">
+    <div class="search-item p-2 border mb-1">
+        <strong class="search-name"></strong><br />
+        <span class="search-email small text-muted"></span>
+    </div>
+</div>
+
 @if (adminAccessService.IsAdmin())
 {
     <div class="text-center mt-5">
         <a asp-controller="Barbers" asp-action="Manage" class="btn-primary">Manage Barbers</a>
     </div>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var input = document.getElementById('barberSearch');
+            var results = document.getElementById('searchResults');
+            var template = document.getElementById('searchTemplate').querySelector('.search-item');
+
+            var timeout;
+            input.addEventListener('input', function () {
+                clearTimeout(timeout);
+                var q = input.value.trim();
+                if (q.length < 2) {
+                    results.innerHTML = '';
+                    return;
+                }
+                timeout = setTimeout(async function () {
+                    try {
+                        var resp = await fetch('/Barbers/Search?q=' + encodeURIComponent(q));
+                        var data = await resp.json();
+                        results.innerHTML = '';
+                        data.forEach(function (b) {
+                            var el = template.cloneNode(true);
+                            el.querySelector('.search-name').innerText = b.name + (b.phone ? ' • ' + b.phone : '');
+                            el.querySelector('.search-email').innerText = b.email || '';
+                            results.appendChild(el);
+                        });
+                    } catch (e) {
+                        console.error(e);
+                    }
+                }, 250);
+            });
+        });
+    </script>
 }

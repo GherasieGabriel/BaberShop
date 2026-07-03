@@ -81,11 +81,23 @@ public class ProfileService(
             .ToListAsync();
     }
 
-    public async Task<List<ContactMessage>> GetAllContactMessagesAsync()
+    public async Task<List<ContactMessage>> GetAllContactMessagesAsync(bool unreadOnly = false)
     {
-        return await dbContext.ContactMessages
+        var query = dbContext.ContactMessages.AsQueryable();
+        if (unreadOnly)
+        {
+            query = query.Where(m => !m.IsRead);
+        }
+
+        return await query
             .OrderByDescending(m => m.CreatedAt)
             .ToListAsync();
+    }
+
+    public async Task<ContactMessage?> GetContactMessageByIdAsync(int messageId)
+    {
+        return await dbContext.ContactMessages
+            .FirstOrDefaultAsync(m => m.MessageId == messageId);
     }
 
     public async Task<bool> MarkMessageAsReadAsync(int messageId)
@@ -98,7 +110,32 @@ public class ProfileService(
                 return false;
             }
 
+            if (message.IsRead)
+            {
+                return true;
+            }
+
             message.IsRead = true;
+            await dbContext.SaveChangesAsync();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public async Task<bool> DeleteMessageAsync(int messageId)
+    {
+        try
+        {
+            var message = await dbContext.ContactMessages.FindAsync(messageId);
+            if (message == null)
+            {
+                return false;
+            }
+
+            dbContext.ContactMessages.Remove(message);
             await dbContext.SaveChangesAsync();
             return true;
         }

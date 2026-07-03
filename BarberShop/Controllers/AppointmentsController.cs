@@ -1,5 +1,6 @@
 using BarberShop.Models;
 using BarberShop.Services.Interfaces;
+using BarberShop.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,17 +8,44 @@ using Microsoft.AspNetCore.Mvc;
 namespace BarberShop.Controllers;
 
 [Authorize]
-public class AppointmentsController(
-    IAppointmentService appointmentService,
-    IServiceCatalogService serviceCatalogService,
-    IBarberService barberService,
-    UserManager<ApplicationUser> userManager) : Controller
+public class AppointmentsController : Controller
 {
+    private readonly IAppointmentService appointmentService;
+    private readonly IServiceCatalogService serviceCatalogService;
+    private readonly IBarberService barberService;
+    private readonly UserManager<ApplicationUser> userManager;
+    private readonly IAppointmentRepository appointmentRepository;
+
+    public AppointmentsController(IAppointmentService appointmentService, IServiceCatalogService serviceCatalogService, IBarberService barberService, UserManager<ApplicationUser> userManager, IAppointmentRepository appointmentRepository)
+    {
+        this.appointmentService = appointmentService;
+        this.serviceCatalogService = serviceCatalogService;
+        this.barberService = barberService;
+        this.userManager = userManager;
+        this.appointmentRepository = appointmentRepository;
+    }
+
     [HttpGet]
     [AllowAnonymous]
-    public async Task<IActionResult> Booking()
+    public async Task<IActionResult> Booking(string? date, string? time)
     {
-        return View(await appointmentService.GetBookingAsync());
+        var vm = await appointmentService.GetBookingAsync();
+        // Prefill date/time if provided as query parameters (date=YYYY-MM-DD, time=HH:mm)
+        if (!string.IsNullOrWhiteSpace(date))
+        {
+            if (DateTime.TryParse(date, out var parsedDate))
+            {
+                vm.Date = parsedDate.Date;
+            }
+        }
+        if (!string.IsNullOrWhiteSpace(time))
+        {
+            if (TimeSpan.TryParse(time, out var parsedTime))
+            {
+                vm.Time = parsedTime;
+            }
+        }
+        return View(vm);
     }
 
     [HttpPost]
@@ -39,11 +67,37 @@ public class AppointmentsController(
         }
 
         var created = await appointmentService.CreateAsync(model);
-        TempData[created ? "BookingSuccess" : "BookingError"] = created
-            ? "Your appointment was saved."
-            : "Please complete all required fields.";
+        if (!created)
+        {
+            TempData["BookingError"] = "Please complete all required fields or choose another time slot.";
+            return RedirectToAction(nameof(Booking));
+        }
 
-        return RedirectToAction(nameof(Booking));
+        var selectedStart = DateTime.SpecifyKind(model.Date!.Value.Date + model.Time!.Value, DateTimeKind.Local).ToUniversalTime();
+        var appointment = await appointmentRepository.GetByClientEmailAndStartAsync(model.Email.Trim(), selectedStart);
+        if (appointment is null)
+        {
+            TempData["BookingSuccess"] = "Your appointment was saved.";
+            return RedirectToAction(nameof(Booking));
+        }
+
+        return RedirectToAction(nameof(Confirmation), new { appointmentId = appointment.AppointmentId });
+    }
+
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task<IActionResult> Confirmation(int appointmentId)
+    {
+        var appointment = await appointmentRepository.GetByIdAsync(appointmentId);
+        if (appointment is null)
+        {
+            return NotFound();
+        }
+
+        return View(new AppointmentConfirmationViewModel
+        {
+            Appointment = appointment
+        });
     }
 
     [HttpGet]
@@ -67,6 +121,40 @@ public class AppointmentsController(
         // This shows the user's appointments
         // We can refactor this later to use Identity user
         return View();
+    }
+
+    // API endpoint for calendar to retrieve appointments (JSON)
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetAppointmentsJson()
+    {
+        var now = DateTime.UtcNow;
+        var to = now.AddDays(60);
+        var items = await appointmentRepository.GetUpcomingAsync(now, to);
+        var events = items.Select(a => new {
+            id = a.AppointmentId,
+            title = $"{a.Service.Name} - {a.Client.FullName}",
+            start = a.StartDateTime.ToString("o"),
+            end = a.EndDateTime.ToString("o"),
+            barber = $"{a.Barber.FirstName} {a.Barber.LastName}",
+            status = a.Status
+        });
+        return Json(events);
+    }
+
+    // API endpoint to create appointment via JSON (used by calendar UI)
+    [HttpPost]
+    [AllowAnonymous]
+    public async Task<IActionResult> CreateAppointmentApi([FromBody] BookingViewModel model)
+    {
+        if (model == null)
+            return BadRequest(new { success = false, message = "Invalid payload" });
+
+        var created = await appointmentService.CreateAsync(model);
+        if (!created)
+            return Conflict(new { success = false, message = "Time slot unavailable or invalid data" });
+
+        return Ok(new { success = true });
     }
 
     [HttpPost]

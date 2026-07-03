@@ -26,6 +26,7 @@ public class EmailSettings
     public string? SmtpPassword { get; set; }
     public string? FromEmail { get; set; }
     public string? FromName { get; set; }
+    public string? SendGridApiKey { get; set; }
     public bool UseSSL { get; set; } = true;
     public int TimeoutSeconds { get; set; } = 10;
 }

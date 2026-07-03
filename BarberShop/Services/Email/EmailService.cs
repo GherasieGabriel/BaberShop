@@ -1,8 +1,14 @@
+using System;
+using System.IO;
+using System.Linq;
+using System.Text;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace BarberShop.Services.Email;
 
@@ -32,10 +38,72 @@ public class EmailService : IEmailService
             _logger.LogWarning("From Email is not configured");
     }
 
+    private async Task<EmailSendResult> SendEmailViaSendGridAsync(EmailMessage message, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            var sgClient = new SendGridClient(_settings.SendGridApiKey);
+            var from = new EmailAddress(_settings.FromEmail ?? "no-reply@barbershop.com", _settings.FromName ?? "BarberShop");
+            var to = new EmailAddress(message.To ?? "");
+            string plainText = message.IsHtml ? null : message.Body;
+            string htmlContent = message.IsHtml ? message.Body : null;
+            var msg = MailHelper.CreateSingleEmail(from, to, message.Subject ?? string.Empty, plainText, htmlContent);
+
+            foreach (var cc in message.CcAddresses)
+                msg.AddCc(new EmailAddress(cc));
+            foreach (var bcc in message.BccAddresses)
+                msg.AddBcc(new EmailAddress(bcc));
+
+            if (message.Attachments?.Any() == true)
+            {
+                foreach (var att in message.Attachments)
+                {
+                    try
+                    {
+                        if (File.Exists(att.Key))
+                        {
+                            var bytes = await File.ReadAllBytesAsync(att.Key, cancellationToken);
+                            var base64 = Convert.ToBase64String(bytes);
+                            msg.AddAttachment(att.Value ?? Path.GetFileName(att.Key), base64);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogWarning(ex, "Failed to attach file {File}", att.Key);
+                    }
+                }
+            }
+
+            var response = await sgClient.SendEmailAsync(msg, cancellationToken);
+            if (response.IsSuccessStatusCode)
+            {
+                _logger.LogInformation("Email sent via SendGrid to {To}. Subject: {Subject}", message.To, message.Subject);
+                return EmailSendResult.Ok($"Email sent via SendGrid to {message.To}");
+            }
+            else
+            {
+                var body = await response.Body.ReadAsStringAsync();
+                _logger.LogError("SendGrid failed to send email: {StatusCode} {Body}", response.StatusCode, body);
+                return EmailSendResult.Failed($"SendGrid failed: {response.StatusCode} - {body}");
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error sending email via SendGrid to {To}", message.To);
+            return EmailSendResult.Failed($"SendGrid failed: {ex.Message}", ex);
+        }
+    }
+
     public async Task<EmailSendResult> SendEmailAsync(EmailMessage message, CancellationToken cancellationToken = default)
     {
         try
         {
+            // Prefer SendGrid when API key is configured
+            if (!string.IsNullOrEmpty(_settings.SendGridApiKey))
+            {
+                return await SendEmailViaSendGridAsync(message, cancellationToken);
+            }
+
             if (string.IsNullOrEmpty(_settings.SmtpServer))
             {
                 _logger.LogWarning("Email sending skipped: SMTP Server not configured. To: {To}, Subject: {Subject}", 

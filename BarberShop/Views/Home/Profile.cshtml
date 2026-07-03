@@ -68,7 +68,7 @@
         else
         {
             <div class="booking-item">
-                <div class="booking-date">@selectedAppointment.StartDateTime.ToString("MMMM d, yyyy - h:mm tt")</div>
+                <div class="booking-date">@selectedAppointment.StartDateTime.ToLocalTime().ToString("MMMM d, yyyy - h:mm tt")</div>
                 <div class="booking-details">
                     <strong>Status:</strong> @selectedAppointment.Status<br>
                     <strong>Service:</strong> @selectedAppointment.Service.Name<br>
@@ -102,12 +102,12 @@
 
                 <label>
                     Date:
-                    <input type="date" name="date" value="@selectedAppointment.StartDateTime.ToString("yyyy-MM-dd")" required>
+                    <input type="date" name="date" value="@selectedAppointment.StartDateTime.ToLocalTime().ToString("yyyy-MM-dd")" required>
                 </label>
 
                 <label>
                     Time:
-                    <input type="time" name="time" value="@selectedAppointment.StartDateTime.ToString("HH:mm")" required>
+                    <input type="time" name="time" value="@selectedAppointment.StartDateTime.ToLocalTime().ToString("HH:mm")" required>
                 </label>
 
                 <label>
@@ -138,7 +138,7 @@
             @foreach (var appointment in Model.PastAppointments)
             {
                 <div class="booking-item">
-                    <div class="booking-date">@appointment.StartDateTime.ToString("MMMM d, yyyy - h:mm tt")</div>
+                    <div class="booking-date">@appointment.StartDateTime.ToLocalTime().ToString("MMMM d, yyyy - h:mm tt")</div>
                     <div class="booking-details">
                         <strong>Service:</strong> @appointment.Service.Name<br>
                         <strong>Barber:</strong> @($"{appointment.Barber.FirstName} {appointment.Barber.LastName}".Trim())<br>

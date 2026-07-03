@@ -61,6 +61,8 @@ builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IAdminAccessService, AdminAccessService>();
 builder.Services.AddScoped<ICartService, CartService>();
 
+// Background reminder service (demo in-memory tracker)
+builder.Services.AddHostedService<BackgroundReminderService>();
 
 var app = builder.Build();
 

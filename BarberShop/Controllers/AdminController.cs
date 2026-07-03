@@ -1,5 +1,6 @@
 using BarberShop.Models;
 using BarberShop.Services.Interfaces;
+using BarberShop.Services.Profile;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,8 @@ namespace BarberShop.Controllers;
 public class AdminController(
     UserManager<ApplicationUser> userManager,
     RoleManager<IdentityRole> roleManager,
-    IAdminAccessService adminAccessService) : Controller
+    IAdminAccessService adminAccessService,
+    IProfileService profileService) : Controller
 {
     [HttpGet("")]
     public IActionResult Dashboard()
@@ -138,14 +140,91 @@ public class AdminController(
     }
 
     [HttpGet("Messages")]
-    public async Task<IActionResult> Messages()
+    public async Task<IActionResult> Messages(int? selectedMessageId = null, bool unreadOnly = false)
     {
-        var messages = await userManager.Users
-            .SelectMany(u => u.Id == u.Id ? new[] { u } : Array.Empty<ApplicationUser>())
-            .ToListAsync();
+        var allMessages = await profileService.GetAllContactMessagesAsync();
+        var filteredMessages = unreadOnly
+            ? allMessages.Where(m => !m.IsRead).ToList()
+            : allMessages;
 
-        // This will need integration with message service
-        return View();
+        var model = new AdminInboxViewModel
+        {
+            Messages = await BuildInboxItemsAsync(filteredMessages),
+            TotalCount = allMessages.Count,
+            UnreadCount = allMessages.Count(m => !m.IsRead),
+            UnreadOnly = unreadOnly,
+            SelectedMessageId = selectedMessageId
+        };
+
+        if (selectedMessageId.HasValue)
+        {
+            var selected = await profileService.GetContactMessageByIdAsync(selectedMessageId.Value);
+            if (selected != null)
+            {
+                model.SelectedMessage = await BuildInboxItemAsync(selected);
+            }
+        }
+        else if (model.Messages.Any())
+        {
+            model.SelectedMessage = model.Messages.First();
+            model.SelectedMessageId = model.SelectedMessage.MessageId;
+        }
+
+        return View(model);
+    }
+
+    [HttpPost("Messages/MarkRead")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> MarkMessageRead(int messageId, bool unreadOnly = false)
+    {
+        var success = await profileService.MarkMessageAsReadAsync(messageId);
+        TempData[success ? "SuccessMessage" : "ErrorMessage"] = success ? "Message marked as read." : "Message not found.";
+        return RedirectToAction(nameof(Messages), new { selectedMessageId = messageId, unreadOnly });
+    }
+
+    [HttpPost("Messages/Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteMessage(int messageId, bool unreadOnly = false)
+    {
+        var success = await profileService.DeleteMessageAsync(messageId);
+        TempData[success ? "SuccessMessage" : "ErrorMessage"] = success ? "Message deleted." : "Message not found.";
+        return RedirectToAction(nameof(Messages), new { unreadOnly });
+    }
+
+    private async Task<List<AdminInboxMessageItemViewModel>> BuildInboxItemsAsync(IEnumerable<ContactMessage> messages)
+    {
+        var items = new List<AdminInboxMessageItemViewModel>();
+        foreach (var message in messages)
+        {
+            items.Add(await BuildInboxItemAsync(message));
+        }
+
+        return items.OrderByDescending(m => m.CreatedAt).ToList();
+    }
+
+    private async Task<AdminInboxMessageItemViewModel> BuildInboxItemAsync(ContactMessage message)
+    {
+        var user = await userManager.FindByIdAsync(message.UserId);
+        var displayName = user is null
+            ? "Unknown sender"
+            : $"{user.FirstName} {user.LastName}".Trim();
+
+        if (string.IsNullOrWhiteSpace(displayName))
+        {
+            displayName = user?.UserName ?? "Unknown sender";
+        }
+
+        return new AdminInboxMessageItemViewModel
+        {
+            MessageId = message.MessageId,
+            UserId = message.UserId,
+            SenderName = displayName,
+            SenderEmail = user?.Email ?? string.Empty,
+            Subject = message.Subject,
+            Message = message.Message,
+            IsRead = message.IsRead,
+            CreatedAt = message.CreatedAt
+        };
     }
 }
 

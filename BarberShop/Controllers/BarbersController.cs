@@ -15,6 +15,21 @@ public class BarbersController(IBarberService barberService) : Controller
     }
 
     [HttpGet]
+    public async Task<IActionResult> Search(string q)
+    {
+        if (string.IsNullOrWhiteSpace(q))
+            return Json(new List<object>());
+
+        var all = await barberService.GetAllAsync();
+        var lowered = q.Trim().ToLowerInvariant();
+        var matches = all.Where(b => ($"{b.FirstName} {b.LastName}".ToLowerInvariant().Contains(lowered) || b.Email.ToLowerInvariant().Contains(lowered)))
+            .Select(b => new { id = b.BarberId, name = $"{b.FirstName} {b.LastName}", email = b.Email, phone = b.Phone })
+            .ToList();
+
+        return Json(matches);
+    }
+
+    [HttpGet]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> Manage()
     {
