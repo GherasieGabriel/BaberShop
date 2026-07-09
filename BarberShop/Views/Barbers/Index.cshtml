@@ -2,7 +2,7 @@
 @inject BarberShop.Services.Interfaces.IAdminAccessService adminAccessService
 
 @{
-    Layout = "_BarberLayout";
+    Layout = "_Layout";
     ViewData["Title"] = "Barbers";
 
     string ImageFor(string firstName)
@@ -36,7 +36,7 @@
     {
         <div class="col-md-6 col-lg-4 mb-4">
             <div class="barber-card">
-                <img src="@ImageFor(barber.FirstName)" alt="@($"{barber.FirstName} {barber.LastName}")" class="barber-image" />
+                <img src="@( !string.IsNullOrEmpty(barber.PhotoFileName) ? Url.Content($"~/images/barbers/{barber.PhotoFileName}") : ImageFor(barber.FirstName) )" alt="@($"{barber.FirstName} {barber.LastName}")" class="barber-image" />
                 <h3>@barber.FirstName @barber.LastName</h3>
                 <p>@(!string.IsNullOrWhiteSpace(barber.Phone) ? barber.Phone : "-")</p>
                 @if (adminAccessService.IsAdmin())
@@ -51,6 +51,6 @@
 @if (adminAccessService.IsAdmin())
 {
     <div class="text-center mt-5">
-        <a asp-controller="Barbers" asp-action="Manage" class="btn-primary">Manage Barbers</a>
+        <a asp-controller="Barbers" asp-action="Manage" class="btn btn-primary">Manage Barbers</a>
     </div>
 }

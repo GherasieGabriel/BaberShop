@@ -2,7 +2,7 @@
 @inject BarberShop.Services.Interfaces.IAdminAccessService adminAccessService
 
 @{
-    Layout = "_BarberLayout";
+    Layout = "_Layout";
     ViewData["Title"] = "Services";
 }
 
@@ -29,7 +29,14 @@
                 <div class="product-card">
                     <h3 class="product-name">@service.Name</h3>
                     <p class="product-description">@(string.IsNullOrWhiteSpace(service.Description) ? "Classic grooming service." : service.Description)</p>
-                    <div class="product-price">@service.BasePrice.ToString("0.00") RON • @service.BaseDuration min</div>
+                    @{ var discount = 0; if (User.Identity?.IsAuthenticated == true) { var membership = User.FindFirst("membership")?.Value; discount = membership == "Bronze" ? 10 : membership == "Silver" ? 20 : membership == "Gold" ? 30 : 0; } var displayPrice = service.BasePrice * (1 - discount / 100m); }
+                    <div class="product-price">
+                        @if (discount > 0)
+                        {
+                            <small class="text-muted text-decoration-line-through">@service.BasePrice.ToString("0.00") RON</small>
+                        }
+                        <span class="ms-2">@displayPrice.ToString("0.00") RON</span> • @service.BaseDuration min
+                    </div>
                     @if (adminAccessService.IsAdmin())
                     {
                         <a asp-controller="Services" asp-action="Edit" asp-route-name="@service.Name" class="btn btn-primary btn-sm mt-2">Edit</a>

@@ -1,7 +1,7 @@
 @model ShoppingCart
 
 @{
-    Layout = "_BarberLayout";
+    Layout = "_Layout";
     ViewData["Title"] = "Shopping Cart";
 }
 
@@ -261,7 +261,7 @@
                     <span>Total:</span>
                     <span>$@Model.GetTotal().ToString("F2")</span>
                 </div>
-                <button class="btn-checkout">Proceed to Checkout</button>
+                <a asp-action="Checkout" class="btn-checkout">Proceed to Checkout</a>
             </div>
         </div>
     }

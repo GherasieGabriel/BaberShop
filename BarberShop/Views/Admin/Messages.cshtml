@@ -1,0 +1,88 @@
+@model BarberShop.Models.AdminInboxViewModel
+
+@{
+    ViewData["Title"] = "Contact Messages";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Contact Messages</h1>
+        <a asp-action="Dashboard" class="btn btn-outline-secondary">Back to Dashboard</a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            @if (!Model.Messages.Any())
+            {
+                <div class="alert alert-info mb-0">
+                    No contact messages found.
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Subject</th>
+                                        <th>Message</th>
+                                        <th>Status</th>
+                                        <th>Received</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var message in Model.Messages)
+                                    {
+                                        <tr>
+                                            <td class="fw-semibold">@message.Subject</td>
+                                            <td>
+                                                @(message.Message.Length > 120 ? message.Message.Substring(0, 120) + "..." : message.Message)
+                                            </td>
+                                            <td>
+                                                <span class="badge @(message.IsRead ? "bg-success" : "bg-warning text-dark")">
+                                                    @(message.IsRead ? "Read" : "Unread")
+                                                </span>
+                                            </td>
+                                            <td>@message.CreatedAt.ToString("MMM d, yyyy HH:mm")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @if (Model.SelectedMessage != null)
+                        {
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">@Model.SelectedMessage.Subject</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">From: @Model.SelectedMessage.SenderName &lt;@Model.SelectedMessage.SenderEmail&gt;</h6>
+                                    <p class="card-text mt-3">@Model.SelectedMessage.Message</p>
+
+                                    <form asp-action="MarkMessageRead" asp-controller="Admin" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="messageId" value="@Model.SelectedMessage.MessageId" />
+                                        <button type="submit" class="btn btn-sm btn-outline-success me-2">Mark Read</button>
+                                    </form>
+
+                                    <form asp-action="DeleteMessage" asp-controller="Admin" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="messageId" value="@Model.SelectedMessage.MessageId" />
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-info">Select a message to view details.</div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

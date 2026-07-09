@@ -109,25 +109,45 @@
                     <div class="card-body">
                         <h1 class="auth-title">Welcome Back</h1>
 
-                        @if (!ViewData.ModelState.IsValid)
+                        @if (!ViewData.ModelState.IsValid || !string.IsNullOrEmpty(ViewBag.Message as string))
                         {
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>Error!</strong>
-                                <ul class="mb-0 mt-2">
-                                    @foreach (var modelState in ViewData.ModelState.Values)
+                            @if (!string.IsNullOrEmpty(ViewBag.Message as string))
+                            {
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>Verification Required</strong>
+                                    <p class="mb-2">@ViewBag.Message</p>
+                                    @if (!string.IsNullOrEmpty(ViewBag.UnverifiedEmail as string))
                                     {
-                                        @foreach (var error in modelState.Errors)
-                                        {
-                                            <li>@error.ErrorMessage</li>
-                                        }
+                                        <form method="post" asp-action="ResendConfirmation" class="d-inline">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="email" value="@ViewBag.UnverifiedEmail" />
+                                            <button type="submit" class="btn btn-sm btn-warning">Resend Confirmation Email</button>
+                                        </form>
                                     }
-                                </ul>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            }
+                            else if (!ViewData.ModelState.IsValid)
+                            {
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Error!</strong>
+                                    <ul class="mb-0 mt-2">
+                                        @foreach (var modelState in ViewData.ModelState.Values)
+                                        {
+                                            @foreach (var error in modelState.Errors)
+                                            {
+                                                <li>@error.ErrorMessage</li>
+                                            }
+                                        }
+                                    </ul>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            }
                         }
 
                         <form method="post" asp-action="Login">
                             @Html.AntiForgeryToken()
+                            <input type="hidden" name="returnUrl" value="@(ViewData["ReturnUrl"] as string)" />
 
                             <div class="mb-3">
                                 <label asp-for="Email" class="form-label">Email Address</label>

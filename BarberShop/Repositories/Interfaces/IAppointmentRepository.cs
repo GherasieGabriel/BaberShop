@@ -11,4 +11,7 @@ public interface IAppointmentRepository
     Task<Appointment> AddAsync(Appointment appointment);
     Task UpdateAsync(Appointment appointment);
     Task DeleteAsync(Appointment appointment);
+    Task<bool> HasOverlappingAppointmentAsync(int barberId, DateTime start, DateTime end);
+    Task<bool> HasOverlappingAppointmentAsync(int barberId, DateTime start, DateTime end, int? excludeAppointmentId);
+    Task<List<Appointment>> GetUpcomingAsync(DateTime from, DateTime to);
 }

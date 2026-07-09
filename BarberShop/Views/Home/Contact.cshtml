@@ -1,5 +1,5 @@
 @{
-    Layout = "_BarberLayout";
+    Layout = "_Layout";
     ViewData["Title"] = "Contact";
 }
 
@@ -18,7 +18,8 @@
 
 <section>
     <h2 class="text-center">Send a Message</h2>
-    <form class="booking-form">
+    <form asp-action="Contact" method="post" class="booking-form">
+        @Html.AntiForgeryToken()
         <label>
             Full name:
             <input type="text" name="fullName" required>
@@ -31,7 +32,7 @@
 
         <label>
             Subject:
-            <input type="text" name="subject" required>
+            <input type="text" name="subject">
         </label>
 
         <label>

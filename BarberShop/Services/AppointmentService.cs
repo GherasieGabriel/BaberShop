@@ -1,6 +1,7 @@
 using BarberShop.Models;
 using BarberShop.Repositories.Interfaces;
 using BarberShop.Services.Interfaces;
+using BarberShop.Services.Email;
 
 namespace BarberShop.Services;
 
@@ -9,7 +10,8 @@ public class AppointmentService(
     IClientService clientService,
     IRepository<Client> clientRepository,
     IBarberService barberService,
-    IServiceCatalogService serviceCatalogService) : IAppointmentService
+    IServiceCatalogService serviceCatalogService,
+    IEmailService emailService) : IAppointmentService
 {
     public async Task<BookingViewModel> GetBookingAsync()
     {
@@ -32,21 +34,55 @@ public class AppointmentService(
         var selectedService = await serviceCatalogService.ResolveServiceAsync(model.Service);
         var selectedBarber = await barberService.ResolveBarberAsync(model.Barber);
 
-        var startDateTime = model.Date.Value.Date + model.Time.Value;
+        // Defensive checks: ensure resolution succeeded
+        if (client is null || selectedService is null || selectedBarber is null)
+            return false;
+
+        // Combine local date + time and convert to UTC for storage
+        var localStart = model.Date.Value.Date + model.Time.Value;
+        var localStartWithKind = DateTime.SpecifyKind(localStart, DateTimeKind.Local);
+        var startDateTimeUtc = localStartWithKind.ToUniversalTime();
+        var endDateTimeUtc = startDateTimeUtc.AddMinutes(selectedService.BaseDuration);
+
+// Check for overlapping appointments for the same barber (exclude cancelled)
+        var hasConflict = await appointmentRepository.HasOverlappingAppointmentAsync(selectedBarber.BarberId, startDateTimeUtc, endDateTimeUtc);
+        if (hasConflict)
+        {
+            return false; // conflict
+        }
+
         var appointment = new Appointment
         {
             ClientId = client.ClientId,
             BarberId = selectedBarber.BarberId,
             ServiceId = selectedService.ServiceId,
-            StartDateTime = startDateTime,
-            EndDateTime = startDateTime.AddMinutes(selectedService.BaseDuration),
+            StartDateTime = startDateTimeUtc,
+            EndDateTime = endDateTimeUtc,
             Status = "Booked",
             Notes = model.Notes,
             CreatedAt = DateTime.UtcNow
         };
 
         await appointmentRepository.AddAsync(appointment);
+
+        // Send confirmation email asynchronously (fire-and-forget)
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                var localDisplay = startDateTimeUtc.ToLocalTime();
+                var details = $"Your appointment is confirmed for {selectedService.Name} with {selectedBarber.FirstName} {selectedBarber.LastName} on {localDisplay:f}.";
+                await emailService.SendAppointmentConfirmationAsync(client.Email, details);
+            }
+            catch { }
+        });
+
         return true;
+    }
+
+    public async Task<List<Appointment>> GetUpcomingAsync(DateTime from, DateTime to)
+    {
+        return await appointmentRepository.GetUpcomingAsync(from, to);
     }
 
     public async Task<ProfileViewModel> GetProfileAsync(string email, int? selectedAppointmentId = null)
@@ -58,13 +94,13 @@ public class AppointmentService(
             ? new List<Appointment>()
             : await appointmentRepository.GetByClientIdWithDetailsAsync(client.ClientId);
 
-        var now = DateTime.Now;
+        var now = DateTime.UtcNow;
         var upcomingAppointments = allAppointments
-            .Where(a => a.StartDateTime >= now && !string.Equals(a.Status, "Cancelled", StringComparison.OrdinalIgnoreCase))
+            .Where(a => a.StartDateTime >= now && (a.Status == null || a.Status.ToLower() != "cancelled"))
             .ToList();
 
         var pastAppointments = allAppointments
-            .Where(a => a.StartDateTime < now || string.Equals(a.Status, "Cancelled", StringComparison.OrdinalIgnoreCase))
+            .Where(a => a.StartDateTime < now || (a.Status != null && a.Status.ToLower() == "cancelled"))
             .OrderByDescending(a => a.StartDateTime)
             .ToList();
 
@@ -97,12 +133,28 @@ public class AppointmentService(
 
         var selectedService = await serviceCatalogService.ResolveServiceAsync(serviceName);
         var selectedBarber = await barberService.ResolveBarberAsync(barberName);
-        var startDateTime = date.Date + time.TimeOfDay;
+
+        if (selectedService is null || selectedBarber is null)
+            return false;
+
+        // Combine provided date + time as local, convert to UTC for storage
+        var localStart = date.Date + time.TimeOfDay;
+        var localStartWithKind = DateTime.SpecifyKind(localStart, DateTimeKind.Local);
+        var startDateTimeUtc = localStartWithKind.ToUniversalTime();
+        var endDateTimeUtc = startDateTimeUtc.AddMinutes(selectedService.BaseDuration);
+
+        // Check for overlapping appointments, excluding the current appointment being updated
+        var hasConflict = await appointmentRepository.HasOverlappingAppointmentAsync(
+            selectedBarber.BarberId, startDateTimeUtc, endDateTimeUtc, appointmentId);
+        if (hasConflict)
+        {
+            return false; // conflict detected
+        }
 
         appointment.ServiceId = selectedService.ServiceId;
         appointment.BarberId = selectedBarber.BarberId;
-        appointment.StartDateTime = startDateTime;
-        appointment.EndDateTime = startDateTime.AddMinutes(selectedService.BaseDuration);
+        appointment.StartDateTime = startDateTimeUtc;
+        appointment.EndDateTime = endDateTimeUtc;
         appointment.Notes = notes;
         appointment.Status = "Booked";
 

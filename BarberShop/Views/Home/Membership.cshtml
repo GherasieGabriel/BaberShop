@@ -1,0 +1,72 @@
+@model BarberShop.Models.MembershipViewModel
+
+@{
+    ViewData["Title"] = "Membership";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="text-center mb-5">
+        <h1 class="mb-2">Membership Plans</h1>
+        <p class="text-muted lead">Choose a membership and enjoy exclusive discounts on all our services</p>
+    </div>
+
+    <div class="row g-4 mb-5">
+        @foreach (var tier in Model.Tiers)
+        {
+            var isPopular = tier.Name == "Silver";
+            <div class="col-lg-4">
+                <div class="card h-100 shadow-lg @(isPopular ? "border-primary border-3 bg-dark text-light" : "bg-white")">
+                    @if (isPopular)
+                    {
+                        <div class="position-absolute top-0 start-50 translate-middle-x">
+                            <span class="badge bg-warning text-dark fs-6 px-3">⭐ Most Popular</span>
+                        </div>
+                    }
+                    <div class="card-body text-center pt-5">
+                        <h3 class="card-title mb-3">@tier.Name Tier</h3>
+                        <p class="@(isPopular ? "text-light" : "text-muted")">@tier.Description</p>
+
+                        <div class="my-5">
+                            <div class="display-3 @(isPopular ? "text-warning" : "text-primary")">@tier.DiscountPercent<span class="fs-6">%</span></div>
+                            <p class="@(isPopular ? "text-light" : "text-muted") mb-0">Discount on All Services</p>
+                        </div>
+
+                        <ul class="list-unstyled mb-4">
+                            <li class="py-2">
+                                <i class="bi bi-check-circle @(isPopular ? "text-warning" : "text-success") me-2"></i>
+                                <strong>@tier.DiscountPercent%</strong> off all services
+                            </li>
+                            <li class="py-2">
+                                <i class="bi bi-check-circle @(isPopular ? "text-warning" : "text-success") me-2"></i>
+                                Priority booking
+                            </li>
+                            <li class="py-2">
+                                <i class="bi bi-check-circle @(isPopular ? "text-warning" : "text-success") me-2"></i>
+                                Member-only offers
+                            </li>
+                            <li class="py-2">
+                                <i class="bi bi-check-circle @(isPopular ? "text-warning" : "text-success") me-2"></i>
+                                Free consultations
+                            </li>
+                        </ul>
+
+                        <form asp-action="Subscribe" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="tier" value="@tier.Name" />
+                            <button type="submit" class="btn @(isPopular ? "btn-warning" : "btn-outline-primary") w-100 fw-bold">Join @tier.Name</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="bg-dark rounded-3 p-5 text-center text-light border border-warning">
+        <h4 class="mb-3">Questions about our membership plans?</h4>
+        <p class="text-light-secondary mb-4">Contact us for more information or to upgrade your membership.</p>
+        <a href="@Url.Action("Contact", "Home")" class="btn btn-warning btn-lg">
+            <i class="bi bi-telephone-fill me-2"></i>Get in Touch
+        </a>
+    </div>
+</div>

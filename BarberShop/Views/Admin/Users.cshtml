@@ -39,9 +39,17 @@
                                     <td>@user.FirstName @user.LastName</td>
                                     <td>@user.CreatedAt.ToString("MMM d, yyyy")</td>
                                     <td>
-                                        <a asp-action="UserRoles" asp-route-userId="@user.Id" class="btn btn-sm btn-primary">
+                                        <a asp-action="UserRoles" asp-route-userId="@user.Id" class="btn btn-sm btn-primary me-2">
                                             <i class="bi bi-shield-check"></i> Manage Roles
                                         </a>
+
+                                        <form asp-action="DeleteUser" method="post" class="d-inline" onsubmit="return confirm('Delete this user?');">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="userId" value="@user.Id" />
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="bi bi-trash"></i> Delete
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             }

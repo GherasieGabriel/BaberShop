@@ -36,6 +36,15 @@ public class AppointmentRepository(BarberShopDbContext context) : IAppointmentRe
             .Include(a => a.Barber)
             .FirstOrDefaultAsync(a => a.Client.Email == email && a.StartDateTime == startDateTime);
 
+    public Task<List<Appointment>> GetUpcomingAsync(DateTime from, DateTime to)
+        => context.Appointments
+            .Include(a => a.Client)
+            .Include(a => a.Service)
+            .Include(a => a.Barber)
+            .Where(a => a.StartDateTime >= from && a.StartDateTime <= to && (a.Status == null || a.Status.ToLower() != "cancelled"))
+            .OrderBy(a => a.StartDateTime)
+            .ToListAsync();
+
     public async Task<Appointment> AddAsync(Appointment appointment)
     {
         context.Appointments.Add(appointment);
@@ -54,4 +63,12 @@ public class AppointmentRepository(BarberShopDbContext context) : IAppointmentRe
         context.Appointments.Remove(appointment);
         await context.SaveChangesAsync();
     }
+
+    public Task<bool> HasOverlappingAppointmentAsync(int barberId, DateTime start, DateTime end)
+        => context.Appointments
+            .AnyAsync(a => a.BarberId == barberId && (a.Status == null || a.Status.ToLower() != "cancelled") && a.StartDateTime < end && a.EndDateTime > start);
+
+    public Task<bool> HasOverlappingAppointmentAsync(int barberId, DateTime start, DateTime end, int? excludeAppointmentId)
+        => context.Appointments
+            .AnyAsync(a => a.BarberId == barberId && (!excludeAppointmentId.HasValue || a.AppointmentId != excludeAppointmentId.Value) && (a.Status == null || a.Status.ToLower() != "cancelled") && a.StartDateTime < end && a.EndDateTime > start);
 }

@@ -1,0 +1,56 @@
+@model List<BarberShop.Models.Order>
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "My Orders";
+}
+
+<div class="container mt-5 mb-5">
+    <h1 class="mb-4">My Orders</h1>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> You haven't placed any orders yet.
+            <a asp-controller="Products" asp-action="Index" class="btn btn-primary btn-sm ms-2">Start Shopping</a>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Order #</th>
+                        <th>Date</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model)
+                    {
+                        <tr>
+                            <td>
+                                <strong>#@order.OrderId</strong>
+                            </td>
+                            <td>@order.CreatedAt.ToString("MMM dd, yyyy")</td>
+                            <td>@order.Items.Count item(s)</td>
+                            <td><strong>@order.TotalAmount.ToString("C2")</strong></td>
+                            <td>
+                                <span class="badge bg-@(order.Status == "Pending" ? "warning" : order.Status == "Completed" ? "success" : "danger")">
+                                    @order.Status
+                                </span>
+                            </td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@order.OrderId" class="btn btn-sm btn-primary">View Details</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

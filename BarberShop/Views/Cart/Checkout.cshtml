@@ -1,0 +1,45 @@
+@model ShoppingCart
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Checkout";
+}
+
+<div class="container mt-4">
+    <h1>Checkout</h1>
+
+    @if (!Model.Items.Any())
+    {
+        <div class="alert alert-info">Your cart is empty.</div>
+        <a asp-action="Index" class="btn btn-secondary">Back to Cart</a>
+    }
+    else
+    {
+        <div class="card p-3 shadow-sm">
+            <h4>Order Summary</h4>
+            <ul class="list-group list-group-flush mb-3">
+                @foreach (var item in Model.Items)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>@item.Name</strong>
+                            <div class="text-muted">Qty: @item.Quantity</div>
+                        </div>
+                        <div>@item.Total.ToString("C2")</div>
+                    </li>
+                }
+            </ul>
+
+            <div class="d-flex justify-content-between mb-3">
+                <div>Subtotal</div>
+                <div>@Model.GetTotal().ToString("C2")</div>
+            </div>
+
+            <form method="post" asp-action="PlaceOrder">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-success">Confirm & Place Order</button>
+                <a asp-action="Index" class="btn btn-link">Back to Cart</a>
+            </form>
+        </div>
+    }
+</div>

@@ -1,5 +1,7 @@
 using BarberShop.Models;
 using BarberShop.Services.Interfaces;
+using BarberShop.Services.Profile;
+using BarberShop.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +14,9 @@ namespace BarberShop.Controllers;
 public class AdminController(
     UserManager<ApplicationUser> userManager,
     RoleManager<IdentityRole> roleManager,
-    IAdminAccessService adminAccessService) : Controller
+    IAdminAccessService adminAccessService,
+    IProfileService profileService,
+    BarberShopDbContext db) : Controller
 {
     [HttpGet("")]
     public IActionResult Dashboard()
@@ -98,15 +102,143 @@ public class AdminController(
         return RedirectToAction("UserRoles", new { userId });
     }
 
-    [HttpGet("Messages")]
-    public async Task<IActionResult> Messages()
+    [HttpPost("DeleteUser")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteUser(string userId)
     {
-        var messages = await userManager.Users
-            .SelectMany(u => u.Id == u.Id ? new[] { u } : Array.Empty<ApplicationUser>())
+        if (string.IsNullOrEmpty(userId))
+        {
+            TempData["ErrorMessage"] = "Invalid user id.";
+            return RedirectToAction("Users");
+        }
+
+        var user = await userManager.FindByIdAsync(userId);
+        if (user == null)
+        {
+            TempData["ErrorMessage"] = "User not found.";
+            return RedirectToAction("Users");
+        }
+
+        // Prevent admin from deleting themselves
+        var currentUserId = userManager.GetUserId(User);
+        if (string.Equals(currentUserId, userId, StringComparison.OrdinalIgnoreCase))
+        {
+            TempData["ErrorMessage"] = "You cannot delete your own account.";
+            return RedirectToAction("Users");
+        }
+
+        var result = await userManager.DeleteAsync(user);
+        if (result.Succeeded)
+        {
+            TempData["SuccessMessage"] = "User deleted successfully.";
+        }
+        else
+        {
+            var errors = string.Join("; ", result.Errors.Select(e => e.Description));
+            TempData["ErrorMessage"] = $"Failed to delete user: {errors}";
+        }
+
+        return RedirectToAction("Users");
+    }
+
+    [HttpGet("Messages")]
+    public async Task<IActionResult> Messages(int? selectedMessageId = null, bool unreadOnly = false)
+    {
+        var allMessages = await profileService.GetAllContactMessagesAsync();
+        var filteredMessages = unreadOnly
+            ? allMessages.Where(m => !m.IsRead).ToList()
+            : allMessages;
+
+        var model = new AdminInboxViewModel
+        {
+            Messages = await BuildInboxItemsAsync(filteredMessages),
+            TotalCount = allMessages.Count,
+            UnreadCount = allMessages.Count(m => !m.IsRead),
+            UnreadOnly = unreadOnly,
+            SelectedMessageId = selectedMessageId
+        };
+
+        if (selectedMessageId.HasValue)
+        {
+            var selected = await profileService.GetContactMessageByIdAsync(selectedMessageId.Value);
+            if (selected != null)
+            {
+                model.SelectedMessage = await BuildInboxItemAsync(selected);
+            }
+        }
+        else if (model.Messages.Any())
+        {
+            model.SelectedMessage = model.Messages.First();
+            model.SelectedMessageId = model.SelectedMessage.MessageId;
+        }
+
+        return View(model);
+    }
+
+    [HttpPost("Messages/MarkRead")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> MarkMessageRead(int messageId, bool unreadOnly = false)
+    {
+        var success = await profileService.MarkMessageAsReadAsync(messageId);
+        TempData[success ? "SuccessMessage" : "ErrorMessage"] = success ? "Message marked as read." : "Message not found.";
+        return RedirectToAction(nameof(Messages), new { selectedMessageId = messageId, unreadOnly });
+    }
+
+    [HttpPost("Messages/Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteMessage(int messageId, bool unreadOnly = false)
+    {
+        var success = await profileService.DeleteMessageAsync(messageId);
+        TempData[success ? "SuccessMessage" : "ErrorMessage"] = success ? "Message deleted." : "Message not found.";
+        return RedirectToAction(nameof(Messages), new { unreadOnly });
+    }
+
+    [HttpGet("Orders")]
+    public async Task<IActionResult> Orders()
+    {
+        // Ensure admin can view all orders
+        var orders = await db.Orders
+            .Include(o => o.Items)
+            .OrderByDescending(o => o.CreatedAt)
             .ToListAsync();
 
-        // This will need integration with message service
-        return View();
+        return View(orders);
+    }
+
+    private async Task<List<AdminInboxMessageItemViewModel>> BuildInboxItemsAsync(IEnumerable<ContactMessage> messages)
+    {
+        var items = new List<AdminInboxMessageItemViewModel>();
+        foreach (var message in messages)
+        {
+            items.Add(await BuildInboxItemAsync(message));
+        }
+
+        return items.OrderByDescending(m => m.CreatedAt).ToList();
+    }
+
+    private async Task<AdminInboxMessageItemViewModel> BuildInboxItemAsync(ContactMessage message)
+    {
+        var user = await userManager.FindByIdAsync(message.UserId);
+        var displayName = user is null
+            ? "Unknown sender"
+            : $"{user.FirstName} {user.LastName}".Trim();
+
+        if (string.IsNullOrWhiteSpace(displayName))
+        {
+            displayName = user?.UserName ?? "Unknown sender";
+        }
+
+        return new AdminInboxMessageItemViewModel
+        {
+            MessageId = message.MessageId,
+            UserId = message.UserId,
+            SenderName = displayName,
+            SenderEmail = user?.Email ?? string.Empty,
+            Subject = message.Subject,
+            Message = message.Message,
+            IsRead = message.IsRead,
+            CreatedAt = message.CreatedAt
+        };
     }
 }
 

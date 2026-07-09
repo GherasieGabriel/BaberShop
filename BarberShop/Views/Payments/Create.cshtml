@@ -1,0 +1,56 @@
+@model PaymentCheckoutViewModel
+@{
+    Layout = "_BarberLayout";
+    ViewData["Title"] = "Payment";
+
+    var appointment = Model.Appointment;
+    var barberName = $"{appointment.Barber.FirstName} {appointment.Barber.LastName}".Trim();
+}
+
+<section class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-body p-4 p-md-5">
+                    <h1 class="text-center mb-4">Complete your payment</h1>
+
+                    <div class="alert alert-info">
+                        This is a demo payment page. Submitting it will record a payment, mark the appointment as paid, and send a confirmation email.
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <strong>Service:</strong><br />
+                            @appointment.Service.Name
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Barber:</strong><br />
+                            @barberName
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Date:</strong><br />
+                            @appointment.StartDateTime.ToLocalTime().ToString("dddd, MMMM d, yyyy")
+                        </div>
+                        <div class="col-md-6">
+                            <strong>Time:</strong><br />
+                            @appointment.StartDateTime.ToLocalTime().ToString("h:mm tt")
+                        </div>
+                        <div class="col-12">
+                            <strong>Total:</strong><br />
+                            @Model.Amount.ToString("N2") @Model.Currency
+                        </div>
+                    </div>
+
+                    <form method="post" asp-action="Create" class="d-grid gap-3">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="appointmentId" value="@Model.AppointmentId" />
+                        <input type="hidden" name="amount" value="@Model.Amount" />
+
+                        <button type="submit" class="btn btn-primary btn-lg">Pay now</button>
+                        <a class="btn btn-outline-secondary" asp-controller="Appointments" asp-action="Confirmation" asp-route-appointmentId="@Model.AppointmentId">Back to confirmation</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

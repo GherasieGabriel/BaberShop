@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Email Confirmation";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            @if (ViewBag.Success == true)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Success!</h4>
+                    <p>@ViewBag.Message</p>
+                    <a href="@Url.Action("Login", "Account")" class="btn btn-success">Continue to Login</a>
+                </div>
+            }
+            else if (!string.IsNullOrEmpty(ViewBag.Error))
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Error!</h4>
+                    <p>@ViewBag.Error</p>
+
+                    <!-- Resend confirmation link option -->
+                    <p class="mt-3 mb-0">
+                        <span>If the link has expired, you can request a new one:</span>
+                    </p>
+                    <form method="post" asp-action="ResendConfirmation" class="mt-2">
+                        @Html.AntiForgeryToken()
+                        <div class="input-group">
+                            <input type="email" name="email" class="form-control" placeholder="Enter your email" required />
+                            <button class="btn btn-warning" type="submit">Resend Confirmation</button>
+                        </div>
+                    </form>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    <p>Processing your email confirmation...</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

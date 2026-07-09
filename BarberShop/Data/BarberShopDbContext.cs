@@ -15,6 +15,8 @@ public class BarberShopDbContext(DbContextOptions<BarberShopDbContext> options) 
     public DbSet<Review> Reviews => Set<Review>();
     public DbSet<Payment> Payments => Set<Payment>();
     public DbSet<ContactMessage> ContactMessages => Set<ContactMessage>();
+    public DbSet<Order> Orders => Set<Order>();
+    public DbSet<OrderItem> OrderItems => Set<OrderItem>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -22,13 +24,13 @@ public class BarberShopDbContext(DbContextOptions<BarberShopDbContext> options) 
 
         modelBuilder.Entity<Client>(entity =>
         {
-            entity.ToTable("CLIENT");
+            entity.ToTable("Clients");
             entity.HasKey(e => e.ClientId);
-            entity.Property(e => e.ClientId).HasColumnName("client_id");
-            entity.Property(e => e.FullName).HasColumnName("full_name").HasMaxLength(100);
-            entity.Property(e => e.Email).HasColumnName("email").HasMaxLength(100);
-            entity.Property(e => e.Phone).HasColumnName("phone").HasMaxLength(20);
-            entity.Property(e => e.MemberSince).HasColumnName("member_since").HasColumnType("date");
+            entity.Property(e => e.ClientId).HasColumnName("ClientId");
+            entity.Property(e => e.FullName).HasColumnName("FullName").HasMaxLength(100);
+            entity.Property(e => e.Email).HasColumnName("Email").HasMaxLength(100);
+            entity.Property(e => e.Phone).HasColumnName("Phone").HasMaxLength(20);
+            entity.Property(e => e.MemberSince).HasColumnName("MemberSince").HasColumnType("datetime2");
         });
 
         modelBuilder.Entity<Barber>(entity =>
@@ -42,6 +44,7 @@ public class BarberShopDbContext(DbContextOptions<BarberShopDbContext> options) 
             entity.Property(e => e.Email).HasColumnName("email").HasMaxLength(100);
             entity.Property(e => e.HireDate).HasColumnName("hire_date").HasColumnType("date");
             entity.Property(e => e.IsActive).HasColumnName("is_active");
+            entity.Property(e => e.PhotoFileName).HasColumnName("photo_file_name").HasMaxLength(200);
         });
 
         modelBuilder.Entity<Service>(entity =>
@@ -172,6 +175,41 @@ public class BarberShopDbContext(DbContextOptions<BarberShopDbContext> options) 
             entity.Property(e => e.Message).HasColumnName("message");
             entity.Property(e => e.IsRead).HasColumnName("is_read");
             entity.Property(e => e.CreatedAt).HasColumnName("created_at");
+        });
+
+        modelBuilder.Entity<Order>(entity =>
+        {
+            entity.ToTable("ORDERS");
+            entity.HasKey(e => e.OrderId);
+            entity.Property(e => e.OrderId).HasColumnName("order_id");
+            entity.Property(e => e.ApplicationUserId).HasColumnName("application_user_id").HasMaxLength(450);
+            entity.Property(e => e.CustomerName).HasColumnName("customer_name").HasMaxLength(200);
+            entity.Property(e => e.CustomerEmail).HasColumnName("customer_email").HasMaxLength(200);
+            entity.Property(e => e.CreatedAt).HasColumnName("created_at");
+            entity.Property(e => e.TotalAmount).HasColumnName("total_amount").HasColumnType("decimal(10,2)");
+            entity.Property(e => e.Status).HasColumnName("status").HasMaxLength(50);
+
+            entity.HasMany(e => e.Items)
+                .WithOne(i => i.Order)
+                .HasForeignKey(i => i.OrderId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<OrderItem>(entity =>
+        {
+            entity.ToTable("ORDER_ITEM");
+            entity.HasKey(e => e.OrderItemId);
+            entity.Property(e => e.OrderItemId).HasColumnName("order_item_id");
+            entity.Property(e => e.OrderId).HasColumnName("order_id");
+            entity.Property(e => e.ProductId).HasColumnName("product_id").HasMaxLength(200);
+            entity.Property(e => e.Name).HasColumnName("name").HasMaxLength(200);
+            entity.Property(e => e.UnitPrice).HasColumnName("unit_price").HasColumnType("decimal(10,2)");
+            entity.Property(e => e.Quantity).HasColumnName("quantity");
+
+            entity.HasOne(e => e.Order)
+                .WithMany(o => o.Items)
+                .HasForeignKey(e => e.OrderId)
+                .OnDelete(DeleteBehavior.Cascade);
         });
     }
 }

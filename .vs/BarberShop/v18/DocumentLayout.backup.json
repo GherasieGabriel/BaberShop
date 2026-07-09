@@ -1,7 +1,242 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\VS repo\\BarberShop\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\setup_checklist.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\setup_checklist.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\GHGC\\.copilot\\plans\\plan-email-confirmation-link-resend-feature-fix.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|MarkdownSecurePreview"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\GHGC\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\2121499323\\ConfirmEmail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\user_secrets_setup.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\user_secrets_setup.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\presentation_guide.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\presentation_guide.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\dummy_accounts_seeding.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\dummy_accounts_seeding.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\application_documentation.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\application_documentation.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\views\\shared\\_barberlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\views\\shared\\_barberlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\models\\membershippaymentviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\models\\membershippaymentviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\data\\barbershopdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\data\\barbershopdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\services\\appointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\services\\appointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{832FF673-C31A-427B-917C-140B9A435120}|BarberShop.Tests\\BarberShop.Tests.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop.tests\\appointmentandpaymenttests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{832FF673-C31A-427B-917C-140B9A435120}|BarberShop.Tests\\BarberShop.Tests.csproj|solutionrelative:barbershop.tests\\appointmentandpaymenttests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\GHGC\\.copilot\\plans\\plan-merge-two-barbershop-versions-into-one.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|MarkdownSecurePreview"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\migrations\\20260709130110_mergedversionfull.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\migrations\\20260709130110_mergedversionfull.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{832FF673-C31A-427B-917C-140B9A435120}|BarberShop.Tests\\BarberShop.Tests.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop.tests\\profilemessagetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{832FF673-C31A-427B-917C-140B9A435120}|BarberShop.Tests\\BarberShop.Tests.csproj|solutionrelative:barbershop.tests\\profilemessagetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{832FF673-C31A-427B-917C-140B9A435120}|BarberShop.Tests\\BarberShop.Tests.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop.tests\\catalogandidentityservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{832FF673-C31A-427B-917C-140B9A435120}|BarberShop.Tests\\BarberShop.Tests.csproj|solutionrelative:barbershop.tests\\catalogandidentityservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\GHGC\\.copilot\\plans\\plan-add-proper-admin-inbox.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|MarkdownSecurePreview"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\GHGC\\.copilot\\plans\\plan-add-appointment-confirmation-and-payment-page.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|MarkdownSecurePreview"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\GHGC\\.copilot\\plans\\plan-appointment-calendar-email-confirmations-(implementation-plan).md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}|MarkdownSecurePreview"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\repositories\\appointmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\repositories\\appointmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\barbershop.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\barbershop.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\repositories\\interfaces\\iappointmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\repositories\\interfaces\\iappointmentrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\services\\email\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\services\\email\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\services\\interfaces\\iappointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\services\\interfaces\\iappointmentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\services\\email\\emailmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\services\\email\\emailmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\views\\appointments\\calendar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\views\\appointments\\calendar.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\services\\backgroundreminderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\services\\backgroundreminderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\controllers\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\controllers\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\controllers\\barberscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\controllers\\barberscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\views\\barbers\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\views\\barbers\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\views\\appointments\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\views\\appointments\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\views\\home\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\views\\home\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\models\\appointmentconfirmationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\models\\appointmentconfirmationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\views\\appointments\\confirmation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\views\\appointments\\confirmation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\models\\paymentcheckoutviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\models\\paymentcheckoutviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\services\\profile\\iprofileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\services\\profile\\iprofileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\services\\profile\\profileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\services\\profile\\profileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\models\\admininboxviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\models\\admininboxviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\views\\admin\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\views\\admin\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\views\\admin\\messages.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\views\\admin\\messages.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{832FF673-C31A-427B-917C-140B9A435120}|BarberShop.Tests\\BarberShop.Tests.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop.tests\\carttests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{832FF673-C31A-427B-917C-140B9A435120}|BarberShop.Tests\\BarberShop.Tests.csproj|solutionrelative:barbershop.tests\\carttests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{832FF673-C31A-427B-917C-140B9A435120}|BarberShop.Tests\\BarberShop.Tests.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop.tests\\testinfrastructure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{832FF673-C31A-427B-917C-140B9A435120}|BarberShop.Tests\\BarberShop.Tests.csproj|solutionrelative:barbershop.tests\\testinfrastructure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\views\\payments\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\views\\payments\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\migrations\\barbershopdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\migrations\\barbershopdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\views\\shared\\_layout.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\views\\shared\\_layout.cshtml.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\views\\home\\payment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\views\\home\\payment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\views\\home\\membershipconfirmation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\views\\home\\membershipconfirmation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\views\\services\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\views\\services\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\services\\dataseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\services\\dataseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\services\\auth\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\services\\auth\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|c:\\users\\ghgc\\source\\repos\\babershop\\barbershop\\views\\account\\confirmemail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C58E4892-03C7-4AF7-9959-7C8B8C15AEBD}|BarberShop\\BarberShop.csproj|solutionrelative:barbershop\\views\\account\\confirmemail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,23 +244,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:3:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
             },
             {
               "$type": "Bookmark",
@@ -46,6 +269,757 @@
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "plan-email-confirmation-link-resend-feature-fix.md [Preview]",
+              "DocumentMoniker": "C:\\Users\\GHGC\\.copilot\\plans\\plan-email-confirmation-link-resend-feature-fix.md",
+              "RelativeDocumentMoniker": "..\\..\\..\\.copilot\\plans\\plan-email-confirmation-link-resend-feature-fix.md",
+              "ToolTip": "C:\\Users\\GHGC\\.copilot\\plans\\plan-email-confirmation-link-resend-feature-fix.md [Preview]",
+              "RelativeToolTip": "..\\..\\..\\.copilot\\plans\\plan-email-confirmation-link-resend-feature-fix.md [Preview]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-09T16:18:02.896Z",
+              "EditorCaption": " [Preview]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "ConfirmEmail.cshtml",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Account\\ConfirmEmail.cshtml",
+              "RelativeDocumentMoniker": "BarberShop\\Views\\Account\\ConfirmEmail.cshtml",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Account\\ConfirmEmail.cshtml",
+              "RelativeToolTip": "BarberShop\\Views\\Account\\ConfirmEmail.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-09T16:17:29.201Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ConfirmEmail.cshtml",
+              "DocumentMoniker": "C:\\Users\\GHGC\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\2121499323\\ConfirmEmail.cshtml",
+              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\2121499323\\ConfirmEmail.cshtml",
+              "ToolTip": "C:\\Users\\GHGC\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\2121499323\\ConfirmEmail.cshtml",
+              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\Temp\\CopilotBaseline\\Deleted\\2121499323\\ConfirmEmail.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-09T16:17:22.373Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "AuthenticationService.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\Auth\\AuthenticationService.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Services\\Auth\\AuthenticationService.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\Auth\\AuthenticationService.cs",
+              "RelativeToolTip": "BarberShop\\Services\\Auth\\AuthenticationService.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T16:15:58.943Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Program.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Program.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Program.cs",
+              "RelativeToolTip": "BarberShop\\Program.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T15:06:04.086Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SETUP_CHECKLIST.md",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\SETUP_CHECKLIST.md",
+              "RelativeDocumentMoniker": "BarberShop\\SETUP_CHECKLIST.md",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\SETUP_CHECKLIST.md",
+              "RelativeToolTip": "BarberShop\\SETUP_CHECKLIST.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIcBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-09T15:09:24.452Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "BarberShop\\Views\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "BarberShop\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAG8AAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-09T16:16:41.262Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DUMMY_ACCOUNTS_SEEDING.md",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\DUMMY_ACCOUNTS_SEEDING.md",
+              "RelativeDocumentMoniker": "BarberShop\\DUMMY_ACCOUNTS_SEEDING.md",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\DUMMY_ACCOUNTS_SEEDING.md",
+              "RelativeToolTip": "BarberShop\\DUMMY_ACCOUNTS_SEEDING.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALsBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-09T15:08:48.47Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PRESENTATION_GUIDE.md",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\PRESENTATION_GUIDE.md",
+              "RelativeDocumentMoniker": "BarberShop\\PRESENTATION_GUIDE.md",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\PRESENTATION_GUIDE.md",
+              "RelativeToolTip": "BarberShop\\PRESENTATION_GUIDE.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGgCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-09T15:08:15.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "USER_SECRETS_SETUP.md",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\USER_SECRETS_SETUP.md",
+              "RelativeDocumentMoniker": "BarberShop\\USER_SECRETS_SETUP.md",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\USER_SECRETS_SETUP.md",
+              "RelativeToolTip": "BarberShop\\USER_SECRETS_SETUP.md",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAACsAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-09T15:05:35.335Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "_BarberLayout.cshtml",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Shared\\_BarberLayout.cshtml",
+              "RelativeDocumentMoniker": "BarberShop\\Views\\Shared\\_BarberLayout.cshtml",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Shared\\_BarberLayout.cshtml",
+              "RelativeToolTip": "BarberShop\\Views\\Shared\\_BarberLayout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-09T14:42:16.882Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "APPLICATION_DOCUMENTATION.md",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\APPLICATION_DOCUMENTATION.md",
+              "RelativeDocumentMoniker": "BarberShop\\APPLICATION_DOCUMENTATION.md",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\APPLICATION_DOCUMENTATION.md",
+              "RelativeToolTip": "BarberShop\\APPLICATION_DOCUMENTATION.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQFAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-09T15:07:25.744Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "DataSeeder.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\DataSeeder.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Services\\DataSeeder.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\DataSeeder.cs",
+              "RelativeToolTip": "BarberShop\\Services\\DataSeeder.cs",
+              "ViewState": "AgIAACgBAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T15:05:41.276Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Models\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Models\\ApplicationUser.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Models\\ApplicationUser.cs",
+              "RelativeToolTip": "BarberShop\\Models\\ApplicationUser.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAEBUwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T14:42:02.064Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "MembershipConfirmation.cshtml",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Home\\MembershipConfirmation.cshtml",
+              "RelativeDocumentMoniker": "BarberShop\\Views\\Home\\MembershipConfirmation.cshtml",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Home\\MembershipConfirmation.cshtml",
+              "RelativeToolTip": "BarberShop\\Views\\Home\\MembershipConfirmation.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-09T14:25:56.919Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "MembershipPaymentViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Models\\MembershipPaymentViewModel.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Models\\MembershipPaymentViewModel.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Models\\MembershipPaymentViewModel.cs",
+              "RelativeToolTip": "BarberShop\\Models\\MembershipPaymentViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T14:25:36.574Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "BarberShop\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "BarberShop\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAIBJwAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-03T15:48:46.118Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "Payment.cshtml",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Home\\Payment.cshtml",
+              "RelativeDocumentMoniker": "BarberShop\\Views\\Home\\Payment.cshtml",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Home\\Payment.cshtml",
+              "RelativeToolTip": "BarberShop\\Views\\Home\\Payment.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-09T14:25:47.795Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Services\\Index.cshtml",
+              "RelativeDocumentMoniker": "BarberShop\\Views\\Services\\Index.cshtml",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Services\\Index.cshtml",
+              "RelativeToolTip": "BarberShop\\Views\\Services\\Index.cshtml",
+              "ViewState": "AgIAACUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-09T14:27:23.046Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "BarberShop\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAMAAAAAAAAAAAAAQwKUAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T15:48:11.023Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "_Layout.cshtml.css",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Shared\\_Layout.cshtml.css",
+              "RelativeDocumentMoniker": "BarberShop\\Views\\Shared\\_Layout.cshtml.css",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Shared\\_Layout.cshtml.css",
+              "RelativeToolTip": "BarberShop\\Views\\Shared\\_Layout.cshtml.css",
+              "ViewState": "AgIAAAkAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-07-09T14:12:53.856Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "BarberShop\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAYwJMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T14:02:10.664Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "BarberShopDbContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Migrations\\BarberShopDbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Migrations\\BarberShopDbContextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Migrations\\BarberShopDbContextModelSnapshot.cs",
+              "RelativeToolTip": "BarberShop\\Migrations\\BarberShopDbContextModelSnapshot.cs",
+              "ViewState": "AgIAANkAAAAAAAAAAMBdwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T13:21:54.066Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "BarberShopDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Data\\BarberShopDbContext.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Data\\BarberShopDbContext.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Data\\BarberShopDbContext.cs",
+              "RelativeToolTip": "BarberShop\\Data\\BarberShopDbContext.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T13:13:13.477Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "plan-merge-two-barbershop-versions-into-one.md [Preview]",
+              "DocumentMoniker": "C:\\Users\\GHGC\\.copilot\\plans\\plan-merge-two-barbershop-versions-into-one.md",
+              "RelativeDocumentMoniker": "..\\..\\..\\.copilot\\plans\\plan-merge-two-barbershop-versions-into-one.md",
+              "ToolTip": "C:\\Users\\GHGC\\.copilot\\plans\\plan-merge-two-barbershop-versions-into-one.md [Preview]",
+              "RelativeToolTip": "..\\..\\..\\.copilot\\plans\\plan-merge-two-barbershop-versions-into-one.md [Preview]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-09T12:47:54.334Z",
+              "EditorCaption": " [Preview]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AppointmentAndPaymentTests.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop.Tests\\AppointmentAndPaymentTests.cs",
+              "RelativeDocumentMoniker": "BarberShop.Tests\\AppointmentAndPaymentTests.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop.Tests\\AppointmentAndPaymentTests.cs",
+              "RelativeToolTip": "BarberShop.Tests\\AppointmentAndPaymentTests.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAYwCEBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T15:56:47.382Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "AppointmentService.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\AppointmentService.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Services\\AppointmentService.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\AppointmentService.cs",
+              "RelativeToolTip": "BarberShop\\Services\\AppointmentService.cs",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAlwFYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T14:58:07.641Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ProfileMessageTests.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop.Tests\\ProfileMessageTests.cs",
+              "RelativeDocumentMoniker": "BarberShop.Tests\\ProfileMessageTests.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop.Tests\\ProfileMessageTests.cs",
+              "RelativeToolTip": "BarberShop.Tests\\ProfileMessageTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T16:05:13.764Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "CartTests.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop.Tests\\CartTests.cs",
+              "RelativeDocumentMoniker": "BarberShop.Tests\\CartTests.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop.Tests\\CartTests.cs",
+              "RelativeToolTip": "BarberShop.Tests\\CartTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T16:05:34.098Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "CatalogAndIdentityServiceTests.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop.Tests\\CatalogAndIdentityServiceTests.cs",
+              "RelativeDocumentMoniker": "BarberShop.Tests\\CatalogAndIdentityServiceTests.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop.Tests\\CatalogAndIdentityServiceTests.cs",
+              "RelativeToolTip": "BarberShop.Tests\\CatalogAndIdentityServiceTests.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T15:56:11.622Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "20260709130110_MergedVersionFull.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Migrations\\20260709130110_MergedVersionFull.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Migrations\\20260709130110_MergedVersionFull.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Migrations\\20260709130110_MergedVersionFull.cs",
+              "RelativeToolTip": "BarberShop\\Migrations\\20260709130110_MergedVersionFull.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T13:04:04.244Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "TestInfrastructure.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop.Tests\\TestInfrastructure.cs",
+              "RelativeDocumentMoniker": "BarberShop.Tests\\TestInfrastructure.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop.Tests\\TestInfrastructure.cs",
+              "RelativeToolTip": "BarberShop.Tests\\TestInfrastructure.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T16:25:46.429Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "plan-add-proper-admin-inbox.md [Preview]",
+              "DocumentMoniker": "C:\\Users\\GHGC\\.copilot\\plans\\plan-add-proper-admin-inbox.md",
+              "RelativeDocumentMoniker": "..\\..\\..\\.copilot\\plans\\plan-add-proper-admin-inbox.md",
+              "ToolTip": "C:\\Users\\GHGC\\.copilot\\plans\\plan-add-proper-admin-inbox.md [Preview]",
+              "RelativeToolTip": "..\\..\\..\\.copilot\\plans\\plan-add-proper-admin-inbox.md [Preview]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-03T15:49:51.902Z",
+              "EditorCaption": " [Preview]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "plan-add-appointment-confirmation-and-payment-page.md [Preview]",
+              "DocumentMoniker": "C:\\Users\\GHGC\\.copilot\\plans\\plan-add-appointment-confirmation-and-payment-page.md",
+              "RelativeDocumentMoniker": "..\\..\\..\\.copilot\\plans\\plan-add-appointment-confirmation-and-payment-page.md",
+              "ToolTip": "C:\\Users\\GHGC\\.copilot\\plans\\plan-add-appointment-confirmation-and-payment-page.md [Preview]",
+              "RelativeToolTip": "..\\..\\..\\.copilot\\plans\\plan-add-appointment-confirmation-and-payment-page.md [Preview]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-03T15:42:47.312Z",
+              "EditorCaption": " [Preview]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "IProfileService.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\Profile\\IProfileService.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Services\\Profile\\IProfileService.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\Profile\\IProfileService.cs",
+              "RelativeToolTip": "BarberShop\\Services\\Profile\\IProfileService.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAABYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T15:47:18.547Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "ProfileService.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\Profile\\ProfileService.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Services\\Profile\\ProfileService.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\Profile\\ProfileService.cs",
+              "RelativeToolTip": "BarberShop\\Services\\Profile\\ProfileService.cs",
+              "ViewState": "AgIAAFIAAAAAAAAAAIBQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T15:47:19.081Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "AdminInboxViewModels.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Models\\AdminInboxViewModels.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Models\\AdminInboxViewModels.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Models\\AdminInboxViewModels.cs",
+              "RelativeToolTip": "BarberShop\\Models\\AdminInboxViewModels.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAABQwBgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T15:47:41.577Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Admin\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "BarberShop\\Views\\Admin\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Admin\\Dashboard.cshtml",
+              "RelativeToolTip": "BarberShop\\Views\\Admin\\Dashboard.cshtml",
+              "ViewState": "AgIAACYAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-03T15:48:33.513Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "Messages.cshtml",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Admin\\Messages.cshtml",
+              "RelativeDocumentMoniker": "BarberShop\\Views\\Admin\\Messages.cshtml",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Admin\\Messages.cshtml",
+              "RelativeToolTip": "BarberShop\\Views\\Admin\\Messages.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAABBwFgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-03T15:48:34.013Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Payments\\Create.cshtml",
+              "RelativeDocumentMoniker": "BarberShop\\Views\\Payments\\Create.cshtml",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Payments\\Create.cshtml",
+              "RelativeToolTip": "BarberShop\\Views\\Payments\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-03T15:41:35.413Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "PaymentCheckoutViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Models\\PaymentCheckoutViewModel.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Models\\PaymentCheckoutViewModel.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Models\\PaymentCheckoutViewModel.cs",
+              "RelativeToolTip": "BarberShop\\Models\\PaymentCheckoutViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T15:41:15.606Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Confirmation.cshtml",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Appointments\\Confirmation.cshtml",
+              "RelativeDocumentMoniker": "BarberShop\\Views\\Appointments\\Confirmation.cshtml",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Appointments\\Confirmation.cshtml",
+              "RelativeToolTip": "BarberShop\\Views\\Appointments\\Confirmation.cshtml",
+              "ViewState": "AgIAAA4AAAAAAAAAAABBwDoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-03T15:40:37.007Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "AppointmentConfirmationViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Models\\AppointmentConfirmationViewModel.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Models\\AppointmentConfirmationViewModel.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Models\\AppointmentConfirmationViewModel.cs",
+              "RelativeToolTip": "BarberShop\\Models\\AppointmentConfirmationViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T15:40:00.449Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Profile.cshtml",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Appointments\\Profile.cshtml",
+              "RelativeDocumentMoniker": "BarberShop\\Views\\Appointments\\Profile.cshtml",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Appointments\\Profile.cshtml",
+              "RelativeToolTip": "BarberShop\\Views\\Appointments\\Profile.cshtml",
+              "ViewState": "AgIAAKYAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-03T15:15:55.049Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "Profile.cshtml",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Home\\Profile.cshtml",
+              "RelativeDocumentMoniker": "BarberShop\\Views\\Home\\Profile.cshtml",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Home\\Profile.cshtml",
+              "RelativeToolTip": "BarberShop\\Views\\Home\\Profile.cshtml",
+              "ViewState": "AgIAAGgAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-03T15:16:10.863Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "AppointmentRepository.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Repositories\\AppointmentRepository.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Repositories\\AppointmentRepository.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Repositories\\AppointmentRepository.cs",
+              "RelativeToolTip": "BarberShop\\Repositories\\AppointmentRepository.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAASwC8AAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T13:58:29.35Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "BackgroundReminderService.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\BackgroundReminderService.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Services\\BackgroundReminderService.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\BackgroundReminderService.cs",
+              "RelativeToolTip": "BarberShop\\Services\\BackgroundReminderService.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAIBQwFgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T14:12:15.673Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "PaymentsController.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Controllers\\PaymentsController.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Controllers\\PaymentsController.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Controllers\\PaymentsController.cs",
+              "RelativeToolTip": "BarberShop\\Controllers\\PaymentsController.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAABBwHYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T14:18:31.789Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "plan-appointment-calendar-email-confirmations-(implementation-plan).md [Preview]",
+              "DocumentMoniker": "C:\\Users\\GHGC\\.copilot\\plans\\plan-appointment-calendar-email-confirmations-(implementation-plan).md",
+              "RelativeDocumentMoniker": "..\\..\\..\\.copilot\\plans\\plan-appointment-calendar-email-confirmations-(implementation-plan).md",
+              "ToolTip": "C:\\Users\\GHGC\\.copilot\\plans\\plan-appointment-calendar-email-confirmations-(implementation-plan).md [Preview]",
+              "RelativeToolTip": "..\\..\\..\\.copilot\\plans\\plan-appointment-calendar-email-confirmations-(implementation-plan).md [Preview]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-03T14:05:03.861Z",
+              "EditorCaption": " [Preview]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "BarbersController.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Controllers\\BarbersController.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Controllers\\BarbersController.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Controllers\\BarbersController.cs",
+              "RelativeToolTip": "BarberShop\\Controllers\\BarbersController.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T14:19:07.243Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Barbers\\Index.cshtml",
+              "RelativeDocumentMoniker": "BarberShop\\Views\\Barbers\\Index.cshtml",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Barbers\\Index.cshtml",
+              "RelativeToolTip": "BarberShop\\Views\\Barbers\\Index.cshtml",
+              "ViewState": "AgIAABoAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-03T14:19:18.675Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "BarberShop.csproj",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\BarberShop.csproj",
+              "RelativeDocumentMoniker": "BarberShop\\BarberShop.csproj",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\BarberShop.csproj",
+              "RelativeToolTip": "BarberShop\\BarberShop.csproj",
+              "ViewState": "AgIAABQAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-07-03T14:07:35.235Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "IAppointmentRepository.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Repositories\\Interfaces\\IAppointmentRepository.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Repositories\\Interfaces\\IAppointmentRepository.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Repositories\\Interfaces\\IAppointmentRepository.cs",
+              "RelativeToolTip": "BarberShop\\Repositories\\Interfaces\\IAppointmentRepository.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T14:09:02.113Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "AppointmentsController.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Controllers\\AppointmentsController.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Controllers\\AppointmentsController.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Controllers\\AppointmentsController.cs",
+              "RelativeToolTip": "BarberShop\\Controllers\\AppointmentsController.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAIBQwAoAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T13:59:38.07Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "IAppointmentService.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\Interfaces\\IAppointmentService.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Services\\Interfaces\\IAppointmentService.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\Interfaces\\IAppointmentService.cs",
+              "RelativeToolTip": "BarberShop\\Services\\Interfaces\\IAppointmentService.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAzwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T14:04:25.242Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\Email\\EmailService.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Services\\Email\\EmailService.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\Email\\EmailService.cs",
+              "RelativeToolTip": "BarberShop\\Services\\Email\\EmailService.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAqwDMAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T13:41:34.412Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\appsettings.json",
+              "RelativeDocumentMoniker": "BarberShop\\appsettings.json",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\appsettings.json",
+              "RelativeToolTip": "BarberShop\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-03T13:41:34.688Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Calendar.cshtml",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Appointments\\Calendar.cshtml",
+              "RelativeDocumentMoniker": "BarberShop\\Views\\Appointments\\Calendar.cshtml",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Views\\Appointments\\Calendar.cshtml",
+              "RelativeToolTip": "BarberShop\\Views\\Appointments\\Calendar.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-03T13:59:55.019Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "EmailModels.cs",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\Email\\EmailModels.cs",
+              "RelativeDocumentMoniker": "BarberShop\\Services\\Email\\EmailModels.cs",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\Services\\Email\\EmailModels.cs",
+              "RelativeToolTip": "BarberShop\\Services\\Email\\EmailModels.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAABQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-03T13:41:34.284Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "BarberShop\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\GHGC\\source\\repos\\BaberShop\\BarberShop\\appsettings.Development.json",
+              "RelativeToolTip": "BarberShop\\appsettings.Development.json",
+              "ViewState": "AgIAAAgAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-03T13:41:35.736Z"
             }
           ]
         }
