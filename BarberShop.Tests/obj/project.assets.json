@@ -57,10 +57,10 @@
           "build/netstandard2.0/coverlet.collector.targets": {}
         }
       },
-      "MailKit/4.7.1": {
+      "MailKit/4.8.0": {
         "type": "package",
         "dependencies": {
-          "MimeKit": "4.7.1"
+          "MimeKit": "4.8.0"
         },
         "compile": {
           "lib/net8.0/MailKit.dll": {
@@ -1172,7 +1172,7 @@
           "build/net8.0/Microsoft.TestPlatform.TestHost.targets": {}
         }
       },
-      "MimeKit/4.7.1": {
+      "MimeKit/4.8.0": {
         "type": "package",
         "dependencies": {
           "BouncyCastle.Cryptography": "2.4.0",
@@ -1622,12 +1622,12 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
-          "MailKit": "4.7.1",
+          "MailKit": "4.8.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "10.0.5",
           "Microsoft.AspNetCore.Identity.UI": "10.0.5",
           "Microsoft.EntityFrameworkCore": "10.0.5",
           "Microsoft.EntityFrameworkCore.SqlServer": "10.0.5",
-          "MimeKit": "4.7.1",
+          "MimeKit": "4.8.0",
           "SendGrid": "9.29.3",
           "Serilog.AspNetCore": "8.0.1",
           "Serilog.Sinks.Console": "5.0.1",
@@ -1776,10 +1776,10 @@
         "coverlet.collector.nuspec"
       ]
     },
-    "MailKit/4.7.1": {
-      "sha512": "mDTq1tWZfsgpCPVfgHF3FDixczPSh5wU22lzo2buDu8OrSAqV3ybPKojjOoUygkLpPRmZ4VAZ+k+PBi5+igGdQ==",
+    "MailKit/4.8.0": {
+      "sha512": "zZ1UoM4FUnSFUJ9fTl5CEEaejR0DNP6+FDt1OfXnjg4igZntcir1tg/8Ufd6WY5vrpmvToAjluYqjVM24A+5lA==",
       "type": "package",
-      "path": "mailkit/4.7.1",
+      "path": "mailkit/4.8.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1816,7 +1816,7 @@
         "lib/netstandard2.1/MailKit.dll.config",
         "lib/netstandard2.1/MailKit.pdb",
         "lib/netstandard2.1/MailKit.xml",
-        "mailkit.4.7.1.nupkg.sha512",
+        "mailkit.4.8.0.nupkg.sha512",
         "mailkit.nuspec"
       ]
     },
@@ -3326,10 +3326,10 @@
         "microsoft.testplatform.testhost.nuspec"
       ]
     },
-    "MimeKit/4.7.1": {
-      "sha512": "Qoj4aVvhX14A1FNvaJ33hzOP4VZI2j+Mr38I9wSGcjMq4BYDtWLJG89aJ9nRW2cNfH6Czjwyp7+Mh++xv3AZvg==",
+    "MimeKit/4.8.0": {
+      "sha512": "U24wp4LKED+sBRzyrWICE+3bSwptsTrPOcCIXbW5zfeThCNzQx5NCo8Wus+Rmi+EUkQrCwlI/3sVfejeq9tuxQ==",
       "type": "package",
-      "path": "mimekit/4.7.1",
+      "path": "mimekit/4.8.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3364,7 +3364,7 @@
         "lib/netstandard2.1/MimeKit.dll.config",
         "lib/netstandard2.1/MimeKit.pdb",
         "lib/netstandard2.1/MimeKit.xml",
-        "mimekit.4.7.1.nupkg.sha512",
+        "mimekit.4.8.0.nupkg.sha512",
         "mimekit.nuspec"
       ]
     },
@@ -4393,7 +4393,7 @@
       "code": "NU1902",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'MailKit' 4.7.1 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-9j88-vvj5-vhgr",
+      "message": "Package 'MailKit' 4.8.0 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-9j88-vvj5-vhgr",
       "libraryId": "MailKit",
       "targetGraphs": [
         "net10.0"
@@ -4403,7 +4403,7 @@
       "code": "NU1902",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'MimeKit' 4.7.1 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-g7hc-96xr-gvvx",
+      "message": "Package 'MimeKit' 4.8.0 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-g7hc-96xr-gvvx",
       "libraryId": "MimeKit",
       "targetGraphs": [
         "net10.0"

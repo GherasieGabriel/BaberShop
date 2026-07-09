@@ -17,8 +17,9 @@
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.5" />
 		<!-- Email Services -->
-		<PackageReference Include="MailKit" Version="4.7.1" />
-		<PackageReference Include="MimeKit" Version="4.7.1" />
+		<PackageReference Include="MailKit" Version="4.8.0" />
+					<PackageReference Include="MimeKit" Version="4.8.0" />
+					<!-- If you prefer to only support Gmail and don't need MailKit features, consider removing MailKit/MimeKit and using System.Net.Mail or SendGrid only -->
 		<PackageReference Include="SendGrid" Version="9.29.3" />
 		<!-- Logging -->
 		<PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />

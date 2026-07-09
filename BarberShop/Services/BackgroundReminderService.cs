@@ -2,6 +2,8 @@ using BarberShop.Repositories.Interfaces;
 using BarberShop.Services.Email;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace BarberShop.Services;
 
@@ -9,15 +11,25 @@ public class BackgroundReminderService : BackgroundService
 {
     private readonly ILogger<BackgroundReminderService> _logger;
     private readonly IServiceScopeFactory _scopeFactory;
-    private readonly TimeSpan _interval = TimeSpan.FromMinutes(1);
+    private readonly IConfiguration _configuration;
+    private TimeSpan _interval = TimeSpan.FromMinutes(1);
 
     // In-memory tracking to avoid duplicate reminders in this demo
     private readonly HashSet<int> _sentReminders = new();
 
-    public BackgroundReminderService(ILogger<BackgroundReminderService> logger, IServiceScopeFactory scopeFactory)
+    public BackgroundReminderService(ILogger<BackgroundReminderService> logger, IServiceScopeFactory scopeFactory, IConfiguration configuration)
     {
         _logger = logger;
         _scopeFactory = scopeFactory;
+        _configuration = configuration;
+
+        // Load interval from configuration, default to 1 minute
+        if (int.TryParse(_configuration["Reminders:IntervalMinutes"], out var intervalMinutes))
+        {
+            _interval = TimeSpan.FromMinutes(intervalMinutes);
+        }
+
+        _logger.LogInformation("BackgroundReminderService initialized with interval: {Interval} minutes", _interval.TotalMinutes);
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)

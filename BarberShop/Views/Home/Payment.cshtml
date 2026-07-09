@@ -1,0 +1,29 @@
+@model BarberShop.Models.MembershipPaymentViewModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Membership Payment";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-light">
+                    <h5 class="mb-0">Confirm Membership Purchase</h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3">Tier: <strong>@Model.Tier</strong></p>
+                    <p class="mb-3">Fee: <strong>@Model.Fee.ToString("N2") RON</strong></p>
+
+                    <form asp-action="ConfirmPayment" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="tier" value="@Model.Tier" />
+                        <button type="submit" class="btn btn-success">Confirm & Pay</button>
+                        <a asp-action="Membership" class="btn btn-secondary ms-2">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

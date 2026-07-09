@@ -1,4 +1,5 @@
 @model ApplicationUser
+@inject BarberShop.Services.Image.IImageService imageService
 
 @{
     ViewData["Title"] = "My Profile";
@@ -12,7 +13,7 @@
                 <div class="card-body text-center">
                     @if (Model.ProfileImage != null)
                     {
-                        <img src="data:image/jpeg;base64,@System.Convert.ToBase64String(Model.ProfileImage)" 
+                        <img src="data:@imageService.GetImageMimeType(Model.ProfileImage);base64,@System.Convert.ToBase64String(Model.ProfileImage)" 
                              alt="Profile" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;" />
                     }
                     else

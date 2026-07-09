@@ -1,6 +1,6 @@
 @model Barber
 @{
-    Layout = "_BarberLayout";
+    Layout = "_Layout";
     ViewData["Title"] = "Edit Barber";
 }
 
@@ -17,7 +17,14 @@
         <div class="alert alert-danger">@TempData["BookingError"]</div>
     }
 
-    <form method="post" asp-action="Update" class="booking-form">
+    @if (!string.IsNullOrEmpty(Model.PhotoFileName))
+    {
+        <div class="mb-3">
+            <img src="~/images/barbers/@Model.PhotoFileName" alt="@Model.FirstName" style="width:200px; height:200px; object-fit:cover;" />
+        </div>
+    }
+
+    <form method="post" asp-action="Update" class="booking-form" enctype="multipart/form-data">
         @Html.AntiForgeryToken()
         <input type="hidden" name="originalEmail" value="@Model.Email" />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>

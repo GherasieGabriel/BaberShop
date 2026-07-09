@@ -1,6 +1,6 @@
 @model ProfileViewModel
 @{
-    Layout = "_BarberLayout";
+    Layout = "_Layout";
     ViewData["Title"] = "Profile";
 
     var selectedAppointment = Model.SelectedAppointment;
@@ -68,7 +68,7 @@
         else
         {
             <div class="booking-item">
-                <div class="booking-date">@selectedAppointment.StartDateTime.ToLocalTime().ToString("MMMM d, yyyy - h:mm tt")</div>
+                <div class="booking-date">@selectedAppointment.StartDateTime.ToString("MMMM d, yyyy - h:mm tt")</div>
                 <div class="booking-details">
                     <strong>Status:</strong> @selectedAppointment.Status<br>
                     <strong>Service:</strong> @selectedAppointment.Service.Name<br>
@@ -84,30 +84,79 @@
                 <label>
                     Service:
                     <select name="service">
-                        <option selected="@(selectedAppointment.Service.Name == "Haircut")">Haircut</option>
-                        <option selected="@(selectedAppointment.Service.Name == "Beard Trim")">Beard Trim</option>
-                        <option selected="@(selectedAppointment.Service.Name == "Haircut + Beard")">Haircut + Beard</option>
+                        @if (selectedAppointment.Service.Name == "Haircut")
+                        {
+                            <option value="Haircut" selected="selected">Haircut</option>
+                        }
+                        else
+                        {
+                            <option value="Haircut">Haircut</option>
+                        }
+                        @if (selectedAppointment.Service.Name == "Beard Trim")
+                        {
+                            <option value="Beard Trim" selected="selected">Beard Trim</option>
+                        }
+                        else
+                        {
+                            <option value="Beard Trim">Beard Trim</option>
+                        }
+                        @if (selectedAppointment.Service.Name == "Haircut + Beard")
+                        {
+                            <option value="Haircut + Beard" selected="selected">Haircut + Beard</option>
+                        }
+                        else
+                        {
+                            <option value="Haircut + Beard">Haircut + Beard</option>
+                        }
                     </select>
                 </label>
 
                 <label>
                     Barber:
                     <select name="barber">
-                        <option selected="@(selectedAppointment.Barber.FirstName == "Any")">Any available</option>
-                        <option selected="@(selectedAppointment.Barber.FirstName == "Alex")">Alex</option>
-                        <option selected="@(selectedAppointment.Barber.FirstName == "Mark")">Mark</option>
-                        <option selected="@(selectedAppointment.Barber.FirstName == "Chris")">Chris</option>
+                        @if (selectedAppointment.Barber.FirstName == "Any")
+                        {
+                            <option value="Any available" selected="selected">Any available</option>
+                        }
+                        else
+                        {
+                            <option value="Any available">Any available</option>
+                        }
+                        @if (selectedAppointment.Barber.FirstName == "Alex")
+                        {
+                            <option value="Alex" selected="selected">Alex</option>
+                        }
+                        else
+                        {
+                            <option value="Alex">Alex</option>
+                        }
+                        @if (selectedAppointment.Barber.FirstName == "Mark")
+                        {
+                            <option value="Mark" selected="selected">Mark</option>
+                        }
+                        else
+                        {
+                            <option value="Mark">Mark</option>
+                        }
+                        @if (selectedAppointment.Barber.FirstName == "Chris")
+                        {
+                            <option value="Chris" selected="selected">Chris</option>
+                        }
+                        else
+                        {
+                            <option value="Chris">Chris</option>
+                        }
                     </select>
                 </label>
 
                 <label>
                     Date:
-                    <input type="date" name="date" value="@selectedAppointment.StartDateTime.ToLocalTime().ToString("yyyy-MM-dd")" required>
+                    <input type="date" name="date" value="@selectedAppointment.StartDateTime.ToString("yyyy-MM-dd")" required>
                 </label>
 
                 <label>
                     Time:
-                    <input type="time" name="time" value="@selectedAppointment.StartDateTime.ToLocalTime().ToString("HH:mm")" required>
+                    <input type="time" name="time" value="@selectedAppointment.StartDateTime.ToString("HH:mm")" required>
                 </label>
 
                 <label>
@@ -138,7 +187,7 @@
             @foreach (var appointment in Model.PastAppointments)
             {
                 <div class="booking-item">
-                    <div class="booking-date">@appointment.StartDateTime.ToLocalTime().ToString("MMMM d, yyyy - h:mm tt")</div>
+                    <div class="booking-date">@appointment.StartDateTime.ToString("MMMM d, yyyy - h:mm tt")</div>
                     <div class="booking-details">
                         <strong>Service:</strong> @appointment.Service.Name<br>
                         <strong>Barber:</strong> @($"{appointment.Barber.FirstName} {appointment.Barber.LastName}".Trim())<br>

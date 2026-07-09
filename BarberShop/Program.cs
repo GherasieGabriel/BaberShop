@@ -26,6 +26,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     options.Password.RequireUppercase = false;
     options.Password.RequireLowercase = false;
     options.Password.RequireDigit = false;
+
+    // Require confirmed email for sign-in if configured
+    options.SignIn.RequireConfirmedEmail = bool.TryParse(builder.Configuration["Identity:RequireConfirmedEmail"], out var requireEmail) ? requireEmail : false;
 })
 .AddEntityFrameworkStores<BarberShopDbContext>()
 .AddDefaultTokenProviders();
@@ -61,6 +64,9 @@ builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IAdminAccessService, AdminAccessService>();
 builder.Services.AddScoped<ICartService, CartService>();
 
+// Data seeder for initial data
+builder.Services.AddScoped<DataSeeder>();
+
 // Background reminder service (demo in-memory tracker)
 builder.Services.AddHostedService<BackgroundReminderService>();
 
@@ -74,9 +80,10 @@ using (var scope = app.Services.CreateScope())
 
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    var dataSeeder = scope.ServiceProvider.GetRequiredService<DataSeeder>();
 
     // Seed roles
-    string[] roles = { "Admin", "Barber", "User" };
+    string[] roles = { "Admin", "Barber", "Customer" };
     foreach (var role in roles)
     {
         if (!await roleManager.RoleExistsAsync(role))
@@ -85,30 +92,8 @@ using (var scope = app.Services.CreateScope())
         }
     }
 
-    // Create default admin user
-    var adminEmail = "admin@barbershop.com";
-    var adminUser = await userManager.FindByEmailAsync(adminEmail);
-    if (adminUser == null)
-    {
-        var admin = new ApplicationUser
-        {
-            UserName = "admin",
-            Email = adminEmail,
-            FirstName = "Admin",
-            LastName = "User",
-            EmailConfirmed = true
-        };
-        await userManager.CreateAsync(admin, "admin123");
-        await userManager.AddToRoleAsync(admin, "Admin");
-    }
-    else
-    {
-        // FIX: Ensure admin user always has Admin role
-        if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
-        {
-            await userManager.AddToRoleAsync(adminUser, "Admin");
-        }
-    }
+    // Seed initial data (Services, Barbers, Products, and Dummy Accounts)
+    await dataSeeder.SeedAsync();
 }
 
 // Configure the HTTP request pipeline.

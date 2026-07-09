@@ -1,6 +1,7 @@
 using BarberShop.Models;
 using BarberShop.Services.Interfaces;
 using BarberShop.Services.Profile;
+using BarberShop.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,8 @@ public class AdminController(
     UserManager<ApplicationUser> userManager,
     RoleManager<IdentityRole> roleManager,
     IAdminAccessService adminAccessService,
-    IProfileService profileService) : Controller
+    IProfileService profileService,
+    BarberShopDbContext db) : Controller
 {
     [HttpGet("")]
     public IActionResult Dashboard()
@@ -189,6 +191,18 @@ public class AdminController(
         var success = await profileService.DeleteMessageAsync(messageId);
         TempData[success ? "SuccessMessage" : "ErrorMessage"] = success ? "Message deleted." : "Message not found.";
         return RedirectToAction(nameof(Messages), new { unreadOnly });
+    }
+
+    [HttpGet("Orders")]
+    public async Task<IActionResult> Orders()
+    {
+        // Ensure admin can view all orders
+        var orders = await db.Orders
+            .Include(o => o.Items)
+            .OrderByDescending(o => o.CreatedAt)
+            .ToListAsync();
+
+        return View(orders);
     }
 
     private async Task<List<AdminInboxMessageItemViewModel>> BuildInboxItemsAsync(IEnumerable<ContactMessage> messages)

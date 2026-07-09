@@ -1,6 +1,7 @@
 @model ProfileViewModel
+@inject BarberShop.Services.Image.IImageService imageService
 @{
-    Layout = "_BarberLayout";
+    Layout = "_Layout";
     ViewData["Title"] = "Profile";
 
     var selectedAppointment = Model.SelectedAppointment;
@@ -11,7 +12,7 @@
         <div class="col-md-3 text-center">
             @if (Model.ProfileImage != null && Model.ProfileImage.Length > 0)
             {
-                <img src="data:image/jpeg;base64,@System.Convert.ToBase64String(Model.ProfileImage)" 
+                <img src="data:@imageService.GetImageMimeType(Model.ProfileImage);base64,@System.Convert.ToBase64String(Model.ProfileImage)" 
                      alt="Profile" class="rounded-circle img-fluid mb-3" style="max-width: 150px; object-fit: cover;" />
             }
             else
@@ -93,7 +94,7 @@
         else
         {
             <div class="booking-item">
-                <div class="booking-date">@selectedAppointment.StartDateTime.ToLocalTime().ToString("MMMM d, yyyy - h:mm tt")</div>
+                <div class="booking-date">@selectedAppointment.StartDateTime.ToString("MMMM d, yyyy - h:mm tt")</div>
                 <div class="booking-details">
                     <strong>Status:</strong> @selectedAppointment.Status<br>
                     <strong>Service:</strong> @selectedAppointment.Service.Name<br>
@@ -111,7 +112,14 @@
                     <select name="service">
                         @foreach (var service in Model.AvailableServices)
                         {
-                            <option selected="@(selectedAppointment.Service.Name == service)">@service</option>
+                            if (selectedAppointment.Service.Name == service)
+                            {
+                                <option value="@service" selected="selected">@service</option>
+                            }
+                            else
+                            {
+                                <option value="@service">@service</option>
+                            }
                         }
                     </select>
                 </label>
@@ -121,7 +129,14 @@
                     <select name="barber">
                         @foreach (var barber in Model.AvailableBarbers)
                         {
-                            <option selected="@($"{selectedAppointment.Barber.FirstName} {selectedAppointment.Barber.LastName}".Trim() == barber)">@barber</option>
+                            if ($"{selectedAppointment.Barber.FirstName} {selectedAppointment.Barber.LastName}".Trim() == barber)
+                            {
+                                <option value="@barber" selected="selected">@barber</option>
+                            }
+                            else
+                            {
+                                <option value="@barber">@barber</option>
+                            }
                         }
                     </select>
                 </label>
@@ -164,7 +179,7 @@
             @foreach (var appointment in Model.PastAppointments)
             {
                 <div class="booking-item">
-                    <div class="booking-date">@appointment.StartDateTime.ToLocalTime().ToString("MMMM d, yyyy - h:mm tt")</div>
+                    <div class="booking-date">@appointment.StartDateTime.ToString("MMMM d, yyyy - h:mm tt")</div>
                     <div class="booking-details">
                         <strong>Service:</strong> @appointment.Service.Name<br>
                         <strong>Barber:</strong> @($"{appointment.Barber.FirstName} {appointment.Barber.LastName}".Trim())<br>

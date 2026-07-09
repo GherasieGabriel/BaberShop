@@ -1,5 +1,6 @@
 using BarberShop.Models;
 using BarberShop.Services.Email;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
@@ -9,7 +10,8 @@ public class AuthenticationService(
     UserManager<ApplicationUser> userManager,
     SignInManager<ApplicationUser> signInManager,
     IEmailService emailService,
-    ILogger<AuthenticationService> logger) : IAuthenticationService
+    ILogger<AuthenticationService> logger,
+    IHttpContextAccessor httpContextAccessor) : IAuthenticationService
 {
     public async Task<(bool Success, string Message)> RegisterAsync(RegisterViewModel model)
     {
@@ -44,8 +46,12 @@ public class AuthenticationService(
         // Generate email confirmation token
         var confirmationToken = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
-        // Build confirmation link (note: you'll need to inject IHttpContextAccessor or pass URL differently)
-        var confirmationLink = $"https://localhost:7293/Account/ConfirmEmail?userId={user.Id}&token={Uri.EscapeDataString(confirmationToken)}";
+        // Build confirmation link using the current request context
+        var request = httpContextAccessor.HttpContext?.Request;
+        string scheme = request?.Scheme ?? "https";
+        string host = request?.Host.Value ?? "localhost:7293";
+        var encodedToken = Uri.EscapeDataString(confirmationToken);
+        var confirmationLink = $"{scheme}://{host}/Account/ConfirmEmail?userId={user.Id}&token={encodedToken}";
 
         // Send welcome email with confirmation link
         try

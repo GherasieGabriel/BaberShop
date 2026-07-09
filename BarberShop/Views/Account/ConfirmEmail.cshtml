@@ -18,7 +18,18 @@
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <h4 class="alert-heading">Error!</h4>
                     <p>@ViewBag.Error</p>
-                    <p>If you need a new confirmation link, please <a href="@Url.Action("Register", "Account")">register again</a>.</p>
+
+                    <!-- Resend confirmation link option -->
+                    <p class="mt-3 mb-0">
+                        <span>If the link has expired, you can request a new one:</span>
+                    </p>
+                    <form method="post" asp-action="ResendConfirmation" class="mt-2">
+                        @Html.AntiForgeryToken()
+                        <div class="input-group">
+                            <input type="email" name="email" class="form-control" placeholder="Enter your email" required />
+                            <button class="btn btn-warning" type="submit">Resend Confirmation</button>
+                        </div>
+                    </form>
                 </div>
             }
             else

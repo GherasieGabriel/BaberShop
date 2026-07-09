@@ -61,6 +61,12 @@ namespace BarberShop.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<DateTime?>("MembershipExpires")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MembershipTier")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -199,6 +205,11 @@ namespace BarberShop.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("phone");
 
+                    b.Property<string>("PhotoFileName")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("photo_file_name");
+
                     b.HasKey("BarberId");
 
                     b.ToTable("BARBER", (string)null);
@@ -209,7 +220,7 @@ namespace BarberShop.Migrations
                     b.Property<int>("ClientId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("client_id");
+                        .HasColumnName("ClientId");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClientId"));
 
@@ -217,27 +228,27 @@ namespace BarberShop.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
-                        .HasColumnName("email");
+                        .HasColumnName("Email");
 
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
-                        .HasColumnName("full_name");
+                        .HasColumnName("FullName");
 
                     b.Property<DateTime>("MemberSince")
-                        .HasColumnType("date")
-                        .HasColumnName("member_since");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("MemberSince");
 
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)")
-                        .HasColumnName("phone");
+                        .HasColumnName("Phone");
 
                     b.HasKey("ClientId");
 
-                    b.ToTable("CLIENT", (string)null);
+                    b.ToTable("Clients", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop.Models.ClientNotificationSettings", b =>
@@ -296,6 +307,90 @@ namespace BarberShop.Migrations
                     b.HasKey("MessageId");
 
                     b.ToTable("CONTACT_MESSAGE", (string)null);
+                });
+
+            modelBuilder.Entity("BarberShop.Models.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("order_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("application_user_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("CustomerEmail")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("customer_email");
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("customer_name");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("status");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(10,2)")
+                        .HasColumnName("total_amount");
+
+                    b.HasKey("OrderId");
+
+                    b.ToTable("ORDERS", (string)null);
+                });
+
+            modelBuilder.Entity("BarberShop.Models.OrderItem", b =>
+                {
+                    b.Property<int>("OrderItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("order_item_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemId"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("name");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int")
+                        .HasColumnName("order_id");
+
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("product_id");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int")
+                        .HasColumnName("quantity");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(10,2)")
+                        .HasColumnName("unit_price");
+
+                    b.HasKey("OrderItemId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("ORDER_ITEM", (string)null);
                 });
 
             modelBuilder.Entity("BarberShop.Models.Payment", b =>
@@ -652,6 +747,17 @@ namespace BarberShop.Migrations
                     b.Navigation("Client");
                 });
 
+            modelBuilder.Entity("BarberShop.Models.OrderItem", b =>
+                {
+                    b.HasOne("BarberShop.Models.Order", "Order")
+                        .WithMany("Items")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("BarberShop.Models.Payment", b =>
                 {
                     b.HasOne("BarberShop.Models.Appointment", "Appointment")
@@ -762,6 +868,11 @@ namespace BarberShop.Migrations
                     b.Navigation("NotificationSettings");
 
                     b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("BarberShop.Models.Order", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("BarberShop.Models.Service", b =>

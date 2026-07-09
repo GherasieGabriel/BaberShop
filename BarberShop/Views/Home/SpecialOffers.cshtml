@@ -1,0 +1,68 @@
+@model BarberShop.Models.SpecialOfferViewModel
+
+@{
+    ViewData["Title"] = "Special Offers";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h1 class="mb-2 text-center">Today's Special Offer</h1>
+            <p class="text-center text-muted mb-4">Limited time only - don't miss out.</p>
+
+            @if (Model?.Service == null)
+            {
+                <div class="alert alert-info text-center">
+                    No services available at the moment. Please check back later.
+                </div>
+            }
+            else
+            {
+                <div class="card shadow-lg border-0 bg-dark text-light">
+                    <div class="card-body p-5">
+                        <div class="mb-4 text-center">
+                            <span class="badge bg-danger fs-6 mb-3">LIMITED TIME OFFER</span>
+                            <h2 class="card-title mb-2">@Model.Service.Name</h2>
+                            <p class="card-text text-muted">@Model.Service.Description</p>
+                        </div>
+
+                        <div class="row mb-5">
+                            <div class="col-md-6">
+                                <div class="bg-secondary p-4 rounded text-center">
+                                    <small class="text-light d-block mb-1">Regular Price</small>
+                                    <h5 class="mb-0 text-decoration-line-through">@(Model.Service.BasePrice.ToString("N2") + " lei")</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="bg-danger p-4 rounded text-center">
+                                    <small class="text-white d-block mb-1">Special Price</small>
+                                    <h3 class="mb-0 text-white">@(Model.DiscountedPrice.ToString("N2") + " lei")</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-warning mb-4" role="alert">
+                            <strong>You Save @Model.DiscountPercent%!</strong>
+                        </div>
+
+                        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                            <a asp-controller="Appointments" asp-action="Booking" class="btn btn-success btn-lg flex-fill">
+                                Book Now
+                            </a>
+                            <form method="post" asp-controller="Cart" asp-action="Add" class="flex-fill">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="service-@Model.Service.ServiceId" />
+                                <input type="hidden" name="name" value="@Model.Service.Name" />
+                                <input type="hidden" name="price" value="@Model.DiscountedPrice" />
+                                <button type="submit" class="btn btn-outline-success btn-lg w-100">
+                                    Add to Cart
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
